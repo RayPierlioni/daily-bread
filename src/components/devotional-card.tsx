@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
-import { saveDevotionalNote, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
+import { DevotionalNoteForm } from "@/components/devotional-note-form";
+import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { jsonArray } from "@/lib/devotionals";
 import { formatDate } from "@/lib/utils";
 
@@ -80,21 +81,7 @@ export function DevotionalCard({
           </Button>
         </div>
 
-        <form action={saveDevotionalNote.bind(null, devotional.id)} className="space-y-2">
-          <label htmlFor="notes" className="text-sm font-medium text-[#31413f]">
-            Personal note
-          </label>
-          <textarea
-            id="notes"
-            name="notes"
-            defaultValue={state?.notes ?? ""}
-            placeholder="What stood out from today's Scripture?"
-            className="min-h-24 w-full rounded-lg border border-[#d9cfbd] bg-white/85 px-3 py-3 text-sm outline-none focus:border-[#345d6f] focus:ring-2 focus:ring-[#345d6f]/15"
-          />
-          <Button variant="secondary" type="submit">
-            Save note
-          </Button>
-        </form>
+        <DevotionalNoteForm devotionalId={devotional.id} initialNotes={state?.notes ?? ""} />
       </CardContent>
     </Card>
   );

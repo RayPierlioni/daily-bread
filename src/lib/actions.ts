@@ -150,6 +150,33 @@ export async function saveDevotionalNote(devotionalId: string, formData: FormDat
   revalidatePath("/devotional");
 }
 
+export type DevotionalNoteActionState = {
+  status: "idle" | "success" | "error";
+  message: string;
+  savedAt?: string;
+};
+
+export async function saveDevotionalNoteWithFeedback(
+  devotionalId: string,
+  _previousState: DevotionalNoteActionState,
+  formData: FormData
+): Promise<DevotionalNoteActionState> {
+  try {
+    await saveDevotionalNote(devotionalId, formData);
+
+    return {
+      status: "success",
+      message: "Note saved.",
+      savedAt: new Date().toISOString()
+    };
+  } catch {
+    return {
+      status: "error",
+      message: "Your note could not be saved. Please try again."
+    };
+  }
+}
+
 export async function toggleDevotionalComplete(devotionalId?: string) {
   const user = await requireUser();
   const current = await getCurrentDevotionalForUser(user);
