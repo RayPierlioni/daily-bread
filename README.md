@@ -232,6 +232,15 @@ pnpm deploy:check
 - Signed-in users receive a sequential devotional track based on onboarding.
 - The first production-style path is `Daily Bread Foundations`, a seeded 365-day ordered curriculum.
 - Missing days does not skip readings; the next devotional is determined by the user's saved progress.
+- Foundation devotionals are generated with longer Scripture-centered readings, pastoral context, reflection, prayer, and a concrete practice step.
 - Ask in Faith includes a curated whitelist of common questions so the app can answer many starter questions for free before any paid AI provider is used.
 - Audio prayer recording is implemented with the browser `MediaRecorder` API where supported.
 - Audio transcription, notifications, direct messaging, analytics, and richer AI personalization are prepared as future features.
+
+## Devotional Content Updates
+
+After improving the generated `Daily Bread Foundations` content, update an existing database without touching user prayers, accounts, or devotional progress:
+
+```bash
+pnpm content:upgrade-foundation
+```

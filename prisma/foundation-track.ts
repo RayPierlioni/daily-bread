@@ -478,6 +478,83 @@ const dayRhythms = [
   }
 ];
 
+const focusPastoralNotes: Record<string, string> = {
+  "Strengthening Faith":
+    "Faith is strengthened as trust becomes specific. You are not trying to manufacture certainty by force; you are learning to place the weight of your life on the character of God one ordinary decision at a time.",
+  "Healing and Comfort":
+    "Healing in Scripture is often tender before it is fast. God meets wounded people with presence, truth, correction, and mercy, and He does not despise the slow places where the heart is learning to breathe again.",
+  "Overcoming Anxiety":
+    "Anxiety often asks you to live several days, months, or outcomes at once. The way of Christ invites you back into today's grace, today's obedience, and today's conversation with the Father who already knows what you need.",
+  "Seeking Purpose":
+    "Purpose is usually received before it is fully understood. Scripture forms people who can be faithful with the light they have, trusting that God is able to direct the larger story while they take the next honest step.",
+  "Learning to Pray":
+    "Prayer is not a performance review. It is communion with God. You can come honestly, briefly, silently, tearfully, or with borrowed words from Scripture, because the Father receives His children before they speak well.",
+  "Growing in Scripture":
+    "The Bible is not merely information to master. It is God's Word forming worship, wisdom, repentance, hope, and endurance in us. Slow attention can do work that hurried reading cannot.",
+  "Wrestling with Doubt":
+    "Doubt does not have to become distance. Many questions become healthier when they are brought into the presence of Jesus, the witness of Scripture, the wisdom of the church, and patient conversation with trusted believers.",
+  "Building Discipline":
+    "Discipline is not the opposite of grace. It is one way grace trains our loves. Small repeated practices can become quiet pathways where God reshapes attention, desire, speech, and action.",
+  "Forgiveness and Restoration":
+    "Restoration begins with truth before God. Scripture never asks you to pretend sin or wounds are small, but it does invite you to trust that mercy, repentance, justice, and healing all belong to God.",
+  "Community and Belonging":
+    "Christian belonging is more than being around people. It is learning to receive grace through the body of Christ and to become a person who carries others with humility, patience, and love."
+};
+
+const rhythmFormationNotes: Record<string, string> = {
+  Receive:
+    "Receiving comes before striving. Let the passage speak first about who God is and what He gives before you turn it into a list of things you must prove.",
+  Listen:
+    "Listening is an act of humility. Instead of rushing to the familiar conclusion, slow down enough for one word or phrase to question, comfort, or correct you.",
+  Trust:
+    "Trust is faith becoming concrete. Bring one real concern into the light of this passage and ask what would change if God's promise were more solid than your fear.",
+  Practice:
+    "Practice protects devotion from staying abstract. The point is not to do something impressive, but to let truth become visible in one small act of obedience or mercy.",
+  Ask:
+    "Asking keeps the heart open. You do not need to hide confusion from God; questions can become a doorway into wisdom when they are carried with reverence and patience.",
+  Walk:
+    "Walking with God means letting Scripture travel with you into conversations, errands, work, family, decisions, and rest. This truth is meant for the whole day.",
+  Remember:
+    "Remembering gives shape to gratitude and repentance. Look back honestly: where did God sustain you, expose something, comfort you, or invite you to keep growing?"
+};
+
+const weeklyProgressionNotes = [
+  "Today introduces the week's theme. Do not rush to mastery. Ask God for a teachable beginning.",
+  "Today invites deeper attention. Return to the passage as if there is still more mercy and wisdom to receive.",
+  "Today brings the theme closer to ordinary pressure. Notice where this truth meets a real fear, habit, or desire.",
+  "Today asks for embodied faith. Let the reading become one specific response before the day ends.",
+  "Today gives room for honest questions. Let curiosity, resistance, or confusion become prayer instead of avoidance.",
+  "Today carries the truth into relationships and choices. Watch how this Scripture wants to shape your presence with others.",
+  "Today gathers the week in remembrance. Name what God showed you, and carry one phrase forward."
+];
+
+function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
+  const dayInWeek = ((day - 1) % 7) + 1;
+  const pastoralNote = focusPastoralNotes[week.focus] ?? focusPastoralNotes["Strengthening Faith"];
+  const rhythmNote = rhythmFormationNotes[rhythm.name] ?? rhythm.lens;
+  const progressionNote = weeklyProgressionNotes[dayInWeek - 1] ?? weeklyProgressionNotes[0];
+
+  return [
+    `This step in Daily Bread Foundations focuses on ${week.summary}. The aim is not to collect religious facts quickly, but to let Scripture build a bridge between what you know, what you trust, and how you live before God today.`,
+    `The passage for today, ${week.scriptureReference}, gives you a doorway into ${week.theme.toLowerCase()}. Read it slowly enough to notice the movement of the verse: what God reveals, what He invites, what He promises, or what He corrects. A devotional life becomes stronger when Scripture is allowed to set the agenda before your worries, plans, or assumptions do.`,
+    pastoralNote,
+    `${rhythmNote} ${rhythm.lens} If the instruction feels simple, stay with it anyway. The deepest formation is often built through ordinary repetition: returning, listening, praying, obeying, remembering, and beginning again with grace.`,
+    `${progressionNote} Before you move on, name one place where this reading touches your actual life. Let that place become the meeting ground between God's Word and today's next faithful step.`
+  ].join("\n\n");
+}
+
+function buildReflectionQuestion(week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
+  return `${rhythm.question} As you answer, where does ${week.theme.toLowerCase()} feel most connected to your real life right now?`;
+}
+
+function buildPrayerPrompt(week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
+  return `Lord, teach me to ${rhythm.verb} Your truth in the area of ${week.theme.toLowerCase()}. Let this Scripture move from words on a page into trust, repentance, comfort, wisdom, and love. Form what is missing, heal what is weary, and lead me one faithful step at a time.`;
+}
+
+function buildActionStep(rhythm: (typeof dayRhythms)[number]) {
+  return `${rhythm.action} Then write one sentence about what you noticed, even if it feels small.`;
+}
+
 export function buildFoundationDevotionals() {
   const generated = [];
   const startDate = new Date("2031-01-01T00:00:00");
@@ -493,10 +570,10 @@ export function buildFoundationDevotionals() {
       title: `Day ${String(day).padStart(3, "0")}: ${rhythm.name} - ${week.theme}`,
       scriptureReference: week.scriptureReference,
       scriptureText: week.scriptureText,
-      body: `This step in Daily Bread Foundations focuses on ${week.summary}. The goal is not to rush through information, but to let the truth form a steady bridge between what you know and how you live.\n\nToday, ${rhythm.verb} this passage with patience. ${rhythm.lens} If this feels simple, stay with it anyway; deep discipleship is often built through repeated, faithful attention to the basics.`,
-      reflectionQuestion: rhythm.question,
-      prayerPrompt: `Lord, teach me to ${rhythm.verb} Your truth in the area of ${week.theme.toLowerCase()}. Form what is missing, heal what is weary, and lead me one faithful step at a time.`,
-      actionStep: rhythm.action,
+      body: buildBody(day, week, rhythm),
+      reflectionQuestion: buildReflectionQuestion(week, rhythm),
+      prayerPrompt: buildPrayerPrompt(week, rhythm),
+      actionStep: buildActionStep(rhythm),
       tags: ["daily-bread-foundations", `day-${String(day).padStart(3, "0")}`, ...week.tags],
       categories: [week.focus, "Growing in Scripture", "Building Discipline"]
     });
