@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { publicMarketingPages, siteConfig } from "@/lib/site";
+import { publicPages, siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -11,10 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1
     },
-    ...publicMarketingPages.map((page) => ({
+    ...publicPages.map((page) => ({
       url: `${siteConfig.url}${page.path}`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: page.path.startsWith("/learn") ? ("weekly" as const) : ("monthly" as const),
       priority: 0.8
     }))
   ];

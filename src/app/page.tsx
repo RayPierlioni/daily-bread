@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { siteConfig } from "@/lib/site";
+import { publicResourcePages, siteConfig } from "@/lib/site";
 
 const features = [
   {
@@ -111,6 +111,35 @@ export default function LandingPage() {
             </Card>
           );
         })}
+      </section>
+
+      <section className="border-t border-[#e4dccd] px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">Learn</p>
+              <h2 className="mt-2 text-3xl font-semibold text-[#24302f]">Helpful guides for prayer, doubt, and daily Scripture.</h2>
+            </div>
+            <LinkButton href="/learn" variant="secondary">
+              View all resources
+            </LinkButton>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {publicResourcePages
+              .filter((page) => page.path !== "/learn")
+              .slice(0, 4)
+              .map((page) => (
+                <Card key={page.path} className="p-5">
+                  <h3 className="text-lg font-semibold text-[#24302f]">
+                    <Link href={page.path} className="hover:text-[#345d6f]">
+                      {page.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#52605d]">{page.description}</p>
+                </Card>
+              ))}
+          </div>
+        </div>
       </section>
     </main>
   );

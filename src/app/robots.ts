@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { publicMarketingPages, siteConfig } from "@/lib/site";
+import { publicPages, siteConfig } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", ...publicMarketingPages.map((page) => page.path)],
+        allow: ["/", ...publicPages.map((page) => page.path)],
         disallow: [
           "/admin",
           "/api",

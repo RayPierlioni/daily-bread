@@ -37,3 +37,33 @@ export const publicMarketingPages = [
     description: "Prayer-centered groups for encouragement, shared devotionals, testimonies, and community."
   }
 ];
+
+export const publicResourcePages = [
+  {
+    path: "/learn",
+    title: "Christian Devotional and Prayer Resources",
+    description: "Helpful Christian resources for prayer, daily devotionals, faith questions, doubt, anxiety, Scripture, and spiritual growth."
+  },
+  {
+    path: "/learn/how-to-pray-when-god-feels-silent",
+    title: "How to Pray When God Feels Silent",
+    description: "A gentle Christian guide for praying when God feels distant, including Scripture, honest encouragement, and simple next steps."
+  },
+  {
+    path: "/learn/free-christian-prayer-journal",
+    title: "Free Christian Prayer Journal",
+    description: "How a private Christian prayer journal can help you write prayers, remember God's faithfulness, and track answered prayers."
+  },
+  {
+    path: "/learn/daily-devotional-for-anxiety",
+    title: "Daily Devotional for Anxiety",
+    description: "A Scripture-centered devotional guide for anxiety, fear, and overwhelm with gentle prayer prompts and biblical encouragement."
+  },
+  {
+    path: "/learn/christian-app-for-faith-questions",
+    title: "Christian App for Faith Questions",
+    description: "A safe Christian space to ask honest questions about God, Jesus, the Bible, doubt, theology, history, and archaeology."
+  }
+];
+
+export const publicPages = [...publicMarketingPages, ...publicResourcePages];
