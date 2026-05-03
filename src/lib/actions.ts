@@ -63,6 +63,8 @@ export async function completeOnboarding(formData: FormData) {
         },
         notificationSettings: {
           dailyDevotional: true,
+          browserReminders: false,
+          reminderTime: "07:00",
           groupPrayer: parsed.wantsCommunity,
           productUpdates: false
         }
@@ -400,7 +402,7 @@ export async function updateSettings(formData: FormData) {
         shareAnsweredPrayerCount: formData.get("shareAnsweredPrayerCount") === "on"
       },
       notificationSettings: {
-        dailyDevotional: formData.get("dailyDevotional") === "on",
+        ...(typeof user.notificationSettings === "object" && user.notificationSettings && !Array.isArray(user.notificationSettings) ? user.notificationSettings : {}),
         groupPrayer: formData.get("groupPrayer") === "on",
         productUpdates: formData.get("productUpdates") === "on"
       },
@@ -409,6 +411,50 @@ export async function updateSettings(formData: FormData) {
   });
 
   revalidatePath("/settings");
+}
+
+export type NotificationSettingsActionState = {
+  status: "idle" | "success" | "error";
+  message: string;
+};
+
+export async function updateNotificationSettingsWithFeedback(
+  _previousState: NotificationSettingsActionState,
+  formData: FormData
+): Promise<NotificationSettingsActionState> {
+  try {
+    const user = await requireUser();
+    const reminderTime = String(formData.get("reminderTime") ?? "07:00");
+    const currentSettings =
+      typeof user.notificationSettings === "object" && user.notificationSettings && !Array.isArray(user.notificationSettings)
+        ? user.notificationSettings
+        : {};
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        notificationSettings: {
+          ...currentSettings,
+          dailyDevotional: formData.get("dailyDevotional") === "on",
+          browserReminders: formData.get("browserReminders") === "on",
+          reminderTime: /^\d{2}:\d{2}$/.test(reminderTime) ? reminderTime : "07:00",
+          timezone: String(formData.get("timezone") ?? "")
+        }
+      }
+    });
+
+    revalidatePath("/settings");
+
+    return {
+      status: "success",
+      message: "Daily reminder settings saved."
+    };
+  } catch {
+    return {
+      status: "error",
+      message: "Reminder settings could not be saved. Please try again."
+    };
+  }
 }
 
 export async function createDevotional(formData: FormData) {

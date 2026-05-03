@@ -18,6 +18,7 @@ import {
   Sparkles,
   Users
 } from "lucide-react";
+import { ReminderScheduler } from "@/components/reminder-scheduler";
 import { Button, LinkButton } from "@/components/ui/button";
 import { publicPages } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -27,6 +28,7 @@ type ShellUser = {
   email?: string | null;
   image?: string | null;
   role?: "USER" | "ADMIN";
+  notificationSettings?: unknown;
 } | null;
 
 const navItems = [
@@ -54,6 +56,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
 
   return (
     <div className="min-h-screen pb-20 lg:pb-0">
+      <ReminderScheduler notificationSettings={user?.notificationSettings} />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-[#e4dccd] bg-[#fffdf8]/94 px-4 py-6 shadow-[12px_0_40px_rgba(36,48,47,0.04)] backdrop-blur lg:block">
         <Link href="/dashboard" className="flex items-center gap-3 px-2">
           <div>

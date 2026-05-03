@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { Download, Trash2 } from "lucide-react";
+import { NotificationSettingsForm } from "@/components/notification-settings-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input, Label, Textarea } from "@/components/ui/form-fields";
@@ -11,8 +12,7 @@ type Settings = Record<string, boolean>;
 export default async function SettingsPage() {
   const user = await requireUser();
   if (!user.onboardingCompleted) redirect("/onboarding");
-  const privacy = user.privacySettings as Settings;
-  const notifications = user.notificationSettings as Settings;
+  const privacy = (user.privacySettings ?? {}) as Settings;
 
   return (
     <div className="space-y-6">
@@ -53,7 +53,7 @@ export default async function SettingsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Privacy and notifications</CardTitle>
+            <CardTitle>Privacy</CardTitle>
           </CardHeader>
           <CardContent>
             <form action={updateSettings} className="space-y-4">
@@ -62,9 +62,6 @@ export default async function SettingsPage() {
                 ["showChurch", "Show church on profile", privacy.showChurch],
                 ["showDenomination", "Show denomination on profile", privacy.showDenomination],
                 ["shareAnsweredPrayerCount", "Show answered prayer count", privacy.shareAnsweredPrayerCount],
-                ["dailyDevotional", "Daily devotional reminders placeholder", notifications.dailyDevotional],
-                ["groupPrayer", "Group prayer notifications placeholder", notifications.groupPrayer],
-                ["productUpdates", "Product updates placeholder", notifications.productUpdates],
                 ["personalization", "Personalization on", Boolean(user.spiritualFocusProfile)]
               ].map(([name, label, checked]) => (
                 <label key={String(name)} className="flex items-center gap-3 rounded-lg border border-[#e4dccd] bg-white/70 p-3 text-sm">
@@ -74,6 +71,16 @@ export default async function SettingsPage() {
               ))}
               <Button type="submit">Save settings</Button>
             </form>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Daily reminders</CardTitle>
+            <p className="text-sm leading-6 text-[#68706e]">Choose when Daily Bread Hub should remind you to open the app for your devotional.</p>
+          </CardHeader>
+          <CardContent>
+            <NotificationSettingsForm notificationSettings={user.notificationSettings} />
           </CardContent>
         </Card>
       </div>

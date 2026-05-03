@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { AppShell } from "@/components/app-shell";
+import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -64,11 +65,23 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  const userSettings = session?.user
+    ? await prisma.user.findFirst({
+        where: {
+          OR: [
+            session.user.id ? { id: session.user.id } : undefined,
+            session.user.email ? { email: session.user.email } : undefined
+          ].filter(Boolean) as { id?: string; email?: string }[]
+        },
+        select: { notificationSettings: true }
+      })
+    : null;
+  const shellUser = session?.user ? { ...session.user, notificationSettings: userSettings?.notificationSettings ?? null } : null;
 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <AppShell user={session?.user ?? null}>{children}</AppShell>
+        <AppShell user={shellUser}>{children}</AppShell>
       </body>
     </html>
   );
