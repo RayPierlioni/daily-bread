@@ -11,18 +11,20 @@ import { formatDate } from "@/lib/utils";
 export function DevotionalCard({
   devotional,
   state,
-  personalizedNote
+  personalizedNote,
+  displayDate
 }: {
   devotional: Devotional;
   state?: UserDevotional | null;
   personalizedNote?: string;
+  displayDate?: string;
 }) {
   return (
     <Card className="overflow-hidden">
       <CardHeader className="border-b border-[#eee5d8] bg-[#fffdf8]">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-sm text-[#68706e]">{formatDate(devotional.date)}</p>
+            <p className="text-sm text-[#68706e]">{displayDate ?? formatDate(devotional.date)}</p>
             <CardTitle className="mt-1 text-2xl">{devotional.title}</CardTitle>
           </div>
           <div className="flex flex-wrap gap-2">

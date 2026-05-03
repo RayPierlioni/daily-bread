@@ -42,6 +42,7 @@ export default async function DashboardPage() {
 
   const trackPercent = current.total ? Math.round((Math.min(current.sequence, current.total) / current.total) * 100) : 0;
   const firstName = user.name?.split(" ")[0] ?? "friend";
+  const todaysDate = formatDate(new Date());
 
   return (
     <div className="space-y-7">
@@ -125,7 +126,7 @@ export default async function DashboardPage() {
             <div className="p-6">
               <div className="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[#9a7c49]">
                 <span>10 min read</span>
-                {devotional ? <span>{formatDate(devotional.date)}</span> : null}
+                {devotional ? <span>{todaysDate}</span> : null}
               </div>
               <h2 className="font-sanctuary mt-4 text-2xl text-[#1d2c2b]">{devotional?.title ?? "Today's devotional"}</h2>
               <p className="mt-4 line-clamp-4 text-sm leading-7 text-[#52605d]">{devotional?.body}</p>

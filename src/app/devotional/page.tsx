@@ -21,6 +21,7 @@ export default async function DevotionalPage() {
 
   const trackRecommendations = getUpcomingDevotionalsFromProgress(current.progress, current.sequence, devotional.id);
   const recommendations = trackRecommendations.length ? trackRecommendations : await getRecommendedDevotionals(user.spiritualFocusProfile, devotional.id);
+  const todaysDate = formatDate(new Date());
 
   return (
     <div className="space-y-6">
@@ -42,6 +43,7 @@ export default async function DevotionalPage() {
       <DevotionalCard
         devotional={devotional}
         state={current.state}
+        displayDate={todaysDate}
         personalizedNote={`This reading is next in your ${current.track?.title ?? user.spiritualFocusProfile ?? "Strengthening Faith"} path. Missing days will not skip this sequence.`}
       />
 
@@ -53,7 +55,7 @@ export default async function DevotionalPage() {
         <CardContent className="grid gap-4 md:grid-cols-3">
           {recommendations.map((item) => (
             <div key={item.id} className="rounded-lg border border-[#eee5d8] bg-white/70 p-4">
-              <p className="text-xs text-[#68706e]">{formatDate(item.date)}</p>
+              <p className="text-xs text-[#68706e]">Upcoming on your path</p>
               <h3 className="mt-2 font-semibold text-[#24302f]">{item.title}</h3>
               <p className="mt-2 text-sm leading-6 text-[#52605d]">{item.reflectionQuestion}</p>
               <div className="mt-3 flex flex-wrap gap-2">

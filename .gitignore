@@ -11,3 +11,5 @@ node_modules
 dist
 .next-dev*.log
 tsconfig.tsbuildinfo
+
+.env*.local
