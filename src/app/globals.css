@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbf7ef;
+  --foreground: #24302f;
+  --card: #fffdf8;
+  --muted: #f0eadf;
+  --muted-foreground: #68706e;
+  --border: #e4dccd;
+  --primary: #345d6f;
+  --primary-foreground: #f8fbfb;
+  --accent: #b38b4d;
+  --sage: #dfe9dd;
+  --danger: #9d3b3b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(223, 233, 221, 0.72), transparent 34rem),
+    linear-gradient(180deg, #fbf7ef 0%, #f8f2e7 45%, #f7f8f4 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-sanctuary {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.soft-panel {
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(247, 242, 232, 0.86));
+  box-shadow: 0 18px 50px rgba(36, 48, 47, 0.08);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: #d8c08e;
+  color: #1d2928;
+}
+
+.peaceful-scrollbar {
+  scrollbar-color: #c9bfae transparent;
+  scrollbar-width: thin;
+}
+
+.prose-soft p + p {
+  margin-top: 1rem;
+}
