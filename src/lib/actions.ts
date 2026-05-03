@@ -457,6 +457,29 @@ export async function updateNotificationSettingsWithFeedback(
   }
 }
 
+export async function enableDailyBrowserReminder(reminderTime = "07:00", timezone = "") {
+  const user = await requireUser();
+  const currentSettings =
+    typeof user.notificationSettings === "object" && user.notificationSettings && !Array.isArray(user.notificationSettings)
+      ? user.notificationSettings
+      : {};
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      notificationSettings: {
+        ...currentSettings,
+        dailyDevotional: true,
+        browserReminders: true,
+        reminderTime: /^\d{2}:\d{2}$/.test(reminderTime) ? reminderTime : "07:00",
+        timezone
+      }
+    }
+  });
+
+  revalidatePath("/settings");
+}
+
 export async function createDevotional(formData: FormData) {
   const user = await requireAdmin();
   const parsed = devotionalSchema.parse({
