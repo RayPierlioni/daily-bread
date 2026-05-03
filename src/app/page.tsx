@@ -1,48 +1,64 @@
 import { ArrowRight, BookOpen, HeartHandshake, Lock, MessageCircleQuestion, Users } from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { siteConfig } from "@/lib/site";
 
 const features = [
   {
     title: "Daily devotionals personalized to your spiritual season.",
     body: "Begin with Scripture, reflection, prayer, and a gentle next step shaped by where you are right now.",
+    href: "/daily-devotional",
     icon: BookOpen
   },
   {
     title: "A safe place to ask honest questions.",
     body: "Explore God, Jesus, the Bible, faith, doubt, history, theology, and archaeology without shame.",
+    href: "/ask-faith-questions",
     icon: MessageCircleQuestion
   },
   {
     title: "A private prayer journal.",
     body: "Write prayers, record audio where supported, search your history, and mark answered prayers.",
+    href: "/prayer-journal",
     icon: Lock
   },
   {
     title: "Christian groups for prayer and encouragement.",
     body: "Join calm spaces for prayer requests, group devotionals, testimony, and thoughtful community.",
+    href: "/christian-prayer-groups",
     icon: Users
   }
 ];
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/"
+  }
+};
+
 export default function LandingPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "Any",
+    description: siteConfig.description,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD"
+    }
+  };
+
   return (
     <main>
-      <header className="fixed left-0 right-0 top-0 z-30 border-b border-white/15 bg-[#1d2928]/72 px-4 py-3 text-white backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-          <LinkButton href="/" variant="ghost" className="font-sanctuary h-auto px-0 text-xl italic text-white hover:bg-transparent">
-            Daily Bread Hub
-          </LinkButton>
-          <div className="flex items-center gap-2">
-            <LinkButton href="/signin" variant="secondary" size="sm" className="border-white/30 bg-white/14 text-white hover:bg-white/24">
-              Sign in
-            </LinkButton>
-            <LinkButton href="/signin" size="sm" className="bg-white text-[#24302f] hover:bg-[#f7f2e8]">
-              Open Demo App
-            </LinkButton>
-          </div>
-        </div>
-      </header>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <MarketingHeader variant="hero" />
       <section
         className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#24302f] px-4 pb-8 pt-24 text-white sm:px-6 lg:px-8"
         style={{
@@ -86,7 +102,11 @@ export default function LandingPage() {
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#dfe9dd] text-[#345d6f]">
                 <Icon className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-semibold leading-6 text-[#24302f]">{feature.title}</h2>
+              <h2 className="font-semibold leading-6 text-[#24302f]">
+                <Link href={feature.href} className="hover:text-[#345d6f]">
+                  {feature.title}
+                </Link>
+              </h2>
               <p className="mt-3 text-sm leading-6 text-[#68706e]">{feature.body}</p>
             </Card>
           );

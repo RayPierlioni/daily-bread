@@ -19,6 +19,7 @@ import {
   Users
 } from "lucide-react";
 import { Button, LinkButton } from "@/components/ui/button";
+import { publicMarketingPages } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type ShellUser = {
@@ -43,7 +44,8 @@ const navItems = [
 
 export function AppShell({ user, children }: { user: ShellUser; children: React.ReactNode }) {
   const pathname = usePathname();
-  const isPublic = pathname === "/" || pathname === "/signin" || pathname === "/onboarding";
+  const publicPaths = ["/", "/signin", "/onboarding", ...publicMarketingPages.map((page) => page.path)];
+  const isPublic = publicPaths.includes(pathname);
   const visibleNav = user?.role === "ADMIN" ? [...navItems, { href: "/admin", label: "Admin", icon: Shield }] : navItems;
 
   if (isPublic) {

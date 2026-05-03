@@ -90,6 +90,7 @@ Required:
 DATABASE_URL="postgresql://..."
 DIRECT_URL="postgresql://..."
 NEXTAUTH_URL="https://yourdomain.com"
+NEXT_PUBLIC_SITE_URL="https://yourdomain.com"
 NEXTAUTH_SECRET="a-long-random-production-secret"
 GOOGLE_CLIENT_ID="..."
 GOOGLE_CLIENT_SECRET="..."
@@ -100,6 +101,7 @@ Optional:
 ```bash
 OPENAI_API_KEY="..."
 OPENAI_MODEL="gpt-5-mini"
+GOOGLE_SITE_VERIFICATION="..."
 ```
 
 If `OPENAI_API_KEY` is not set, Ask in Faith first checks the curated Daily Bread Hub whitelist for common questions, then uses the built-in mock answer generator for non-whitelisted questions. That keeps the app usable without creating automatic AI bills during the first launch.
@@ -178,6 +180,33 @@ Then paste the credentials into the hosting dashboard:
 GOOGLE_CLIENT_ID="..."
 GOOGLE_CLIENT_SECRET="..."
 ```
+
+## Google Search Setup
+
+Daily Bread Hub includes public SEO pages, a generated sitemap, robots.txt, and social sharing metadata.
+
+After the production domain is live:
+
+1. Open Google Search Console.
+2. Add the domain property for `ourdailybreadhub.com`.
+3. Verify ownership with DNS, or paste Google's verification token into the hosting dashboard as `GOOGLE_SITE_VERIFICATION`.
+4. Submit the sitemap:
+
+```text
+https://ourdailybreadhub.com/sitemap.xml
+```
+
+5. Use URL Inspection for the homepage and request indexing.
+
+Public crawlable pages:
+
+- `https://ourdailybreadhub.com/`
+- `https://ourdailybreadhub.com/daily-devotional`
+- `https://ourdailybreadhub.com/prayer-journal`
+- `https://ourdailybreadhub.com/ask-faith-questions`
+- `https://ourdailybreadhub.com/christian-prayer-groups`
+
+Most app pages remain private behind sign-in and are intentionally excluded from the sitemap.
 
 ## Production Readiness Commands
 
