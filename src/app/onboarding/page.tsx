@@ -32,19 +32,20 @@ export default async function OnboardingPage({
           <p className="text-sm font-medium text-[#345d6f]">Welcome to Next Faithful Step</p>
           <h1 className="mt-2 text-3xl font-semibold text-[#24302f]">Choose how you want to begin.</h1>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-[#68706e]">
-            You do not have to answer personal questions to use the app. Start with the standard Foundations path now, or take the optional assessment if you want a more personalized track.
+            You can start without answering personal questions. Faithful Foundations is available to everyone, and the private assessment is only here if you want a more personalized path.
           </p>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-2">
           <Card className="border-[#d9cfbd] bg-white/88">
             <CardHeader>
+              <span className="mb-3 inline-flex w-fit rounded-full bg-[#f2eadb] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#9b773f]">Recommended for most people</span>
               <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-[#dfe9dd] text-[#345d6f]">
                 <BookOpen className="h-5 w-5" aria-hidden="true" />
               </div>
               <CardTitle className="text-2xl">Start with Foundations</CardTitle>
               <p className="text-sm leading-6 text-[#68706e]">
-                Begin with the standard Faithful Foundations track. No assessment is needed, and you can personalize later from your settings or onboarding page.
+                Begin with a gentle Scripture-centered path for building a steady rhythm with God. No assessment is needed, and you can personalize later if you choose.
               </p>
             </CardHeader>
             <CardContent>
@@ -54,7 +55,7 @@ export default async function OnboardingPage({
                 </Button>
               </form>
               <p className="mt-4 text-xs leading-5 text-[#68706e]">
-                Best for anyone who wants to get into the app first and build trust before sharing more.
+                No assessment required. Best for anyone who wants to get into the app first and build trust before sharing more.
               </p>
             </CardContent>
           </Card>
@@ -66,7 +67,7 @@ export default async function OnboardingPage({
               </div>
               <CardTitle className="text-2xl">Personalize my path</CardTitle>
               <p className="text-sm leading-6 text-[#68706e]">
-                Take a short, gentle assessment so the app can connect you with a track that better fits your current spiritual season.
+                Take a short, gentle check-in to help match your devotional path to your current spiritual season.
               </p>
             </CardHeader>
             <CardContent>
@@ -75,7 +76,7 @@ export default async function OnboardingPage({
               </LinkButton>
               <div className="mt-4 flex items-start gap-2 rounded-lg bg-[#f7fbf8] p-3 text-xs leading-5 text-[#52605d]">
                 <Lock className="mt-0.5 h-4 w-4 shrink-0 text-[#345d6f]" aria-hidden="true" />
-                <span>Your assessment is private. It is used to choose your devotional track, not shown publicly.</span>
+                <span>Your answers are private. They are used only to guide your devotional path, not shown publicly.</span>
               </div>
             </CardContent>
           </Card>
@@ -94,7 +95,7 @@ export default async function OnboardingPage({
           </p>
           {isRetake ? (
             <p className="text-sm leading-6 text-[#68706e]">
-              If your answers place you on a different track, your new course path will begin at step 1. If the track stays the same, your current progress is preserved.
+              Updating your path starts the selected devotional track at step 1, so your new path is clear and never begins halfway through.
             </p>
           ) : null}
         </CardHeader>

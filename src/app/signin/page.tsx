@@ -17,6 +17,12 @@ export default function SignInPage() {
           <p className="text-sm leading-6 text-[#68706e]">Sign in to keep your prayers, faith questions, and devotional notes private.</p>
         </CardHeader>
         <CardContent>
+          <div className="mb-4 rounded-xl border border-[#e4dccd] bg-[#fbf7ef] p-4 text-sm leading-6 text-[#52605d]">
+            <p className="font-semibold text-[#24302f]">You can start without answering personal questions.</p>
+            <p className="mt-1">
+              Sign in to save your place, begin the Foundations path, and personalize later only if you want to.
+            </p>
+          </div>
           <SignInButtons googleConfigured={isGoogleAuthConfigured} />
           {!isGoogleAuthConfigured ? (
             <p className="mt-4 rounded-lg bg-[#fbf7ef] p-3 text-xs leading-5 text-[#68706e]">

@@ -36,18 +36,23 @@ const features = [
 
 const howItWorks = [
   {
-    title: "Tell us where you are",
-    body: "A short, gentle assessment places you into a devotional track built for your current faith season \u2014 not a one-size-fits-all plan.",
+    title: "Start simply",
+    body: "Begin with Faithful Foundations, no assessment required. You can step into Scripture and prayer before sharing anything personal.",
+    icon: BookOpen
+  },
+  {
+    title: "Personalize if you want",
+    body: "Take a private spiritual check-in whenever you want a devotional path shaped to your current faith season.",
     icon: ClipboardList
   },
   {
-    title: "Follow your track, day by day",
-    body: "Each morning you get the next devotional you actually need. Miss a week? You return to where you left off, not a random date.",
+    title: "Continue at your pace",
+    body: "Each morning brings your next faithful step. Miss a week? You return to where you left off, not a random calendar date.",
     icon: BookmarkCheck
   },
   {
-    title: "Keep your spiritual life private",
-    body: "Your prayers, journal entries, faith questions, and assessment are private by default. You share only what you choose.",
+    title: "Keep it private",
+    body: "Your prayers, journal entries, faith questions, and assessment answers are private by default. You share only what you choose.",
     icon: ShieldCheck
   }
 ];
@@ -125,7 +130,7 @@ export default function LandingPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">How it works</p>
           <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">Your path. Your pace. Your private space.</h2>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {howItWorks.map((step, index) => {
             const Icon = step.icon;
             return (
