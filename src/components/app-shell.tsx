@@ -7,16 +7,17 @@ import {
   BookOpen,
   Church,
   Gift,
-  Home,
   LayoutDashboard,
   LibraryBig,
   LogOut,
   MessageCircleQuestion,
+  MoreHorizontal,
   PenLine,
   Search,
   Settings,
   Shield,
   Sparkles,
+  UserCircle,
   Users
 } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
@@ -34,28 +35,40 @@ type ShellUser = {
   notificationSettings?: unknown;
 } | null;
 
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/devotional", label: "Today's Devotional", icon: BookOpen },
-  { href: "/prayers", label: "Prayer Journal", icon: PenLine },
-  { href: "/ask", label: "Ask in Faith", icon: MessageCircleQuestion },
-  { href: "/community", label: "Community", icon: Users },
+const primaryNavItems = [
+  { href: "/dashboard", label: "Today", shortLabel: "Today", icon: LayoutDashboard },
+  { href: "/devotional", label: "My Path", shortLabel: "Path", icon: BookOpen },
+  { href: "/prayers", label: "Prayers", shortLabel: "Pray", icon: PenLine },
+  { href: "/ask", label: "Ask in Faith", shortLabel: "Ask", icon: MessageCircleQuestion },
+  { href: "/support", label: "Support", shortLabel: "Give", icon: Gift }
+];
+
+const secondaryNavItems = [
+  { href: "/community", label: "Prayer & Encouragement", icon: Users },
   { href: "/groups", label: "Prayer Groups", icon: Church },
-  { href: "/blog", label: "Blog", icon: LibraryBig },
+  { href: "/blog", label: "Reflections", icon: LibraryBig },
   { href: "/search", label: "Search", icon: Search },
-  { href: "/support", label: "Support", icon: Gift },
-  { href: "/profile", label: "Profile", icon: Home },
+  { href: "/profile", label: "Profile", icon: UserCircle },
   { href: "/settings", label: "Settings", icon: Settings }
 ];
+
+const adminNavItem = { href: "/admin", label: "Admin", icon: Shield };
+const mobileMorePaths = ["/more", "/community", "/groups", "/blog", "/search", "/profile", "/settings", "/support", "/admin"];
+
+function isActivePath(pathname: string, href: string) {
+  return pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+}
 
 export function AppShell({ user, children }: { user: ShellUser; children: React.ReactNode }) {
   const pathname = usePathname();
   const publicPaths = publicPages.map((page) => page.path);
   const alwaysStandalonePaths = ["/", "/signin", "/onboarding"];
   const isPublic = alwaysStandalonePaths.includes(pathname) || (!user && publicPaths.includes(pathname));
-  const visibleNav = user?.role === "ADMIN" ? [...navItems, { href: "/admin", label: "Admin", icon: Shield }] : navItems;
-  const welcomeNav = visibleNav.filter((item) => !["/search", "/profile", "/settings", "/admin"].includes(item.href));
-  const personalNav = visibleNav.filter((item) => ["/search", "/profile", "/settings", "/admin"].includes(item.href));
+  const adminNav = user?.role === "ADMIN" ? [adminNavItem] : [];
+  const mobileNav = [
+    ...primaryNavItems.slice(0, 4),
+    { href: "/more", label: "More", shortLabel: "More", icon: MoreHorizontal }
+  ];
 
   if (isPublic) {
     return <>{children}</>;
@@ -72,10 +85,10 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
 
         <nav className="peaceful-scrollbar mt-8 flex-1 space-y-7 overflow-y-auto pr-1">
           <div className="space-y-2">
-            <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Welcome</p>
-            {welcomeNav.map((item) => {
+            <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Start here</p>
+            {primaryNavItems.map((item) => {
               const Icon = item.icon;
-              const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+              const active = isActivePath(pathname, item.href);
               return (
                 <Link
                   key={item.href}
@@ -93,10 +106,10 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
           </div>
 
           <div className="space-y-2">
-            <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Personal</p>
-            {personalNav.map((item) => {
+            <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">More</p>
+            {secondaryNavItems.map((item) => {
               const Icon = item.icon;
-              const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+              const active = isActivePath(pathname, item.href);
               return (
                 <Link
                   key={item.href}
@@ -112,6 +125,29 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
               );
             })}
           </div>
+
+          {adminNav.length ? (
+            <div className="space-y-2">
+              <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Admin</p>
+              {adminNav.map((item) => {
+                const Icon = item.icon;
+                const active = isActivePath(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-[#52605d] transition hover:border-[#d9cfbd] hover:bg-white/80 hover:text-[#24302f]",
+                      active && "border-[#d9cfbd] bg-white text-[#24302f] shadow-sm"
+                    )}
+                  >
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
         </nav>
 
         <div className="mt-5 rounded-xl border border-[#e4dccd] bg-white/82 p-3 shadow-sm">
@@ -155,10 +191,10 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
         {children}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-6 border-t border-[#e4dccd] bg-[#fffdf8]/95 px-2 py-2 backdrop-blur lg:hidden">
-        {[...visibleNav.slice(0, 5), navItems.find((item) => item.href === "/support")!].map((item) => {
+      <nav className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-5 border-t border-[#e4dccd] bg-[#fffdf8]/95 px-2 py-2 backdrop-blur lg:hidden">
+        {mobileNav.map((item) => {
           const Icon = item.icon;
-          const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+          const active = item.href === "/more" ? mobileMorePaths.some((path) => isActivePath(pathname, path)) : isActivePath(pathname, item.href);
           return (
             <Link
               key={item.href}
@@ -166,7 +202,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
               className={cn("flex min-h-12 flex-col items-center justify-center gap-1 rounded-lg text-[11px] text-[#68706e]", active && "bg-[#dfe9dd] text-[#24302f]")}
             >
               <Icon className="h-4 w-4" aria-hidden="true" />
-              <span className="max-w-full truncate">{item.label.split(" ")[0]}</span>
+              <span className="max-w-full truncate">{item.shortLabel}</span>
             </Link>
           );
         })}
