@@ -14,7 +14,7 @@ import {
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { determineAssessmentOutcome } from "@/lib/assessment";
-import { advanceUserDevotionalProgress, assignUserDevotionalTrack, getCurrentDevotionalForUser } from "@/lib/devotionals";
+import { advanceUserDevotionalProgress, assignUserDevotionalTrack, assignUserFoundationTrack, getCurrentDevotionalForUser } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireUser } from "@/lib/current-user";
 import { blogSchema, devotionalSchema, groupSchema, onboardingSchema, postSchema, prayerSchema } from "@/lib/validations";
@@ -81,6 +81,40 @@ export async function completeOnboarding(formData: FormData) {
     id: user.id,
     spiritualFocusProfile: generatedProfile
   });
+
+  redirect("/dashboard");
+}
+
+export async function startFoundationsPath() {
+  const user = await requireUser();
+  const currentPrivacySettings =
+    typeof user.privacySettings === "object" && user.privacySettings && !Array.isArray(user.privacySettings) ? user.privacySettings : null;
+  const currentNotificationSettings =
+    typeof user.notificationSettings === "object" && user.notificationSettings && !Array.isArray(user.notificationSettings) ? user.notificationSettings : {};
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      spiritualFocusProfile: "Core Foundations",
+      onboardingCompleted: true,
+      privacySettings: currentPrivacySettings ?? {
+        showBio: true,
+        showChurch: false,
+        showDenomination: false,
+        shareAnsweredPrayerCount: false
+      },
+      notificationSettings: {
+        ...currentNotificationSettings,
+        dailyDevotional: currentNotificationSettings.dailyDevotional ?? true,
+        browserReminders: currentNotificationSettings.browserReminders ?? false,
+        reminderTime: currentNotificationSettings.reminderTime ?? "07:00",
+        groupPrayer: currentNotificationSettings.groupPrayer ?? false,
+        productUpdates: currentNotificationSettings.productUpdates ?? false
+      }
+    }
+  });
+
+  await assignUserFoundationTrack(user.id);
 
   redirect("/dashboard");
 }

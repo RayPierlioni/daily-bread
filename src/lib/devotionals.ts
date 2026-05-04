@@ -129,6 +129,40 @@ export async function assignUserDevotionalTrack(user: Pick<User, "id" | "spiritu
   return getProgressWithTrack(user.id);
 }
 
+export async function assignUserFoundationTrack(userId: string) {
+  const track =
+    (await prisma.devotionalTrack.findUnique({
+      where: { slug: foundationTrackSlug }
+    })) ??
+    (await prisma.devotionalTrack.findFirst({
+      where: { focusCategory: "Core Foundations" },
+      orderBy: { createdAt: "asc" }
+    })) ??
+    (await prisma.devotionalTrack.findFirst({
+      orderBy: { createdAt: "asc" }
+    }));
+
+  if (!track) return null;
+
+  await prisma.userDevotionalProgress.upsert({
+    where: { userId },
+    update: {
+      trackId: track.id,
+      currentSequence: 1,
+      startedAt: new Date(),
+      lastAdvancedAt: null,
+      completedTrackAt: null
+    },
+    create: {
+      userId,
+      trackId: track.id,
+      currentSequence: 1
+    }
+  });
+
+  return getProgressWithTrack(userId);
+}
+
 export async function getCurrentDevotionalForUser(user: Pick<User, "id" | "spiritualFocusProfile">) {
   const progress = await ensureUserDevotionalProgress(user);
 

@@ -1,14 +1,20 @@
 import Link from "next/link";
+import { BookOpen, Lock, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/form-fields";
-import { completeOnboarding } from "@/lib/actions";
+import { completeOnboarding, startFoundationsPath } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { focusCategories } from "@/lib/validations";
 
-export default async function OnboardingPage() {
+export default async function OnboardingPage({
+  searchParams
+}: {
+  searchParams: Promise<{ mode?: string }>;
+}) {
   const user = await requireUser();
+  const params = await searchParams;
   const latestAssessment = await prisma.spiritualAssessment.findFirst({
     where: { userId: user.id },
     orderBy: { createdAt: "desc" }
@@ -17,6 +23,66 @@ export default async function OnboardingPage() {
   const growthAreas = Array.isArray(answers.growthAreas) ? answers.growthAreas.map(String) : [];
   const struggles = Array.isArray(answers.struggles) ? answers.struggles.map(String) : [];
   const isRetake = user.onboardingCompleted;
+  const showAssessment = isRetake || params.mode === "assessment";
+
+  if (!showAssessment) {
+    return (
+      <main className="mx-auto max-w-5xl px-4 py-10">
+        <div className="mb-6">
+          <p className="text-sm font-medium text-[#345d6f]">Welcome to Next Faithful Step</p>
+          <h1 className="mt-2 text-3xl font-semibold text-[#24302f]">Choose how you want to begin.</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[#68706e]">
+            You do not have to answer personal questions to use the app. Start with the standard Foundations path now, or take the optional assessment if you want a more personalized track.
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          <Card className="border-[#d9cfbd] bg-white/88">
+            <CardHeader>
+              <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-[#dfe9dd] text-[#345d6f]">
+                <BookOpen className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-2xl">Start with Foundations</CardTitle>
+              <p className="text-sm leading-6 text-[#68706e]">
+                Begin with the standard Faithful Foundations track. No assessment is needed, and you can personalize later from your settings or onboarding page.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form action={startFoundationsPath}>
+                <Button type="submit" size="lg" className="w-full sm:w-auto">
+                  Start the Foundations path
+                </Button>
+              </form>
+              <p className="mt-4 text-xs leading-5 text-[#68706e]">
+                Best for anyone who wants to get into the app first and build trust before sharing more.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#fffdf8]">
+            <CardHeader>
+              <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-[#fbf0d8] text-[#9b773f]">
+                <Sparkles className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-2xl">Personalize my path</CardTitle>
+              <p className="text-sm leading-6 text-[#68706e]">
+                Take a short, gentle assessment so the app can connect you with a track that better fits your current spiritual season.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <LinkButton href="/onboarding?mode=assessment" size="lg" variant="secondary" className="w-full sm:w-auto">
+                Take the optional assessment
+              </LinkButton>
+              <div className="mt-4 flex items-start gap-2 rounded-lg bg-[#f7fbf8] p-3 text-xs leading-5 text-[#52605d]">
+                <Lock className="mt-0.5 h-4 w-4 shrink-0 text-[#345d6f]" aria-hidden="true" />
+                <span>Your assessment is private. It is used to choose your devotional track, not shown publicly.</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
