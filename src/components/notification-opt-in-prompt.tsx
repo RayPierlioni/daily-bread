@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { BellRing, Clock, X } from "lucide-react";
 import { Button, LinkButton } from "@/components/ui/button";
@@ -22,7 +22,14 @@ function parseSettings(value: unknown): NotificationSettings {
 
 function wasDismissedRecently() {
   if (typeof window === "undefined") return true;
-  const dismissedAt = Number(window.localStorage.getItem(dismissalKey) ?? "0");
+  let dismissedAt = 0;
+
+  try {
+    dismissedAt = Number(window.localStorage.getItem(dismissalKey) ?? "0");
+  } catch {
+    dismissedAt = 0;
+  }
+
   return Boolean(dismissedAt && Date.now() - dismissedAt < dismissalWindowMs);
 }
 
@@ -31,7 +38,7 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
   const settings = useMemo(() => parseSettings(notificationSettings), [notificationSettings]);
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState("");
-  const [isPending, startTransition] = useTransition();
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -49,33 +56,53 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
   }, [pathname, settings.browserReminders]);
 
   const dismiss = () => {
-    window.localStorage.setItem(dismissalKey, String(Date.now()));
     setVisible(false);
+
+    try {
+      window.localStorage.setItem(dismissalKey, String(Date.now()));
+    } catch {
+      // If storage is blocked, still close the prompt for this page view.
+    }
   };
 
   const enableReminders = async () => {
+    setMessage("Turning on your 7:00 AM reminder...");
+
     if (!("Notification" in window)) {
       setMessage("This browser does not support reminders yet.");
+      globalThis.setTimeout(() => setVisible(false), 2500);
       return;
     }
 
-    setMessage("");
+    setIsSaving(true);
     const permission = Notification.permission === "granted" ? "granted" : await Notification.requestPermission();
 
     if (permission !== "granted") {
+      setIsSaving(false);
       setMessage("Notifications were not enabled. You can still turn them on later in Settings.");
+      globalThis.setTimeout(() => setVisible(false), 3000);
       return;
     }
 
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     const reminderTime = "07:00";
 
-    startTransition(async () => {
+    try {
       await enableDailyBrowserReminder(reminderTime, timezone);
-      window.localStorage.removeItem(dismissalKey);
+
+      try {
+        window.localStorage.removeItem(dismissalKey);
+      } catch {
+        // Ignore blocked storage after the reminder is saved.
+      }
+
       setMessage("Daily reminder enabled for 7:00 AM. You can change the time in Settings.");
-      window.setTimeout(() => setVisible(false), 2000);
-    });
+      globalThis.setTimeout(() => setVisible(false), 2000);
+    } catch {
+      setMessage("The reminder could not be saved. Please try Settings instead.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   if (!visible) return null;
@@ -107,8 +134,8 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
         {message ? <p className="mt-3 text-sm font-medium text-[#52633f]" role="status">{message}</p> : null}
 
         <div className="mt-5 flex flex-wrap gap-2">
-          <Button type="button" onClick={enableReminders} disabled={isPending}>
-            {isPending ? "Turning on..." : "Enable reminders"}
+          <Button type="button" onClick={enableReminders} disabled={isSaving}>
+            {isSaving ? "Saving..." : "Enable 7 AM reminder"}
           </Button>
           <Button type="button" variant="secondary" onClick={dismiss}>
             Not now
