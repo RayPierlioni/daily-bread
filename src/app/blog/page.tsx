@@ -13,7 +13,9 @@ export default async function BlogPage() {
   if (!user.onboardingCompleted) redirect("/onboarding");
 
   const blogs = await prisma.blog.findMany({
-    where: { status: "PUBLISHED" },
+    where: {
+      OR: [{ status: "PUBLISHED" }, { authorId: user.id }]
+    },
     include: { author: { select: { name: true, isSponsor: true } } },
     orderBy: { createdAt: "desc" }
   });
@@ -28,7 +30,7 @@ export default async function BlogPage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_25rem]">
         <section className="grid gap-4 md:grid-cols-2">
           {blogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
+            <BlogCard key={blog.id} blog={blog} currentUserId={user.id} currentUserRole={user.role} />
           ))}
         </section>
         <aside>
@@ -53,9 +55,9 @@ export default async function BlogPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
-                  <Select id="status" name="status" defaultValue="DRAFT">
+                  <Select id="status" name="status" defaultValue="PUBLISHED">
+                    <option value="PUBLISHED">Publish now</option>
                     <option value="DRAFT">Save draft</option>
-                    <option value="PUBLISHED">Publish</option>
                   </Select>
                 </div>
                 <Button type="submit">

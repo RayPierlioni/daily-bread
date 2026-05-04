@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/form-fields";
 import { SponsorBadge } from "@/components/sponsor-badge";
@@ -30,7 +30,8 @@ export default async function BlogDetailPage({
     }
   });
 
-  if (!blog || (blog.status !== "PUBLISHED" && blog.authorId !== user.id)) notFound();
+  const canEdit = Boolean(blog && (blog.authorId === user.id || user.role === "ADMIN"));
+  if (!blog || (blog.status !== "PUBLISHED" && !canEdit)) notFound();
 
   return (
     <article className="mx-auto max-w-3xl space-y-6">
@@ -38,6 +39,7 @@ export default async function BlogDetailPage({
         <div className="flex flex-wrap items-center gap-2 text-sm text-[#68706e]">
           <span>{formatDate(blog.createdAt)} by {blog.author.name ?? "Next Faithful Step"}</span>
           <SponsorBadge isSponsor={blog.author.isSponsor} />
+          {blog.status === "DRAFT" ? <Badge className="border-[#b38b4d]/35 bg-[#fbf7ef] text-[#7a5a20]">Draft</Badge> : null}
         </div>
         <h1 className="mt-3 text-4xl font-semibold leading-tight text-[#24302f]">{blog.title}</h1>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -45,6 +47,11 @@ export default async function BlogDetailPage({
             <Badge key={tag}>{tag}</Badge>
           ))}
         </div>
+        {canEdit ? (
+          <LinkButton href={`/blog/${blog.id}/edit`} variant="secondary" size="sm" className="mt-4">
+            Edit post
+          </LinkButton>
+        ) : null}
       </div>
       <Card className="p-6">
         <div className="prose-soft whitespace-pre-line text-base leading-8 text-[#31413f]">{blog.body}</div>

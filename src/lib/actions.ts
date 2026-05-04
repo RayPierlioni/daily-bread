@@ -358,7 +358,39 @@ export async function createBlogPost(formData: FormData) {
   });
 
   revalidatePath("/blog");
+  revalidatePath(`/blog/${blog.id}`);
   redirect(`/blog/${blog.id}`);
+}
+
+export async function updateBlogPost(blogId: string, formData: FormData) {
+  const user = await requireUser();
+  const blog = await prisma.blog.findUnique({ where: { id: blogId }, select: { authorId: true } });
+
+  if (!blog || (blog.authorId !== user.id && user.role !== "ADMIN")) {
+    redirect("/blog");
+  }
+
+  const parsed = blogSchema.parse({
+    title: formData.get("title"),
+    body: formData.get("body"),
+    tags: toTagArray(formData.get("tags")),
+    status: formData.get("status")
+  });
+
+  await prisma.blog.update({
+    where: { id: blogId },
+    data: {
+      title: parsed.title,
+      body: parsed.body,
+      tags: parsed.tags,
+      status: parsed.status as BlogStatus
+    }
+  });
+
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${blogId}`);
+  revalidatePath(`/blog/${blogId}/edit`);
+  redirect(`/blog/${blogId}`);
 }
 
 export async function createBlogComment(blogId: string, formData: FormData) {
