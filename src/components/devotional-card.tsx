@@ -1,6 +1,6 @@
 import type { Devotional, UserDevotional } from "@prisma/client";
 import { CheckCircle2, Heart, MessageSquare, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
@@ -90,14 +90,14 @@ export function DevotionalCard({
               {state?.saved ? "Saved" : "Save"}
             </Button>
           </form>
-          <Button variant="ghost" type="button">
+          <LinkButton href="/groups" variant="ghost">
             <Share2 className="h-4 w-4" aria-hidden="true" />
-            Share to group soon
-          </Button>
-          <Button variant="ghost" type="button">
+            Prayer groups
+          </LinkButton>
+          <LinkButton href="/community?type=DEVOTIONAL_DISCUSSION" variant="ghost">
             <MessageSquare className="h-4 w-4" aria-hidden="true" />
-            Discuss soon
-          </Button>
+            Discuss in community
+          </LinkButton>
         </div>
 
         <DevotionalNoteForm devotionalId={devotional.id} initialNotes={state?.notes ?? ""} />

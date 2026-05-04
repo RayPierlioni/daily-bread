@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { ArrowRight, BookOpen, CalendarCheck, Heart, MessageCircleQuestion, PenLine, Share2, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button, LinkButton } from "@/components/ui/button";
@@ -74,9 +75,9 @@ export default async function DashboardPage() {
                           <Heart className="h-4 w-4" aria-hidden="true" />
                         </button>
                       </form>
-                      <button className="rounded-full p-2 transition hover:bg-[#f3eee4]" type="button" aria-label="Share devotional placeholder">
+                      <Link className="rounded-full p-2 transition hover:bg-[#f3eee4]" href="/community?type=DEVOTIONAL_DISCUSSION" aria-label="Discuss this devotional in community">
                         <Share2 className="h-4 w-4" aria-hidden="true" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                   <div className="mt-12 border-l-4 border-[#d8b56f] pl-6">
@@ -85,7 +86,7 @@ export default async function DashboardPage() {
                   </div>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <LinkButton href="/devotional" variant="primary">
-                      Read full chapter
+                      Read today&apos;s devotional
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </LinkButton>
                     <form action={toggleDevotionalComplete.bind(null, devotional.id)}>

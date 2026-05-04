@@ -302,7 +302,7 @@ async function main() {
     }))
   });
 
-  const publishedDevotionals = starterDevotionals;
+  const publishedDevotionals = foundationDevotionals;
 
   for (const focus of focusCategories) {
     const slug = slugify(focus);
