@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/form-fields";
+import { SponsorBadge } from "@/components/sponsor-badge";
 import { createBlogComment } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { jsonArray } from "@/lib/devotionals";
@@ -21,10 +22,10 @@ export default async function BlogDetailPage({
   const blog = await prisma.blog.findUnique({
     where: { id },
     include: {
-      author: { select: { name: true } },
+      author: { select: { name: true, isSponsor: true } },
       comments: {
         orderBy: { createdAt: "asc" },
-        include: { user: { select: { name: true } } }
+        include: { user: { select: { name: true, isSponsor: true } } }
       }
     }
   });
@@ -34,9 +35,10 @@ export default async function BlogDetailPage({
   return (
     <article className="mx-auto max-w-3xl space-y-6">
       <div>
-        <p className="text-sm text-[#68706e]">
-          {formatDate(blog.createdAt)} by {blog.author.name ?? "Daily Bread Hub"}
-        </p>
+        <div className="flex flex-wrap items-center gap-2 text-sm text-[#68706e]">
+          <span>{formatDate(blog.createdAt)} by {blog.author.name ?? "Next Faithful Step"}</span>
+          <SponsorBadge isSponsor={blog.author.isSponsor} />
+        </div>
         <h1 className="mt-3 text-4xl font-semibold leading-tight text-[#24302f]">{blog.title}</h1>
         <div className="mt-4 flex flex-wrap gap-2">
           {jsonArray(blog.tags).map((tag) => (
@@ -51,7 +53,11 @@ export default async function BlogDetailPage({
         <h2 className="text-xl font-semibold text-[#24302f]">Comments</h2>
         {blog.comments.map((comment) => (
           <Card key={comment.id} className="p-4 text-sm leading-6">
-            <span className="font-medium text-[#24302f]">{comment.user.name ?? "Reader"}: </span>
+            <span className="inline-flex flex-wrap items-center gap-2">
+              <span className="font-medium text-[#24302f]">{comment.user.name ?? "Reader"}</span>
+              <SponsorBadge isSponsor={comment.user.isSponsor} />
+              <span className="font-medium text-[#24302f]">:</span>
+            </span>{" "}
             <span className="text-[#52605d]">{comment.body}</span>
           </Card>
         ))}

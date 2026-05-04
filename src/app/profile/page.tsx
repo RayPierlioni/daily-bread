@@ -32,7 +32,7 @@ export default async function ProfilePage() {
     }),
     prisma.blog.findMany({
       where: { authorId: user.id, status: "PUBLISHED" },
-      include: { author: { select: { name: true } } },
+      include: { author: { select: { name: true, isSponsor: true } } },
       orderBy: { createdAt: "desc" },
       take: 4
     }),

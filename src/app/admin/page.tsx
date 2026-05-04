@@ -1,9 +1,12 @@
 import { FileText, Library, ShieldAlert, Users } from "lucide-react";
 import { AdminTable } from "@/components/admin-table";
+import { SponsorBadge } from "@/components/sponsor-badge";
 import { Card } from "@/components/ui/card";
-import { LinkButton } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { requireAdmin } from "@/lib/current-user";
+import { setUserSponsorStatus } from "@/lib/actions";
 import { prisma } from "@/lib/prisma";
+import { formatDate } from "@/lib/utils";
 
 export default async function AdminPage() {
   await requireAdmin();
@@ -14,6 +17,19 @@ export default async function AdminPage() {
     prisma.user.count(),
     prisma.sourceLibraryItem.count()
   ]);
+  const recentUsers = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      isSponsor: true,
+      sponsorSince: true,
+      createdAt: true
+    },
+    orderBy: { createdAt: "desc" },
+    take: 25
+  });
 
   const cards = [
     { label: "Devotionals", value: devotionals, icon: FileText, href: "/admin/devotionals" },
@@ -53,6 +69,34 @@ export default async function AdminPage() {
           ["Advanced analytics", "Placeholder for engagement and safety insights"]
         ]}
       />
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Sponsor recognition</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            After someone supports the mission through Buy Me a Coffee, mark their account here so their sponsor badge appears on community and blog activity.
+          </p>
+        </div>
+        <AdminTable
+          headers={["User", "Role", "Sponsor", "Action"]}
+          rows={recentUsers.map((user) => [
+            <div key={`${user.id}-user`}>
+              <p className="font-medium text-[#24302f]">{user.name ?? "Unnamed user"}</p>
+              <p className="text-xs text-[#68706e]">{user.email ?? "No email"}</p>
+            </div>,
+            user.role,
+            <div key={`${user.id}-sponsor`} className="space-y-1">
+              <SponsorBadge isSponsor={user.isSponsor} />
+              <p className="text-xs text-[#68706e]">{user.sponsorSince ? `Since ${formatDate(user.sponsorSince)}` : "Not marked"}</p>
+            </div>,
+            <form key={`${user.id}-action`} action={setUserSponsorStatus.bind(null, user.id, !user.isSponsor)}>
+              <Button type="submit" variant={user.isSponsor ? "ghost" : "secondary"} size="sm">
+                {user.isSponsor ? "Remove badge" : "Mark sponsor"}
+              </Button>
+            </form>
+          ])}
+        />
+      </section>
     </div>
   );
 }

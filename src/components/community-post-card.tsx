@@ -4,13 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/form-fields";
+import { SponsorBadge } from "@/components/sponsor-badge";
 import { createComment, createReport } from "@/lib/actions";
 import { jsonArray } from "@/lib/devotionals";
 import { formatDate, humanizeEnum } from "@/lib/utils";
 
 type PostWithRelations = Post & {
-  user: Pick<User, "name" | "image">;
-  comments: Array<Comment & { user: Pick<User, "name"> }>;
+  user: Pick<User, "name" | "image" | "isSponsor">;
+  comments: Array<Comment & { user: Pick<User, "name" | "isSponsor"> }>;
 };
 
 export function CommunityPostCard({ post }: { post: PostWithRelations }) {
@@ -23,7 +24,10 @@ export function CommunityPostCard({ post }: { post: PostWithRelations }) {
             <span className="text-xs text-[#68706e]">{formatDate(post.createdAt)}</span>
           </div>
           <h3 className="mt-2 text-lg font-semibold text-[#24302f]">{post.title}</h3>
-          <p className="mt-1 text-xs text-[#68706e]">by {post.user.name ?? "A community member"}</p>
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#68706e]">
+            <span>by {post.user.name ?? "A community member"}</span>
+            <SponsorBadge isSponsor={post.user.isSponsor} />
+          </div>
         </div>
         <form action={createReport.bind(null, "POST", post.id)} className="flex items-center gap-2">
           <input type="hidden" name="reason" value="Community report" />
@@ -52,7 +56,11 @@ export function CommunityPostCard({ post }: { post: PostWithRelations }) {
       <div className="mt-4 space-y-3">
         {post.comments.slice(0, 3).map((comment) => (
           <div key={comment.id} className="rounded-lg bg-[#fbf7ef] p-3 text-sm leading-6">
-            <span className="font-medium text-[#24302f]">{comment.user.name ?? "Community member"}: </span>
+            <span className="inline-flex flex-wrap items-center gap-2">
+              <span className="font-medium text-[#24302f]">{comment.user.name ?? "Community member"}</span>
+              <SponsorBadge isSponsor={comment.user.isSponsor} />
+              <span className="font-medium text-[#24302f]">:</span>
+            </span>{" "}
             <span className="text-[#52605d]">{comment.body}</span>
           </div>
         ))}

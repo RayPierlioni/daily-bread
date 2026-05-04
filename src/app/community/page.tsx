@@ -26,10 +26,10 @@ export default async function CommunityPage({
       type: type && postTypes.includes(type) ? (type as never) : undefined
     },
     include: {
-      user: { select: { name: true, image: true } },
+      user: { select: { name: true, image: true, isSponsor: true } },
       comments: {
         orderBy: { createdAt: "asc" },
-        include: { user: { select: { name: true } } }
+        include: { user: { select: { name: true, isSponsor: true } } }
       }
     },
     orderBy: { createdAt: "desc" },

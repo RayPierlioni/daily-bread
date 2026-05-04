@@ -92,6 +92,8 @@ model User {
   church                 String?
   denomination           String?
   role                   Role                  @default(USER)
+  isSponsor              Boolean               @default(false)
+  sponsorSince           DateTime?
   spiritualFocusProfile  String?
   onboardingCompleted    Boolean               @default(false)
   privacySettings        Json?

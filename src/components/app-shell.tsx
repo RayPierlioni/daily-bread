@@ -50,8 +50,9 @@ const navItems = [
 
 export function AppShell({ user, children }: { user: ShellUser; children: React.ReactNode }) {
   const pathname = usePathname();
-  const publicPaths = ["/", "/signin", "/onboarding", ...publicPages.map((page) => page.path)];
-  const isPublic = publicPaths.includes(pathname);
+  const publicPaths = publicPages.map((page) => page.path);
+  const alwaysStandalonePaths = ["/", "/signin", "/onboarding"];
+  const isPublic = alwaysStandalonePaths.includes(pathname) || (!user && publicPaths.includes(pathname));
   const visibleNav = user?.role === "ADMIN" ? [...navItems, { href: "/admin", label: "Admin", icon: Shield }] : navItems;
   const welcomeNav = visibleNav.filter((item) => !["/search", "/profile", "/settings", "/admin"].includes(item.href));
   const personalNav = visibleNav.filter((item) => ["/search", "/profile", "/settings", "/admin"].includes(item.href));

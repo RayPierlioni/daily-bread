@@ -537,6 +537,22 @@ export async function updateReportStatus(reportId: string, status: ReportStatus,
   revalidatePath("/admin/reports");
 }
 
+export async function setUserSponsorStatus(userId: string, isSponsor: boolean) {
+  await requireAdmin();
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      isSponsor,
+      sponsorSince: isSponsor ? new Date() : null
+    }
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/community");
+  revalidatePath("/blog");
+}
+
 export async function createSourceLibraryItem(formData: FormData) {
   await requireAdmin();
 

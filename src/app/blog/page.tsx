@@ -14,7 +14,7 @@ export default async function BlogPage() {
 
   const blogs = await prisma.blog.findMany({
     where: { status: "PUBLISHED" },
-    include: { author: { select: { name: true } } },
+    include: { author: { select: { name: true, isSponsor: true } } },
     orderBy: { createdAt: "desc" }
   });
 

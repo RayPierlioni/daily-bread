@@ -26,8 +26,8 @@ export default async function GroupDetailPage({
       posts: {
         where: { visibility: { in: ["PUBLIC", "GROUP"] } },
         include: {
-          user: { select: { name: true, image: true } },
-          comments: { include: { user: { select: { name: true } } }, orderBy: { createdAt: "asc" } }
+          user: { select: { name: true, image: true, isSponsor: true } },
+          comments: { include: { user: { select: { name: true, isSponsor: true } } }, orderBy: { createdAt: "asc" } }
         },
         orderBy: { createdAt: "desc" }
       }
