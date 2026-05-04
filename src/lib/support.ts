@@ -1,5 +1,4 @@
-// TODO: Replace this placeholder with the real Daily Bread Hub donation URL.
-export const donationUrl = "https://buymeacoffee.com";
+export const donationUrl = "https://buymeacoffee.com/ourdailybreadhub";
 
 export const donationOptions = [
   "$5 \u2014 A small gift",
