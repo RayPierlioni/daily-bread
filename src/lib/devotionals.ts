@@ -34,6 +34,17 @@ export function jsonArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map(String) : [];
 }
 
+export function publicDevotionalTags(value: unknown) {
+  return jsonArray(value).filter((tag) => tag !== "daily-bread-foundations" && !/^day-\d{3}$/i.test(tag));
+}
+
+export function formatTrackStepTitle(title: string, sequence?: number | null) {
+  if (!sequence) return title;
+
+  const paddedSequence = String(sequence).padStart(3, "0");
+  return title.replace(/^Day\s+\d{3}:/i, `Step ${paddedSequence}:`);
+}
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -98,20 +109,15 @@ export async function ensureUserDevotionalProgress(user: Pick<User, "id" | "spir
 export async function assignUserDevotionalTrack(user: Pick<User, "id" | "spiritualFocusProfile">) {
   const track = await chooseTrackForUser(user);
   if (!track) return null;
-  const existing = await prisma.userDevotionalProgress.findUnique({
-    where: { userId: user.id },
-    select: { trackId: true }
-  });
-  const isChangingTracks = Boolean(existing && existing.trackId !== track.id);
 
   await prisma.userDevotionalProgress.upsert({
     where: { userId: user.id },
     update: {
       trackId: track.id,
-      currentSequence: isChangingTracks ? 1 : undefined,
-      startedAt: isChangingTracks ? new Date() : undefined,
-      lastAdvancedAt: isChangingTracks ? null : undefined,
-      completedTrackAt: isChangingTracks ? null : undefined
+      currentSequence: 1,
+      startedAt: new Date(),
+      lastAdvancedAt: null,
+      completedTrackAt: null
     },
     create: {
       userId: user.id,

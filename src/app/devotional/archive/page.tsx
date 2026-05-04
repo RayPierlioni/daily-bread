@@ -6,7 +6,7 @@ import { SearchInput } from "@/components/search-input";
 import { TagFilter } from "@/components/tag-filter";
 import { requireUser } from "@/lib/current-user";
 import { getDevotionalImage } from "@/lib/devotional-media";
-import { jsonArray } from "@/lib/devotionals";
+import { jsonArray, publicDevotionalTags } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { focusCategories } from "@/lib/validations";
@@ -79,7 +79,7 @@ export default async function DevotionalArchivePage({
                 <p className="mt-1 text-sm font-medium text-[#345d6f]">{item.scriptureReference}</p>
                 <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#52605d]">{item.body}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {[...jsonArray(item.tags), ...jsonArray(item.spiritualFocusCategories)].slice(0, 4).map((tag) => (
+                  {[...publicDevotionalTags(item.tags), ...jsonArray(item.spiritualFocusCategories)].slice(0, 4).map((tag) => (
                     <Badge key={tag}>{tag}</Badge>
                   ))}
                 </div>

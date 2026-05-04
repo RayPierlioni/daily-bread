@@ -7,21 +7,25 @@ import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { getDevotionalImage } from "@/lib/devotional-media";
-import { jsonArray } from "@/lib/devotionals";
+import { publicDevotionalTags } from "@/lib/devotionals";
 import { formatDate } from "@/lib/utils";
 
 export function DevotionalCard({
   devotional,
   state,
   personalizedNote,
-  displayDate
+  displayDate,
+  displayTitle
 }: {
   devotional: Devotional;
   state?: UserDevotional | null;
   personalizedNote?: string;
   displayDate?: string;
+  displayTitle?: string;
 }) {
   const image = getDevotionalImage(devotional);
+  const title = displayTitle ?? devotional.title;
+  const tags = publicDevotionalTags(devotional.tags).slice(0, 3);
 
   return (
     <Card className="overflow-hidden">
@@ -37,7 +41,7 @@ export function DevotionalCard({
       >
         <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/72">{displayDate ?? formatDate(devotional.date)}</p>
-          <h2 className="font-sanctuary mt-2 max-w-3xl text-4xl leading-tight sm:text-5xl">{devotional.title}</h2>
+          <h2 className="font-sanctuary mt-2 max-w-3xl text-4xl leading-tight sm:text-5xl">{title}</h2>
           <p className="mt-3 text-sm font-medium text-white/82">{devotional.scriptureReference}</p>
         </div>
       </div>
@@ -48,7 +52,7 @@ export function DevotionalCard({
             <CardTitle className="mt-1 text-2xl">{devotional.scriptureReference}</CardTitle>
           </div>
           <div className="flex flex-wrap gap-2">
-            {jsonArray(devotional.tags).slice(0, 3).map((tag) => (
+            {tags.map((tag) => (
               <Badge key={tag}>{tag}</Badge>
             ))}
           </div>

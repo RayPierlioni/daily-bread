@@ -10,7 +10,7 @@ import { SupportNudgeBanner } from "@/components/support-nudge-banner";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { getDevotionalImage } from "@/lib/devotional-media";
-import { getCurrentDevotionalForUser, jsonArray } from "@/lib/devotionals";
+import { formatTrackStepTitle, getCurrentDevotionalForUser, jsonArray } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { formatDate, humanizeEnum } from "@/lib/utils";
 
@@ -47,6 +47,8 @@ export default async function DashboardPage() {
   const firstName = user.name?.split(" ")[0] ?? "friend";
   const todaysDate = formatDate(new Date());
   const devotionalImage = getDevotionalImage(devotional);
+  const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
+  const devotionalTitle = devotional ? formatTrackStepTitle(devotional.title, currentStep) : "Today's devotional";
 
   return (
     <div className="space-y-7">
@@ -107,7 +109,7 @@ export default async function DashboardPage() {
                     </div>
                   </div>
                   <p className="mx-auto mt-7 max-w-44 text-sm leading-6 text-[#52605d]">
-                    You are on step {Math.min(current.sequence, Math.max(current.total, 1))} of {current.total || 1} in {current.track?.title ?? "your foundations track"}.
+                    You are on step {currentStep} of {current.total || 1} in {current.track?.title ?? "your foundations track"}.
                   </p>
                   <div className="mt-7 border-t border-[#e0dec9] pt-4 text-xs text-[#68706e]">{completedCount} completed readings total</div>
                 </Card>
@@ -135,7 +137,7 @@ export default async function DashboardPage() {
                 <span>10 min read</span>
                 {devotional ? <span>{todaysDate}</span> : null}
               </div>
-              <h2 className="font-sanctuary mt-4 text-2xl text-[#1d2c2b]">{devotional?.title ?? "Today's devotional"}</h2>
+              <h2 className="font-sanctuary mt-4 text-2xl text-[#1d2c2b]">{devotionalTitle}</h2>
               <p className="mt-4 line-clamp-4 text-sm leading-7 text-[#52605d]">{devotional?.body}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {devotional
