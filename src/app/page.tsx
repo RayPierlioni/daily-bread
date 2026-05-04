@@ -1,6 +1,7 @@
-import { ArrowRight, BookOpen, HeartHandshake, Lock, MessageCircleQuestion, Users } from "lucide-react";
+import { ArrowRight, BookOpen, BookmarkCheck, ClipboardList, HeartHandshake, Lock, MessageCircleQuestion, ShieldCheck, Users } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { DonationSection } from "@/components/donation-section";
 import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -31,6 +32,31 @@ const features = [
     href: "/christian-prayer-groups",
     icon: Users
   }
+];
+
+const howItWorks = [
+  {
+    title: "Tell us where you are",
+    body: "A short, gentle assessment places you into a devotional track built for your current faith season \u2014 not a one-size-fits-all plan.",
+    icon: ClipboardList
+  },
+  {
+    title: "Follow your track, day by day",
+    body: "Each morning you get the next devotional you actually need. Miss a week? You return to where you left off, not a random date.",
+    icon: BookmarkCheck
+  },
+  {
+    title: "Keep your spiritual life private",
+    body: "Your prayers, journal entries, faith questions, and assessment are private by default. You share only what you choose.",
+    icon: ShieldCheck
+  }
+];
+
+const audienceStatements = [
+  "New or returning Christians who aren't sure where to start",
+  "People wrestling with doubt who want honest answers, not shame",
+  "Anyone who needs a gentler morning rhythm with God",
+  "Small groups or churches looking for a free devotional companion"
 ];
 
 export const metadata: Metadata = {
@@ -74,23 +100,65 @@ export default function LandingPage() {
               <HeartHandshake className="h-4 w-4" aria-hidden="true" />
               Peaceful, private, Scripture-centered
             </div>
-            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Start every morning with Scripture, prayer, and a community of believers.</h1>
+            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Most devotional apps skip ahead when you fall behind. This one doesn&apos;t.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/86">
-              A devotional and spiritual hub for Christians who want daily encouragement, honest answers, private prayer tracking, and faith-centered community.
+              Daily Bread Hub gives you a free, private devotional path that starts where your faith actually is {"\u2014"} and picks up exactly where you left off, no matter how long you&apos;ve been away.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/signin" size="lg" className="bg-white text-[#24302f] hover:bg-[#f7f2e8]">
-                Open Demo App
+                Start Your Free Path
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </LinkButton>
-              <LinkButton href="/signin" size="lg" variant="secondary" className="border-white/35 bg-white/12 text-white hover:bg-white/20">
-                Sign in to Continue
+              <LinkButton href="#how-it-works" size="lg" variant="secondary" className="border-white/35 bg-white/12 text-white hover:bg-white/20">
+                See How It Works
               </LinkButton>
             </div>
           </div>
           <div className="hidden rounded-xl border border-white/22 bg-white/13 p-5 text-sm leading-6 text-white/88 backdrop-blur md:block">
             &quot;You are not wrong for asking this.&quot; Daily Bread Hub is built for reverent devotion and honest seeking.
           </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">How it works</p>
+          <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">Your path. Your pace. Your private space.</h2>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {howItWorks.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <Card key={step.title} className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#dfe9dd] text-[#345d6f]">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#b38b4d]">Step {index + 1}</span>
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-[#24302f]">{step.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#52605d]">{step.body}</p>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="border-y border-[#e4dccd] bg-[#f0eadf]/70 px-4 py-8 text-center sm:px-6 lg:px-8">
+        <p className="mx-auto max-w-4xl text-xl font-semibold leading-8 text-[#24302f]">Your prayers are private. Your questions are safe. Your journey is yours.</p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">Who it helps</p>
+          <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">Built for people who feel behind</h2>
+        </div>
+        <div className="mt-8 grid gap-3 md:grid-cols-2">
+          {audienceStatements.map((statement) => (
+            <Card key={statement} className="p-5 text-sm font-medium leading-7 text-[#52605d]">
+              {statement}
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -141,6 +209,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <DonationSection className="border-t border-[#e4dccd] bg-[#fffdf8]/55" />
     </main>
   );
 }

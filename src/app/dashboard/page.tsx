@@ -5,6 +5,7 @@ import { Button, LinkButton } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/form-fields";
 import { Badge } from "@/components/ui/badge";
 import { PrivacyBadge } from "@/components/privacy-badge";
+import { SupportNudgeBanner } from "@/components/support-nudge-banner";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { getCurrentDevotionalForUser, jsonArray } from "@/lib/devotionals";
@@ -46,6 +47,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-7">
+      <SupportNudgeBanner completedCount={completedCount} />
       <section className="soft-panel overflow-hidden rounded-2xl border border-[#e4dccd]">
         <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_19rem]">
           <div className="space-y-7 p-5 sm:p-7 lg:p-9">

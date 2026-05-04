@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 import {
   BookOpen,
   Church,
+  Gift,
   Home,
   LayoutDashboard,
   LibraryBig,
@@ -41,6 +42,7 @@ const navItems = [
   { href: "/groups", label: "Prayer Groups", icon: Church },
   { href: "/blog", label: "Blog", icon: LibraryBig },
   { href: "/search", label: "Search", icon: Search },
+  { href: "/support", label: "Support", icon: Gift },
   { href: "/profile", label: "Profile", icon: Home },
   { href: "/settings", label: "Settings", icon: Settings }
 ];
@@ -92,22 +94,22 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
           <div className="space-y-2">
             <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Personal</p>
             {visibleNav.slice(7).map((item) => {
-            const Icon = item.icon;
-            const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-[#52605d] transition hover:border-[#d9cfbd] hover:bg-white/80 hover:text-[#24302f]",
-                  active && "border-[#d9cfbd] bg-white text-[#24302f] shadow-sm"
-                )}
-              >
-                <Icon className="h-4 w-4" aria-hidden="true" />
-                {item.label}
-              </Link>
-            );
-          })}
+              const Icon = item.icon;
+              const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-[#52605d] transition hover:border-[#d9cfbd] hover:bg-white/80 hover:text-[#24302f]",
+                    active && "border-[#d9cfbd] bg-white text-[#24302f] shadow-sm"
+                  )}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </nav>
 
@@ -152,8 +154,8 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
         {children}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-5 border-t border-[#e4dccd] bg-[#fffdf8]/95 px-2 py-2 backdrop-blur lg:hidden">
-        {visibleNav.slice(0, 5).map((item) => {
+      <nav className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-6 border-t border-[#e4dccd] bg-[#fffdf8]/95 px-2 py-2 backdrop-blur lg:hidden">
+        {[...visibleNav.slice(0, 5), navItems.find((item) => item.href === "/support")!].map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
           return (

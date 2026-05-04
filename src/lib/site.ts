@@ -35,6 +35,11 @@ export const publicMarketingPages = [
     path: "/christian-prayer-groups",
     title: "Christian Prayer Groups",
     description: "Prayer-centered groups for encouragement, shared devotionals, testimonies, and community."
+  },
+  {
+    path: "/support",
+    title: "Support Daily Bread Hub",
+    description: "Help keep Daily Bread Hub free for people who need Scripture, prayer, honest faith questions, and a private devotional path."
   }
 ];
 

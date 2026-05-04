@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { AskFaithDisclaimer } from "@/components/ask-faith-disclaimer";
 import { FaithQuestionChat } from "@/components/faith-question-chat";
 import { Card } from "@/components/ui/card";
 import { requireUser } from "@/lib/current-user";
@@ -26,6 +27,7 @@ export default async function AskPage() {
       <Card className="border-[#d9cfbd] bg-[#fffdf8] p-4 text-sm leading-6 text-[#52605d]">
         Faith questions are private by default. If something you write suggests self-harm, abuse, or immediate danger, Daily Bread Hub will encourage urgent real-world support.
       </Card>
+      <AskFaithDisclaimer />
       <FaithQuestionChat
         previous={previous.map((item) => ({
           question: item.question,

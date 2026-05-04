@@ -7,7 +7,8 @@ const links = [
   { href: "/prayer-journal", label: "Prayer Journal" },
   { href: "/ask-faith-questions", label: "Faith Questions" },
   { href: "/christian-prayer-groups", label: "Groups" },
-  { href: "/learn", label: "Learn" }
+  { href: "/learn", label: "Learn" },
+  { href: "/support", label: "Support" }
 ];
 
 export function MarketingHeader({ variant = "light" }: { variant?: "light" | "hero" }) {
