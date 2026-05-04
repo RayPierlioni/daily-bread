@@ -52,6 +52,8 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
   const publicPaths = ["/", "/signin", "/onboarding", ...publicPages.map((page) => page.path)];
   const isPublic = publicPaths.includes(pathname);
   const visibleNav = user?.role === "ADMIN" ? [...navItems, { href: "/admin", label: "Admin", icon: Shield }] : navItems;
+  const welcomeNav = visibleNav.filter((item) => !["/search", "/profile", "/settings", "/admin"].includes(item.href));
+  const personalNav = visibleNav.filter((item) => ["/search", "/profile", "/settings", "/admin"].includes(item.href));
 
   if (isPublic) {
     return <>{children}</>;
@@ -61,7 +63,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
     <div className="min-h-screen pb-20 lg:pb-0">
       <ReminderScheduler notificationSettings={user?.notificationSettings} />
       <NotificationOptInPrompt notificationSettings={user?.notificationSettings} />
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-[#e4dccd] bg-[#fffdf8]/94 px-4 py-6 shadow-[12px_0_40px_rgba(36,48,47,0.04)] backdrop-blur lg:block">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-[#e4dccd] bg-[#fffdf8]/94 px-4 py-6 shadow-[12px_0_40px_rgba(36,48,47,0.04)] backdrop-blur lg:flex">
         <Link href="/dashboard" className="flex items-center gap-3 px-2">
           <div>
             <p className="font-sanctuary text-xl italic text-[#24302f]">Daily Bread Hub</p>
@@ -69,10 +71,10 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
           </div>
         </Link>
 
-        <nav className="mt-8 space-y-7">
+        <nav className="peaceful-scrollbar mt-8 flex-1 space-y-7 overflow-y-auto pr-1">
           <div className="space-y-2">
             <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Welcome</p>
-            {visibleNav.slice(0, 7).map((item) => {
+            {welcomeNav.map((item) => {
               const Icon = item.icon;
               const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
               return (
@@ -93,7 +95,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
 
           <div className="space-y-2">
             <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa19d]">Personal</p>
-            {visibleNav.slice(7).map((item) => {
+            {personalNav.map((item) => {
               const Icon = item.icon;
               const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
               return (
@@ -113,7 +115,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
           </div>
         </nav>
 
-        <div className="absolute bottom-5 left-4 right-4 rounded-xl border border-[#e4dccd] bg-white/82 p-3 shadow-sm">
+        <div className="mt-5 rounded-xl border border-[#e4dccd] bg-white/82 p-3 shadow-sm">
           <div className="mb-3 flex items-center gap-2 text-xs font-medium text-[#b38b4d]">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             Faithful Journeyer
