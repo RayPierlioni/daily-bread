@@ -19,6 +19,7 @@ import {
   Sparkles,
   Users
 } from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 import { NotificationOptInPrompt } from "@/components/notification-opt-in-prompt";
 import { ReminderScheduler } from "@/components/reminder-scheduler";
 import { Button, LinkButton } from "@/components/ui/button";
@@ -65,10 +66,7 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
       <NotificationOptInPrompt notificationSettings={user?.notificationSettings} />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-[#e4dccd] bg-[#fffdf8]/94 px-4 py-6 shadow-[12px_0_40px_rgba(36,48,47,0.04)] backdrop-blur lg:flex">
         <Link href="/dashboard" className="flex items-center gap-3 px-2">
-          <div>
-            <p className="font-sanctuary text-xl italic text-[#24302f]">Daily Bread Hub</p>
-            <p className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-[#8a918d]">A Digital Sanctuary</p>
-          </div>
+          <BrandMark iconSize={46} subtitle />
         </Link>
 
         <nav className="peaceful-scrollbar mt-8 flex-1 space-y-7 overflow-y-auto pr-1">
@@ -131,8 +129,8 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
 
       <header className="sticky top-0 z-20 border-b border-[#e4dccd] bg-[#fbf7ef]/88 px-4 py-3 backdrop-blur lg:hidden">
         <div className="flex items-center justify-between">
-          <Link href="/dashboard" className="font-sanctuary flex items-center gap-2 text-lg italic text-[#24302f]">
-            Daily Bread Hub
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <BrandMark iconSize={34} />
           </Link>
           {user ? (
             <Button variant="ghost" size="sm" aria-label="Sign out" onClick={() => signOut({ callbackUrl: "/" })}>

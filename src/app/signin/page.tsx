@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Compass } from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { isGoogleAuthConfigured } from "@/lib/auth";
 import { SignInButtons } from "./signin-buttons";
@@ -9,8 +9,8 @@ export default function SignInPage() {
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <Link href="/" className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#345d6f] text-white">
-            <Compass className="h-6 w-6" aria-hidden="true" />
+          <Link href="/" className="mx-auto inline-flex">
+            <BrandMark iconSize={58} showText={false} />
             <span className="sr-only">Daily Bread Hub home</span>
           </Link>
           <CardTitle className="text-2xl">Welcome to Daily Bread Hub</CardTitle>

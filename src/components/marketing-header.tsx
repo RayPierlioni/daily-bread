@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -22,8 +23,8 @@ export function MarketingHeader({ variant = "light" }: { variant?: "light" | "he
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-        <Link href="/" className={cn("font-sanctuary text-xl italic", isHero ? "text-white" : "text-[#24302f]")}>
-          Daily Bread Hub
+        <Link href="/" className="shrink-0">
+          <BrandMark tone={isHero ? "light" : "dark"} iconSize={38} />
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-medium md:flex">
           {links.map((link) => (
