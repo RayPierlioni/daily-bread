@@ -45,15 +45,15 @@ async function chooseTrackForUser(user: Pick<User, "spiritualFocusProfile">) {
   const focus = user.spiritualFocusProfile ?? fallbackFocus;
 
   return (
-    (await prisma.devotionalTrack.findUnique({
-      where: { slug: foundationTrackSlug }
-    })) ??
     (await prisma.devotionalTrack.findFirst({
       where: { focusCategory: focus },
       orderBy: { createdAt: "asc" }
     })) ??
     (await prisma.devotionalTrack.findUnique({
-      where: { slug: slugify(fallbackFocus) }
+      where: { slug: slugify(focus) }
+    })) ??
+    (await prisma.devotionalTrack.findUnique({
+      where: { slug: foundationTrackSlug }
     })) ??
     (await prisma.devotionalTrack.findFirst({
       orderBy: { createdAt: "asc" }
@@ -98,15 +98,20 @@ export async function ensureUserDevotionalProgress(user: Pick<User, "id" | "spir
 export async function assignUserDevotionalTrack(user: Pick<User, "id" | "spiritualFocusProfile">) {
   const track = await chooseTrackForUser(user);
   if (!track) return null;
+  const existing = await prisma.userDevotionalProgress.findUnique({
+    where: { userId: user.id },
+    select: { trackId: true }
+  });
+  const isChangingTracks = Boolean(existing && existing.trackId !== track.id);
 
   await prisma.userDevotionalProgress.upsert({
     where: { userId: user.id },
     update: {
       trackId: track.id,
-      currentSequence: 1,
-      startedAt: new Date(),
-      lastAdvancedAt: null,
-      completedTrackAt: null
+      currentSequence: isChangingTracks ? 1 : undefined,
+      startedAt: isChangingTracks ? new Date() : undefined,
+      lastAdvancedAt: isChangingTracks ? null : undefined,
+      completedTrackAt: isChangingTracks ? null : undefined
     },
     create: {
       userId: user.id,

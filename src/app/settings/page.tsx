@@ -1,11 +1,12 @@
 import { redirect } from "next/navigation";
-import { Download, Trash2 } from "lucide-react";
+import { BookOpenCheck, Download, Trash2 } from "lucide-react";
 import { NotificationSettingsForm } from "@/components/notification-settings-form";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input, Label, Textarea } from "@/components/ui/form-fields";
 import { updateProfile, updateSettings } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
+import { getCurrentDevotionalForUser } from "@/lib/devotionals";
 
 type Settings = Record<string, boolean>;
 
@@ -13,6 +14,7 @@ export default async function SettingsPage() {
   const user = await requireUser();
   if (!user.onboardingCompleted) redirect("/onboarding");
   const privacy = (user.privacySettings ?? {}) as Settings;
+  const current = await getCurrentDevotionalForUser(user);
 
   return (
     <div className="space-y-6">
@@ -81,6 +83,28 @@ export default async function SettingsPage() {
           </CardHeader>
           <CardContent>
             <NotificationSettingsForm notificationSettings={user.notificationSettings} />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BookOpenCheck className="h-5 w-5 text-[#345d6f]" aria-hidden="true" />
+              Assessment and course path
+            </CardTitle>
+            <p className="text-sm leading-6 text-[#68706e]">Your assessment answers choose the devotional course track that appears on your dashboard.</p>
+          </CardHeader>
+          <CardContent>
+            <div className="rounded-lg border border-[#e4dccd] bg-white/70 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#b38b4d]">Current path</p>
+              <p className="mt-2 text-lg font-semibold text-[#24302f]">{current.track?.title ?? "Daily Bread Foundations"}</p>
+              <p className="mt-2 text-sm leading-6 text-[#68706e]">
+                Focus: {user.spiritualFocusProfile ?? "Strengthening Faith"}. Step {Math.min(current.sequence, Math.max(current.total, 1))} of {current.total || 1}.
+              </p>
+            </div>
+            <LinkButton href="/onboarding" className="mt-4">
+              Retake assessment
+            </LinkButton>
           </CardContent>
         </Card>
       </div>

@@ -13,10 +13,11 @@ import {
 } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { determineAssessmentOutcome } from "@/lib/assessment";
 import { advanceUserDevotionalProgress, assignUserDevotionalTrack, getCurrentDevotionalForUser } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireUser } from "@/lib/current-user";
-import { blogSchema, devotionalSchema, focusCategories, groupSchema, onboardingSchema, postSchema, prayerSchema } from "@/lib/validations";
+import { blogSchema, devotionalSchema, groupSchema, onboardingSchema, postSchema, prayerSchema } from "@/lib/validations";
 import { toTagArray } from "@/lib/utils";
 
 export async function completeOnboarding(formData: FormData) {
@@ -38,8 +39,11 @@ export async function completeOnboarding(formData: FormData) {
     wantsCommunity: formData.get("wantsCommunity") === "on"
   });
 
-  const generatedProfile = parsed.growthAreas.find((area) => focusCategories.includes(area as (typeof focusCategories)[number])) ?? "Strengthening Faith";
-  const recommendedTopics = [...new Set([generatedProfile, ...parsed.growthAreas, ...parsed.struggles])].filter(Boolean);
+  const { generatedProfile, recommendedTopics } = determineAssessmentOutcome(parsed);
+  const currentPrivacySettings =
+    typeof user.privacySettings === "object" && user.privacySettings && !Array.isArray(user.privacySettings) ? user.privacySettings : null;
+  const currentNotificationSettings =
+    typeof user.notificationSettings === "object" && user.notificationSettings && !Array.isArray(user.notificationSettings) ? user.notificationSettings : {};
 
   await prisma.$transaction([
     prisma.spiritualAssessment.create({
@@ -55,18 +59,19 @@ export async function completeOnboarding(formData: FormData) {
       data: {
         spiritualFocusProfile: generatedProfile,
         onboardingCompleted: true,
-        privacySettings: {
+        privacySettings: currentPrivacySettings ?? {
           showBio: true,
           showChurch: false,
           showDenomination: false,
           shareAnsweredPrayerCount: false
         },
         notificationSettings: {
-          dailyDevotional: true,
-          browserReminders: false,
-          reminderTime: "07:00",
+          ...currentNotificationSettings,
+          dailyDevotional: currentNotificationSettings.dailyDevotional ?? true,
+          browserReminders: currentNotificationSettings.browserReminders ?? false,
+          reminderTime: currentNotificationSettings.reminderTime ?? "07:00",
           groupPrayer: parsed.wantsCommunity,
-          productUpdates: false
+          productUpdates: currentNotificationSettings.productUpdates ?? false
         }
       }
     })
