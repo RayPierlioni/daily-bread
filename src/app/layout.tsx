@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
   title: {
-    default: "Daily Bread Hub | Free Christian Devotional and Prayer Journal App",
+    default: "Next Faithful Step | A Free Devotional Path at Your Pace",
     template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
@@ -33,32 +33,28 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: siteConfig.name,
-    title: "Daily Bread Hub | Start Every Morning with Scripture and Prayer",
+    title: "Next Faithful Step | Take the Next Faithful Step",
     description: siteConfig.description,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Daily Bread Hub devotional and prayer app"
+        alt: "Next Faithful Step free devotional path"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daily Bread Hub | Free Christian Devotional App",
+    title: "Next Faithful Step | Free Christian Devotional Path",
     description: siteConfig.description,
     images: ["/opengraph-image"]
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/brand/favicon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/brand/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/brand/icon-512.png", sizes: "512x512", type: "image/png" }
+      { url: "/brand/next-faithful-step.svg", type: "image/svg+xml" }
     ],
-    apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
+    apple: [{ url: "/brand/next-faithful-step.svg", type: "image/svg+xml" }]
   },
   robots: {
     index: true,

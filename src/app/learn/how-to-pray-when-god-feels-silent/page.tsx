@@ -45,7 +45,7 @@ export default function HowToPrayWhenGodFeelsSilentPage() {
         "Write a three-sentence prayer: what you feel, what you need, and what you hope God will do.",
         "Read Psalm 13, Psalm 42, or Romans 8:26-27 slowly.",
         "Tell a trusted pastor, friend, counselor, or mentor if the silence feels connected to deep despair or isolation.",
-        "Use Daily Bread Hub to save the prayer and return to it later."
+        "Use Next Faithful Step to save the prayer and return to it later."
       ]}
     />
   );

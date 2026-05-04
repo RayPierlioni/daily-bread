@@ -15,7 +15,7 @@ export default function ChristianPrayerGroupsMarketingPage() {
     <MarketingFeaturePage
       eyebrow="Prayer Groups"
       title="Prayer-centered community without the noise."
-      description="Daily Bread Hub includes Christian prayer groups for people who want encouragement, shared devotionals, praise reports, testimonies, and intentional community."
+      description="Next Faithful Step includes Christian prayer groups for people who want encouragement, shared devotionals, praise reports, testimonies, and intentional community."
       primaryAction="Explore groups"
       highlights={[
         "Groups are centered on prayer, Scripture, encouragement, and reflection.",
@@ -33,7 +33,7 @@ export default function ChristianPrayerGroupsMarketingPage() {
         },
         {
           title: "Stay intentional",
-          body: "Daily Bread Hub is designed around spiritual care, not endless scrolling."
+          body: "Next Faithful Step is designed around spiritual care, not endless scrolling."
         }
       ]}
     />

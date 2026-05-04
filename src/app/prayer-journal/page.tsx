@@ -15,7 +15,7 @@ export default function PrayerJournalMarketingPage() {
     <MarketingFeaturePage
       eyebrow="Prayer Journal"
       title="A private place to write prayers and remember God's faithfulness."
-      description="Daily Bread Hub gives you a private prayer journal for honest prayers, follow-up notes, answered prayer tracking, and searchable reflection over time."
+      description="Next Faithful Step gives you a private prayer journal for honest prayers, follow-up notes, answered prayer tracking, and searchable reflection over time."
       highlights={[
         "Private by default, so your prayers are not placed in a public feed.",
         "Search by title, prayer text, transcript, tags, status, or follow-up notes.",

@@ -230,7 +230,7 @@ const weeklyThemes: FoundationWeek[] = [
     focus: "Overcoming Anxiety",
     scriptureReference: "Deuteronomy 8:3",
     scriptureText: "Man doth not live by bread only, but by every word that proceedeth out of the mouth of the LORD doth man live.",
-    tags: ["wilderness", "trust", "daily bread"]
+    tags: ["wilderness", "trust", "daily provision"]
   },
   {
     theme: "Courage and Obedience",
@@ -574,7 +574,7 @@ function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms
 
   return [
     `${storyOpening} This is the kind of place where ${week.theme.toLowerCase()} begins: not as a slogan, but as a real meeting between the Word of God and the life you actually woke up inside today.`,
-    `This step in Daily Bread Foundations focuses on ${week.summary}. The aim is not to collect religious facts quickly or rush ahead just to stay on schedule. The aim is to let Scripture build a bridge between what you know, what you trust, and how you live before God in the ordinary details of this day.`,
+    `This step in Faithful Foundations focuses on ${week.summary}. The aim is not to collect religious facts quickly or rush ahead just to stay on schedule. The aim is to let Scripture build a bridge between what you know, what you trust, and how you live before God in the ordinary details of this day.`,
     `The passage for today, ${week.scriptureReference}, gives you a doorway into ${week.theme.toLowerCase()}. Read it slowly enough to notice the movement of the verse: what God reveals, what He invites, what He promises, and what He gently corrects. Let one phrase linger. Sometimes one phrase, carried honestly, can do more in the heart than a whole chapter read in a hurry.`,
     heartNote,
     pastoralNote,

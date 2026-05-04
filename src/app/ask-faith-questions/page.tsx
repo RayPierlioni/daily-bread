@@ -15,7 +15,7 @@ export default function AskFaithQuestionsMarketingPage() {
     <MarketingFeaturePage
       eyebrow="Ask in Faith"
       title="A safe place to ask difficult faith questions."
-      description="Daily Bread Hub is built for people who love God, people who are spiritually curious, and people who have real questions. Doubt is handled gently, Scripture is treated seriously, and historical claims are presented with care."
+      description="Next Faithful Step is built for people who love God, people who are spiritually curious, and people who have real questions. Doubt is handled gently, Scripture is treated seriously, and historical claims are presented with care."
       primaryAction="Ask a faith question"
       highlights={[
         "Answers are designed to be Bible-centered, grace-filled, and honest about uncertainty.",

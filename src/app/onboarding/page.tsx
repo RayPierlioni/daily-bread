@@ -24,7 +24,7 @@ export default async function OnboardingPage() {
         <CardHeader>
           <CardTitle className="text-2xl">{isRetake ? "Retake your spiritual assessment" : "A gentle spiritual check-in"}</CardTitle>
           <p className="text-sm leading-6 text-[#68706e]">
-            This is private. It connects your answers to the devotional course track you see, so Daily Bread Hub can meet your current faith season without judging where you are.
+            This is private. It connects your answers to the devotional course track you see, so Next Faithful Step can meet your current faith season without judging where you are.
           </p>
           {isRetake ? (
             <p className="text-sm leading-6 text-[#68706e]">

@@ -30,7 +30,7 @@ export default function FreeChristianPrayerJournalPage() {
           heading: "Private by default matters",
           body: [
             "Some prayers are meant to be shared with trusted people. Many are not. A healthy prayer journal should make privacy the default and sharing an intentional choice.",
-            "Daily Bread Hub was built this way: your prayer entries are private unless you choose to share a prayer request with a group."
+            "Next Faithful Step was built this way: your prayer entries are private unless you choose to share a prayer request with a group."
           ]
         },
         {

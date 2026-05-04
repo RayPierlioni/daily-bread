@@ -1,12 +1,12 @@
-# Daily Bread Hub Launch Kit
+# Next Faithful Step Launch Kit
 
-Use the name "Daily Bread Hub" consistently in public copy so people recognize the app and do not confuse it with any other ministry.
+Use the name "Next Faithful Step" consistently in public copy so people recognize the app and do not confuse it with any other ministry.
 
 Live site: https://ourdailybreadhub.com/
 
 ## Simple App Description
 
-Daily Bread Hub is a free Christian devotional, prayer journal, and faith Q&A app for people who want a quiet place to start the morning with Scripture, track prayers privately, ask honest questions, and grow at their own pace.
+Next Faithful Step is a free Christian devotional, prayer journal, and faith Q&A app for people who want a quiet place to start the morning with Scripture, track prayers privately, ask honest questions, and grow at their own pace.
 
 ## One-Sentence Description
 
@@ -14,13 +14,13 @@ A free Scripture-centered devotional and prayer app with private journaling, hon
 
 ## Short Invite Message
 
-Hey, I built a free Christian devotional app called Daily Bread Hub. It gives you a daily Scripture-centered devotional, a private prayer journal, and a safe place to ask honest faith questions. There is no cost and no pressure. I would love for you to try it and tell me what feels helpful or confusing.
+Hey, I built a free Christian devotional app called Next Faithful Step. It gives you a daily Scripture-centered devotional, a private prayer journal, and a safe place to ask honest faith questions. There is no cost and no pressure. I would love for you to try it and tell me what feels helpful or confusing.
 
 https://ourdailybreadhub.com/
 
 ## Friend Text Message
 
-I wanted to share something meaningful I have been working on. It is called Daily Bread Hub, and it is a free Christian devotional app with daily Scripture, private prayer journaling, and a place to ask faith questions without feeling judged.
+I wanted to share something meaningful I have been working on. It is called Next Faithful Step, and it is a free Christian devotional app with daily Scripture, private prayer journaling, and a place to ask faith questions without feeling judged.
 
 Would you be willing to try it for a few minutes and tell me what you think?
 
@@ -28,7 +28,7 @@ https://ourdailybreadhub.com/
 
 ## Church Or Small Group Message
 
-I recently built a free app called Daily Bread Hub for Christians and spiritually curious people who want a private place to begin the day with Scripture, prayer, and honest questions.
+I recently built a free app called Next Faithful Step for Christians and spiritually curious people who want a private place to begin the day with Scripture, prayer, and honest questions.
 
 It includes:
 
@@ -46,7 +46,7 @@ https://ourdailybreadhub.com/
 
 Hi Pastor,
 
-I wanted to share a free tool I built called Daily Bread Hub. It is a Christian devotional and prayer app designed to help people begin the morning with Scripture, track private prayers, ask honest faith questions, and connect around prayer in a calm and respectful way.
+I wanted to share a free tool I built called Next Faithful Step. It is a Christian devotional and prayer app designed to help people begin the morning with Scripture, track private prayers, ask honest faith questions, and connect around prayer in a calm and respectful way.
 
 I built it to be gentle, Scripture-centered, and non-judgmental, especially for people who are growing in faith or wrestling with questions.
 
@@ -56,7 +56,7 @@ https://ourdailybreadhub.com/
 
 ## Facebook Launch Post
 
-I am excited to share something I have been building: Daily Bread Hub.
+I am excited to share something I have been building: Next Faithful Step.
 
 It is a free Christian devotional and prayer app for people who want a quiet place to start the morning with Scripture, write prayers privately, track answered prayers, and ask honest questions about God, Jesus, the Bible, faith, doubt, history, and life.
 
@@ -68,7 +68,7 @@ https://ourdailybreadhub.com/
 
 ## Softer Facebook Post
 
-I built a free app called Daily Bread Hub for anyone who wants a peaceful place to start the day with Scripture and prayer.
+I built a free app called Next Faithful Step for anyone who wants a peaceful place to start the day with Scripture and prayer.
 
 It includes daily devotionals, private prayer journaling, answered prayer tracking, and a gentle space to ask faith questions.
 
@@ -80,7 +80,7 @@ https://ourdailybreadhub.com/
 
 ### Start your morning with Scripture and prayer
 
-Daily Bread Hub is a free Christian devotional and prayer app.
+Next Faithful Step is a free Christian devotional and prayer app.
 
 Use it to:
 
@@ -98,7 +98,7 @@ https://ourdailybreadhub.com/
 
 ## Feedback Request
 
-Thank you for trying Daily Bread Hub. I am still improving it and would love honest feedback.
+Thank you for trying Next Faithful Step. I am still improving it and would love honest feedback.
 
 Could you tell me:
 
@@ -164,8 +164,8 @@ Review feedback and decide what feature or wording should improve next.
 
 ## Best Positioning
 
-Daily Bread Hub should be introduced as a free spiritual rhythm tool, not as a social media platform or a replacement for church.
+Next Faithful Step should be introduced as a free spiritual rhythm tool, not as a social media platform or a replacement for church.
 
 The safest message is:
 
-Daily Bread Hub helps people start the day with Scripture, prayer, honest questions, and private reflection.
+Next Faithful Step helps people start the day with Scripture, prayer, honest questions, and private reflection.

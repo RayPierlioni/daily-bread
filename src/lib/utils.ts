@@ -50,4 +50,4 @@ export function containsSafetyConcern(text: string) {
 }
 
 export const safetyMessage =
-  "You deserve immediate care and support. If you may be in danger or might hurt yourself, please contact emergency services now, call or text 988 in the U.S., or reach out to a trusted person, pastor, counselor, or local crisis line. Daily Bread Hub can encourage and help you reflect, but it is not a replacement for urgent professional care.";
+  "You deserve immediate care and support. If you may be in danger or might hurt yourself, please contact emergency services now, call or text 988 in the U.S., or reach out to a trusted person, pastor, counselor, or local crisis line. Next Faithful Step can encourage and help you reflect, but it is not a replacement for urgent professional care.";

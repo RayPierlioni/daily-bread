@@ -1,17 +1,18 @@
 export const siteConfig = {
-  name: "Daily Bread Hub",
+  name: "Next Faithful Step",
   url: process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "https://ourdailybreadhub.com",
   description:
-    "A free Scripture-centered devotional and prayer app with private journaling, honest faith questions, and gentle Christian community.",
+    "A free, private Christian devotional path that starts where your faith actually is and continues at your pace without skipping ahead.",
   keywords: [
     "Christian devotional app",
-    "daily devotional",
+    "personalized devotional path",
     "prayer journal",
     "Bible devotional",
     "Christian prayer app",
     "faith questions",
     "Christian community",
-    "answered prayer tracking"
+    "answered prayer tracking",
+    "faith at your pace"
   ]
 };
 
@@ -38,8 +39,8 @@ export const publicMarketingPages = [
   },
   {
     path: "/support",
-    title: "Support Daily Bread Hub",
-    description: "Help keep Daily Bread Hub free for people who need Scripture, prayer, honest faith questions, and a private devotional path."
+    title: "Support Next Faithful Step",
+    description: "Help keep Next Faithful Step free for people who need Scripture, prayer, honest faith questions, and a private devotional path."
   }
 ];
 

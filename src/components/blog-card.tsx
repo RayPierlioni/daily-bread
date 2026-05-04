@@ -9,7 +9,7 @@ export function BlogCard({ blog }: { blog: Blog & { author: Pick<User, "name"> }
   return (
     <Card className="p-5">
       <p className="text-xs text-[#68706e]">
-        {formatDate(blog.createdAt)} by {blog.author.name ?? "Daily Bread Hub"}
+        {formatDate(blog.createdAt)} by {blog.author.name ?? "Next Faithful Step"}
       </p>
       <h3 className="mt-2 text-lg font-semibold text-[#24302f]">{blog.title}</h3>
       <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#52605d]">{blog.body}</p>

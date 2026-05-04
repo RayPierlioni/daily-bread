@@ -66,13 +66,13 @@ async function main() {
     const foundationTrack = await prisma.devotionalTrack.upsert({
       where: { slug: "daily-bread-foundations" },
       update: {
-        title: "Daily Bread Foundations",
+        title: "Faithful Foundations",
         description: "A 365-day ordered discipleship path that starts with grace, Scripture, prayer, core doctrine, spiritual formation, and everyday faithfulness.",
         focusCategory: "Core Foundations",
         startingLevel: "FOUNDATIONS"
       },
       create: {
-        title: "Daily Bread Foundations",
+        title: "Faithful Foundations",
         slug: "daily-bread-foundations",
         description: "A 365-day ordered discipleship path that starts with grace, Scripture, prayer, core doctrine, spiritual formation, and everyday faithfulness.",
         focusCategory: "Core Foundations",
@@ -152,7 +152,7 @@ async function main() {
       });
     }
 
-    console.log(`Upgraded ${updated} Daily Bread Foundations devotionals and rebuilt ${focusCategories.length + 1} devotional tracks.`);
+    console.log(`Upgraded ${updated} Faithful Foundations devotionals and rebuilt ${focusCategories.length + 1} devotional tracks.`);
   } finally {
     await prisma.$disconnect();
   }

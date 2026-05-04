@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
-const dismissedKey = "daily-bread-ask-faith-disclaimer-dismissed";
+const dismissedKey = "next-faithful-step-ask-faith-disclaimer-dismissed";
 
 export function AskFaithDisclaimer() {
   const [visible, setVisible] = useState(false);

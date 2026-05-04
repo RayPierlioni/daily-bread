@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Next Faithful Step">
+  <rect width="512" height="512" rx="128" fill="#fbf7ef"/>
+  <circle cx="256" cy="256" r="184" fill="#fffdf8" stroke="#d8b56f" stroke-width="18"/>
+  <path d="M154 330c54-98 124-144 206-138" fill="none" stroke="#345d6f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M194 346c46-64 100-98 162-102" fill="none" stroke="#7a8f6a" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="188" cy="292" r="23" fill="#345d6f"/>
+  <ellipse cx="226" cy="246" rx="24" ry="33" fill="#345d6f" transform="rotate(22 226 246)"/>
+  <circle cx="288" cy="224" r="21" fill="#7a8f6a"/>
+  <ellipse cx="329" cy="199" rx="22" ry="31" fill="#7a8f6a" transform="rotate(26 329 199)"/>
+  <path d="M256 139v72M222 175h68" stroke="#b38b4d" stroke-width="18" stroke-linecap="round"/>
+</svg>

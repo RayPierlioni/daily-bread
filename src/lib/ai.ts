@@ -11,7 +11,7 @@ const labels = [
 ];
 
 export function buildFaithPrompt(question: string) {
-  return `Answer this faith question for Daily Bread Hub: ${question}
+  return `Answer this faith question for Next Faithful Step: ${question}
 
 Rules:
 - Start with: "You are not wrong for asking this."
@@ -112,7 +112,7 @@ export async function answerFaithQuestion(question: string) {
 
     return {
       answer: outputText,
-      sources: ["OpenAI Responses API", "Daily Bread Hub safety prompt"],
+      sources: ["OpenAI Responses API", "Next Faithful Step safety prompt"],
       tags: labels
     };
   } catch {

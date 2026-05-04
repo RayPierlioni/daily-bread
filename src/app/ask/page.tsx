@@ -25,7 +25,7 @@ export default async function AskPage() {
         </p>
       </div>
       <Card className="border-[#d9cfbd] bg-[#fffdf8] p-4 text-sm leading-6 text-[#52605d]">
-        Faith questions are private by default. If something you write suggests self-harm, abuse, or immediate danger, Daily Bread Hub will encourage urgent real-world support.
+        Faith questions are private by default. If something you write suggests self-harm, abuse, or immediate danger, Next Faithful Step will encourage urgent real-world support.
       </Card>
       <AskFaithDisclaimer />
       <FaithQuestionChat

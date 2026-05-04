@@ -22,7 +22,7 @@ export default function ChristianAppForFaithQuestionsPage() {
         {
           heading: "Doubt is not the enemy of seeking",
           body: [
-            "Many people carry questions they are afraid to ask out loud. Daily Bread Hub was built with the conviction that honest questions can become part of a faithful search.",
+            "Many people carry questions they are afraid to ask out loud. Next Faithful Step was built with the conviction that honest questions can become part of a faithful search.",
             "The goal is not to flatten mystery or pretend every issue is easy. The goal is to answer with Scripture, care, humility, and intellectual honesty."
           ]
         },
@@ -30,7 +30,7 @@ export default function ChristianAppForFaithQuestionsPage() {
           heading: "Faith questions need careful answers",
           body: [
             "Questions about the Bible, archaeology, church history, theology, and apologetics should not be answered with exaggerated claims. Christians can be confident without being careless.",
-            "Daily Bread Hub separates Scripture, theology, church history, archaeology, apologetics, and pastoral encouragement so users know what kind of answer they are reading."
+            "Next Faithful Step separates Scripture, theology, church history, archaeology, apologetics, and pastoral encouragement so users know what kind of answer they are reading."
           ]
         },
         {

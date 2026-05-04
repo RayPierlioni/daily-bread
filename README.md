@@ -1,4 +1,4 @@
-# Daily Bread Hub
+# Next Faithful Step
 
 A production-minded MVP for a peaceful Christian devotional, prayer, apologetics, and community hub.
 
@@ -60,15 +60,15 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Demo Accounts
 
-- Demo user: `demo@dailybreadhub.local`
-- Admin user: `admin@dailybreadhub.local`
+- Demo user: `demo@nextfaithfulstep.local`
+- Admin user: `admin@nextfaithfulstep.local`
 - First-time assessment demo: click **Try first-time assessment** on `/signin`
 
-The first-time assessment demo creates a fresh local review user, redirects to onboarding, saves the spiritual assessment, and starts the user on the sequential `Daily Bread Foundations` devotional track.
+The first-time assessment demo creates a fresh local review user, redirects to onboarding, saves the spiritual assessment, and starts the user on the sequential `Faithful Foundations` devotional track.
 
 ## Production Deployment Overview
 
-Daily Bread Hub is a full-stack Next.js app. It should be deployed as a Node.js app, not copied into static hosting.
+Next Faithful Step is a full-stack Next.js app. It should be deployed as a Node.js app, not copied into static hosting.
 
 The recommended low-friction production setup is:
 
@@ -104,7 +104,7 @@ OPENAI_MODEL="gpt-5-mini"
 GOOGLE_SITE_VERIFICATION="..."
 ```
 
-If `OPENAI_API_KEY` is not set, Ask in Faith first checks the curated Daily Bread Hub whitelist for common questions, then uses the built-in mock answer generator for non-whitelisted questions. That keeps the app usable without creating automatic AI bills during the first launch.
+If `OPENAI_API_KEY` is not set, Ask in Faith first checks the curated Next Faithful Step whitelist for common questions, then uses the built-in mock answer generator for non-whitelisted questions. That keeps the app usable without creating automatic AI bills during the first launch.
 
 ## Prisma Schemas
 
@@ -183,7 +183,7 @@ GOOGLE_CLIENT_SECRET="..."
 
 ## Google Search Setup
 
-Daily Bread Hub includes public SEO pages, a generated sitemap, robots.txt, and social sharing metadata.
+Next Faithful Step includes public SEO pages, a generated sitemap, robots.txt, and social sharing metadata.
 
 After the production domain is live:
 
@@ -230,7 +230,7 @@ pnpm deploy:check
 
 - Prayers, faith questions, and spiritual assessment records are private by default.
 - Signed-in users receive a sequential devotional track based on onboarding.
-- The first production-style path is `Daily Bread Foundations`, a seeded 365-day ordered curriculum.
+- The first production-style path is `Faithful Foundations`, a seeded 365-day ordered curriculum.
 - Missing days does not skip readings; the next devotional is determined by the user's saved progress.
 - Foundation devotionals are generated with longer Scripture-centered readings, pastoral context, reflection, prayer, and a concrete practice step.
 - Ask in Faith includes a curated whitelist of common questions so the app can answer many starter questions for free before any paid AI provider is used.
@@ -239,7 +239,7 @@ pnpm deploy:check
 
 ## Devotional Content Updates
 
-After improving the generated `Daily Bread Foundations` content, update an existing database without touching user prayers, accounts, or devotional progress:
+After improving the generated `Faithful Foundations` content, update an existing database without touching user prayers, accounts, or devotional progress:
 
 ```bash
 pnpm content:upgrade-foundation

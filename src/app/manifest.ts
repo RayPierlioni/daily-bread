@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: siteConfig.name,
-    short_name: "Daily Bread",
+    short_name: "Faithful Step",
     description: siteConfig.description,
     start_url: "/",
     display: "standalone",
@@ -12,14 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#345d6f",
     icons: [
       {
-        src: "/brand/icon-192.png",
-        sizes: "192x192",
-        type: "image/png"
-      },
-      {
-        src: "/brand/icon-512.png",
-        sizes: "512x512",
-        type: "image/png"
+        src: "/brand/next-faithful-step.svg",
+        sizes: "any",
+        type: "image/svg+xml"
       }
     ]
   };

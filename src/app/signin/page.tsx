@@ -11,9 +11,9 @@ export default function SignInPage() {
         <CardHeader className="text-center">
           <Link href="/" className="mx-auto inline-flex">
             <BrandMark iconSize={58} showText={false} />
-            <span className="sr-only">Daily Bread Hub home</span>
+            <span className="sr-only">Next Faithful Step home</span>
           </Link>
-          <CardTitle className="text-2xl">Welcome to Daily Bread Hub</CardTitle>
+          <CardTitle className="text-2xl">Welcome to Next Faithful Step</CardTitle>
           <p className="text-sm leading-6 text-[#68706e]">Sign in to keep your prayers, faith questions, and devotional notes private.</p>
         </CardHeader>
         <CardContent>

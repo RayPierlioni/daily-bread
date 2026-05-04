@@ -4,7 +4,7 @@ import { MarketingFeaturePage } from "@/components/marketing-feature-page";
 export const metadata: Metadata = {
   title: "Personalized Daily Devotional App",
   description:
-    "Daily Bread Hub is a free Christian devotional app with Scripture-centered readings personalized to your spiritual season and paced by your reading journey.",
+    "Next Faithful Step is a free Christian devotional app with Scripture-centered readings personalized to your spiritual season and paced by your reading journey.",
   alternates: {
     canonical: "/daily-devotional"
   }
@@ -15,7 +15,7 @@ export default function DailyDevotionalMarketingPage() {
     <MarketingFeaturePage
       eyebrow="Daily Devotional"
       title="A daily devotional that meets you where you are."
-      description="Daily Bread Hub begins with a gentle spiritual assessment, then guides you through Scripture-centered devotionals at a pace that follows your real life. If you miss a week, your next devotional waits for you."
+      description="Next Faithful Step begins with a gentle spiritual assessment, then guides you through Scripture-centered devotionals at a pace that follows your real life. If you miss a week, your next devotional waits for you."
       primaryAction="Begin today's devotional"
       highlights={[
         "Personalized by spiritual season instead of a one-size-fits-all reading.",

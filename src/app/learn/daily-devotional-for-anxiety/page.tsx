@@ -30,7 +30,7 @@ export default function DailyDevotionalForAnxietyPage() {
           heading: "Use a small daily rhythm",
           body: [
             "When anxiety is high, long routines can feel impossible. Start smaller: read one verse, breathe slowly, write one honest prayer, and take one faithful next step.",
-            "Daily Bread Hub can help you keep that rhythm with Scripture, reflection, prayer prompts, and private notes."
+            "Next Faithful Step can help you keep that rhythm with Scripture, reflection, prayer prompts, and private notes."
           ]
         },
         {

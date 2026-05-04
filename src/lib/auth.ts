@@ -30,17 +30,17 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" }
       },
       async authorize(credentials) {
-        const requestedEmail = credentials?.email?.trim().toLowerCase() || "demo@dailybreadhub.local";
-        const isAdmin = requestedEmail === "admin@dailybreadhub.local";
+        const requestedEmail = credentials?.email?.trim().toLowerCase() || "demo@nextfaithfulstep.local";
+        const isAdmin = requestedEmail === "admin@nextfaithfulstep.local";
         const isFirstTimeDemo =
-          requestedEmail === "new@dailybreadhub.local" || requestedEmail.endsWith("@firsttime.dailybreadhub.local");
-        const email = isAdmin ? requestedEmail : isFirstTimeDemo ? requestedEmail : "demo@dailybreadhub.local";
+          requestedEmail === "new@nextfaithfulstep.local" || requestedEmail.endsWith("@firsttime.nextfaithfulstep.local");
+        const email = isAdmin ? requestedEmail : isFirstTimeDemo ? requestedEmail : "demo@nextfaithfulstep.local";
         const user = await prisma.user.upsert({
           where: { email },
           update: {},
           create: {
             email,
-            name: isAdmin ? "Daily Bread Admin" : isFirstTimeDemo ? "First-Time Demo" : "Demo Believer",
+            name: isAdmin ? "Next Faithful Step Admin" : isFirstTimeDemo ? "First-Time Demo" : "Demo Believer",
             role: isAdmin ? "ADMIN" : "USER",
             onboardingCompleted: isAdmin || !isFirstTimeDemo,
             spiritualFocusProfile: isAdmin || !isFirstTimeDemo ? "Growing in Scripture" : null

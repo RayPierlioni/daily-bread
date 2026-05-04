@@ -355,7 +355,7 @@ export function findCuratedFaithAnswer(question: string): CuratedFaithAnswer | n
 
   return {
     answer: buildAnswer(match),
-    sources: ["Daily Bread Hub curated answer", ...match.sources],
+    sources: ["Next Faithful Step curated answer", ...match.sources],
     tags: match.tags,
     matchId: match.id,
     title: match.title

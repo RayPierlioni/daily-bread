@@ -3,8 +3,8 @@ import { DonationSection } from "@/components/donation-section";
 import { MarketingHeader } from "@/components/marketing-header";
 
 export const metadata: Metadata = {
-  title: "Support Daily Bread Hub",
-  description: "Help keep Daily Bread Hub free for people who need Scripture, prayer, honest faith questions, and a private devotional path.",
+  title: "Support Next Faithful Step",
+  description: "Help keep Next Faithful Step free for people who need Scripture, prayer, honest faith questions, and a private devotional path.",
   alternates: {
     canonical: "/support"
   }

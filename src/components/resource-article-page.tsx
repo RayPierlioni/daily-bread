@@ -60,7 +60,7 @@ export function ResourceArticlePage({ eyebrow, title, description, scriptureRefe
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
             <LinkButton href="/signin">
-              Begin with Daily Bread Hub
+              Begin with Next Faithful Step
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </LinkButton>
             <LinkButton href="/learn" variant="secondary">
@@ -70,11 +70,11 @@ export function ResourceArticlePage({ eyebrow, title, description, scriptureRefe
         </Card>
 
         <p className="mt-8 text-sm leading-6 text-[#68706e]">
-          Daily Bread Hub is a free Christian devotional and prayer app. It is meant to support spiritual growth, not replace a church, pastor, counselor, doctor, or emergency care.
+          Next Faithful Step is a free Christian devotional and prayer app. It is meant to support spiritual growth, not replace a church, pastor, counselor, doctor, or emergency care.
         </p>
         <p className="mt-3 text-sm text-[#68706e]">
           <Link href="/" className="font-medium text-[#345d6f] hover:underline">
-            Return to Daily Bread Hub
+            Return to Next Faithful Step
           </Link>
         </p>
       </article>

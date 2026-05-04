@@ -94,7 +94,7 @@ export function FaithQuestionChat({ previous }: { previous: Answer[] }) {
           Suggested questions
         </div>
         <p className="text-xs leading-5 text-[#68706e]">
-          These starter questions use curated Daily Bread Hub answers first, which helps keep early launch costs low.
+          These starter questions use curated Next Faithful Step answers first, which helps keep early launch costs low.
         </p>
         <div className="space-y-2">
           {suggestions.map((suggestion) => (

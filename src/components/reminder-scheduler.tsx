@@ -49,9 +49,9 @@ export function ReminderScheduler({ notificationSettings }: { notificationSettin
       timeoutId = window.setTimeout(() => {
         if (cancelled) return;
 
-        new Notification("Daily Bread Hub", {
+        new Notification("Next Faithful Step", {
           body: `Open the app at ${formatReminderTime(reminderTime)} for today's devotional.`,
-          tag: "daily-bread-devotional-reminder"
+          tag: "next-faithful-step-devotional-reminder"
         });
 
         schedule();

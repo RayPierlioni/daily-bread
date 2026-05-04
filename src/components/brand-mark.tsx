@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Footprints } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function BrandMark({
@@ -19,13 +19,20 @@ export function BrandMark({
 
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
-      <span className={cn("relative shrink-0 overflow-hidden rounded-full bg-white shadow-sm", tone === "light" ? "ring-1 ring-white/35" : "ring-1 ring-[#e4dccd]")}>
-        <Image src="/brand/logo-mark-256.png" alt="" width={iconSize} height={iconSize} className="h-auto w-auto rounded-full" priority={iconSize >= 44} />
+      <span
+        className={cn(
+          "relative inline-flex shrink-0 items-center justify-center rounded-full shadow-sm",
+          tone === "light" ? "bg-white/95 text-[#345d6f] ring-1 ring-white/35" : "bg-[#fffdf8] text-[#345d6f] ring-1 ring-[#e4dccd]"
+        )}
+        style={{ width: iconSize, height: iconSize }}
+        aria-hidden="true"
+      >
+        <Footprints style={{ width: iconSize * 0.55, height: iconSize * 0.55 }} strokeWidth={1.9} />
       </span>
       {showText ? (
         <span className="leading-none">
-          <span className={cn("font-sanctuary block text-xl italic", textClass)}>Daily Bread Hub</span>
-          {subtitle ? <span className={cn("mt-1 block text-[11px] uppercase tracking-[0.2em]", subtitleClass)}>A Digital Sanctuary</span> : null}
+          <span className={cn("font-sanctuary block text-xl italic", textClass)}>Next Faithful Step</span>
+          {subtitle ? <span className={cn("mt-1 block text-[11px] uppercase tracking-[0.2em]", subtitleClass)}>A private faith path</span> : null}
         </span>
       ) : null}
     </span>

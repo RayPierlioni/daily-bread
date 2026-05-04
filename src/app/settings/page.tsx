@@ -79,7 +79,7 @@ export default async function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle>Daily reminders</CardTitle>
-            <p className="text-sm leading-6 text-[#68706e]">Choose when Daily Bread Hub should remind you to open the app for your devotional.</p>
+            <p className="text-sm leading-6 text-[#68706e]">Choose when Next Faithful Step should remind you to open the app for your devotional.</p>
           </CardHeader>
           <CardContent>
             <NotificationSettingsForm notificationSettings={user.notificationSettings} />
@@ -97,7 +97,7 @@ export default async function SettingsPage() {
           <CardContent>
             <div className="rounded-lg border border-[#e4dccd] bg-white/70 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#b38b4d]">Current path</p>
-              <p className="mt-2 text-lg font-semibold text-[#24302f]">{current.track?.title ?? "Daily Bread Foundations"}</p>
+              <p className="mt-2 text-lg font-semibold text-[#24302f]">{current.track?.title ?? "Faithful Foundations"}</p>
               <p className="mt-2 text-sm leading-6 text-[#68706e]">
                 Focus: {user.spiritualFocusProfile ?? "Strengthening Faith"}. Step {Math.min(current.sequence, Math.max(current.total, 1))} of {current.total || 1}.
               </p>

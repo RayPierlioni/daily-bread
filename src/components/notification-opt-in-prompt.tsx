@@ -12,7 +12,7 @@ type NotificationSettings = {
   reminderTime?: string;
 };
 
-const dismissalKey = "daily-bread-reminder-prompt-dismissed-at";
+const dismissalKey = "next-faithful-step-reminder-prompt-dismissed-at";
 const dismissalWindowMs = 7 * 24 * 60 * 60 * 1000;
 
 function parseSettings(value: unknown): NotificationSettings {
@@ -123,7 +123,7 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
           Want a daily devotional reminder?
         </h2>
         <p className="mt-3 text-sm leading-6 text-[#52605d]">
-          Daily Bread Hub can remind you to open the app at 7:00 AM for your devotional. You can change the time later in Settings.
+          Next Faithful Step can remind you to open the app at 7:00 AM for your devotional. You can change the time later in Settings.
         </p>
 
         <div className="mt-4 flex items-center gap-2 rounded-lg bg-[#fbf7ef] p-3 text-sm text-[#52605d]">

@@ -206,11 +206,11 @@ function slugify(value: string) {
 
 async function main() {
   const admin = await prisma.user.upsert({
-    where: { email: "admin@dailybreadhub.local" },
+    where: { email: "admin@nextfaithfulstep.local" },
     update: { role: Role.ADMIN },
     create: {
-      name: "Daily Bread Admin",
-      email: "admin@dailybreadhub.local",
+      name: "Next Faithful Step Admin",
+      email: "admin@nextfaithfulstep.local",
       role: Role.ADMIN,
       onboardingCompleted: true,
       spiritualFocusProfile: "Growing in Scripture"
@@ -218,11 +218,11 @@ async function main() {
   });
 
   const demo = await prisma.user.upsert({
-    where: { email: "demo@dailybreadhub.local" },
+    where: { email: "demo@nextfaithfulstep.local" },
     update: {},
     create: {
       name: "Demo Believer",
-      email: "demo@dailybreadhub.local",
+      email: "demo@nextfaithfulstep.local",
       bio: "Learning to start the morning with Scripture and honest prayer.",
       church: "Local Church",
       denomination: "Non-denominational",
@@ -257,13 +257,13 @@ async function main() {
   const foundationTrack = await prisma.devotionalTrack.upsert({
     where: { slug: "daily-bread-foundations" },
     update: {
-      title: "Daily Bread Foundations",
+      title: "Faithful Foundations",
       description: "A 365-day ordered discipleship path that starts with grace, Scripture, prayer, core doctrine, spiritual formation, and everyday faithfulness.",
       focusCategory: "Core Foundations",
       startingLevel: "FOUNDATIONS"
     },
     create: {
-      title: "Daily Bread Foundations",
+      title: "Faithful Foundations",
       slug: "daily-bread-foundations",
       description: "A 365-day ordered discipleship path that starts with grace, Scripture, prayer, core doctrine, spiritual formation, and everyday faithfulness.",
       focusCategory: "Core Foundations",

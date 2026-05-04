@@ -50,7 +50,7 @@ export default async function ProfilePage() {
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#dfe9dd] text-2xl font-semibold text-[#345d6f]">{user.name?.[0] ?? "D"}</div>
           )}
           <div>
-            <h1 className="text-3xl font-semibold text-[#24302f]">{user.name ?? "Daily Bread user"}</h1>
+            <h1 className="text-3xl font-semibold text-[#24302f]">{user.name ?? "Next Faithful Step user"}</h1>
             <p className="mt-1 text-sm text-[#68706e]">{user.email}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {user.spiritualFocusProfile ? <Badge>{user.spiritualFocusProfile}</Badge> : null}

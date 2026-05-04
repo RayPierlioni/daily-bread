@@ -100,9 +100,9 @@ export default function LandingPage() {
               <HeartHandshake className="h-4 w-4" aria-hidden="true" />
               Peaceful, private, Scripture-centered
             </div>
-            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Most devotional apps skip ahead when you fall behind. This one doesn&apos;t.</h1>
+            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Take the next faithful step, right where you are.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/86">
-              Daily Bread Hub gives you a free, private devotional path that starts where your faith actually is {"\u2014"} and picks up exactly where you left off, no matter how long you&apos;ve been away.
+              Most devotional apps move on when you fall behind. Next Faithful Step gives you a free, private devotional path that starts where your faith actually is {"\u2014"} and picks up exactly where you left off, no matter how long you&apos;ve been away.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/signin" size="lg" className="bg-white text-[#24302f] hover:bg-[#f7f2e8]">
@@ -115,7 +115,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="hidden rounded-xl border border-white/22 bg-white/13 p-5 text-sm leading-6 text-white/88 backdrop-blur md:block">
-            &quot;You are not wrong for asking this.&quot; Daily Bread Hub is built for reverent devotion and honest seeking.
+            &quot;You are not behind here.&quot; Next Faithful Step is built for reverent devotion, honest seeking, and a pace that keeps meeting you with grace.
           </div>
         </div>
       </section>

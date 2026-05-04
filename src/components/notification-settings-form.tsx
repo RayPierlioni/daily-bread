@@ -62,7 +62,7 @@ export function NotificationSettingsForm({ notificationSettings }: { notificatio
         <input name="dailyDevotional" type="checkbox" defaultChecked={settings.dailyDevotional ?? true} className="mt-1 h-4 w-4 accent-[#345d6f]" />
         <span>
           <span className="block font-medium text-[#24302f]">Daily devotional reminder</span>
-          <span className="mt-1 block leading-6 text-[#68706e]">Remind me to open Daily Bread Hub for my next devotional.</span>
+          <span className="mt-1 block leading-6 text-[#68706e]">Remind me to open Next Faithful Step for my next devotional.</span>
         </span>
       </label>
 
