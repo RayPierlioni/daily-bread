@@ -8,6 +8,7 @@ import { PrivacyBadge } from "@/components/privacy-badge";
 import { SupportNudgeBanner } from "@/components/support-nudge-banner";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
+import { getDevotionalImage } from "@/lib/devotional-media";
 import { getCurrentDevotionalForUser, jsonArray } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { formatDate, humanizeEnum } from "@/lib/utils";
@@ -44,6 +45,7 @@ export default async function DashboardPage() {
   const trackPercent = current.total ? Math.round((Math.min(current.sequence, current.total) / current.total) * 100) : 0;
   const firstName = user.name?.split(" ")[0] ?? "friend";
   const todaysDate = formatDate(new Date());
+  const devotionalImage = getDevotionalImage(devotional);
 
   return (
     <div className="space-y-7">
@@ -119,8 +121,10 @@ export default async function DashboardPage() {
           <div className="grid min-h-64 md:grid-cols-[16rem_minmax(0,1fr)]">
             <div
               className="min-h-52 bg-[#d8c08e]"
+              role="img"
+              aria-label={devotionalImage.alt}
               style={{
-                backgroundImage: "linear-gradient(180deg, rgba(36,48,47,0.05), rgba(36,48,47,0.18)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80')",
+                backgroundImage: `linear-gradient(180deg, rgba(36,48,47,0.05), rgba(36,48,47,0.2)), url('${devotionalImage.src}')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover"
               }}

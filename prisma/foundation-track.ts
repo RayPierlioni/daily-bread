@@ -501,6 +501,42 @@ const focusPastoralNotes: Record<string, string> = {
     "Christian belonging is more than being around people. It is learning to receive grace through the body of Christ and to become a person who carries others with humility, patience, and love."
 };
 
+const storyOpenings = [
+  "Imagine someone sitting in a quiet kitchen before the rest of the house wakes up. The coffee is still too hot, the phone is face down, and the day has not yet started making demands. For a few minutes, that person does not need to solve the whole future. They only need to be honest before God about the next breath, the next choice, and the mercy needed for today.",
+  "There is a kind of prayer that happens in a parked car after a long day. The engine is off, but the heart is still running. Words do not come out polished. They come out in fragments: Lord, I am tired. Lord, I do not know what to do. Lord, please help me. Scripture has room for prayers like that because God has room for people like that.",
+  "Picture someone holding an old letter from a person they love. They do not skim it like a receipt. They slow down because the words carry a voice, a history, and a relationship. The Bible asks for that kind of attention. Not rushed consumption, but receiving words from the God who knows the reader before the reader knows how to answer.",
+  "Many people know what it is to smile in public while carrying questions privately. Faith can feel strong on Sunday and fragile by Tuesday afternoon. The kindness of God is that He does not only meet us when we sound certain. He meets trembling trust, half-spoken prayers, and the honest place where belief asks for help.",
+  "A small act of faith can look almost invisible. An apology sent before pride can harden. A Bible opened for five quiet minutes. A worry named in prayer instead of rehearsed all morning. These ordinary moments may not feel dramatic, but they are often where the roots of a life with God grow deeper.",
+  "At the end of a week, a person can look back and see mostly unfinished tasks. The sink still fills, messages still wait, and the heart still has places that need healing. Yet God often works in ways that are easy to miss while they are happening. Remembering trains the soul to notice mercy that arrived quietly.",
+  "Think of a road at dawn, when only the first stretch is visible. The driver cannot see the whole route, but there is enough light for the next turn. Much of discipleship feels like that. God does not always hand us the full map. He gives His Word, His presence, and enough grace for faithful movement.",
+  "There are mornings when Scripture feels close, and mornings when it feels like reading through fog. Neither morning surprises God. The invitation is not to pretend every day feels deep. The invitation is to keep bringing the real self to the real God, trusting that faithfulness is formed through returning.",
+  "Someone can carry a heavy question for years and still be loved by God. Some questions need study. Some need grief. Some need patient conversation. Some need time. Jesus is not threatened by honest seeking, and Scripture gives us a way to bring the mind and heart into the light together.",
+  "A table can become holy ground when a person stops long enough to tell the truth. I am afraid. I am grateful. I need wisdom. I miss who I used to be. I want to begin again. Devotion is not an escape from ordinary life; it is the place where ordinary life is brought before the Lord who redeems it."
+];
+
+const focusHeartNotes: Record<string, string> = {
+  "Strengthening Faith":
+    "If faith feels small, do not despise it. Jesus spoke tenderly about mustard-seed faith because the kingdom of God does not depend on impressive beginnings. Today is an invitation to place one honest ounce of trust on God's character and let Him teach you how to carry more.",
+  "Healing and Comfort":
+    "If you are coming to this reading weary, let comfort be more than a religious word. In Scripture, comfort is God drawing near with truth strong enough to hold sorrow and mercy gentle enough to touch wounds without crushing them.",
+  "Overcoming Anxiety":
+    "If anxiety has been loud, the aim is not to shame yourself into calm. Bring the noise into God's presence. Let this passage become a handrail: something steady to hold while your thoughts learn to slow down and return to the Father who sees the whole road.",
+  "Seeking Purpose":
+    "If purpose feels unclear, begin smaller and holier than a five-year plan. Ask what love requires today, what obedience looks like today, and what good can be done with the light already given. God often reveals calling while we are practicing faithfulness.",
+  "Learning to Pray":
+    "If prayer feels awkward, you are still welcome. Children learn language by being spoken to and by speaking imperfectly back. Prayer grows the same way: in trust, repetition, silence, Scripture, tears, gratitude, and honest words offered to a Father who is already listening.",
+  "Growing in Scripture":
+    "If the Bible feels large or unfamiliar, take courage. You do not have to understand everything today. Start by listening for what this passage reveals about God, what it tells the truth about in you, and what it invites you to carry into the next ordinary hour.",
+  "Wrestling with Doubt":
+    "If doubt is part of your story right now, bring it into the room instead of hiding it in the basement of the soul. Honest questions can become places of deeper faith when they are held with humility, Scripture, prayer, and wise companionship.",
+  "Building Discipline":
+    "If discipline sounds cold, remember that Christian practice is not a way to earn God's love. It is a way to make room for the love already given. Small habits become trellises where grace can train attention, desire, patience, and courage.",
+  "Forgiveness and Restoration":
+    "If forgiveness is tender territory, move slowly and truthfully. The gospel never asks you to call evil good or wounds small. It invites you to meet God in the truth, receive mercy, seek wisdom, and take the next faithful step toward restoration where it is possible.",
+  "Community and Belonging":
+    "If belonging has been painful or complicated, know this: Christian community is not meant to be a stage for pretending. At its best, it is a table where grace teaches people to bear burdens, speak truth gently, repent quickly, and stay near one another in love."
+};
+
 const rhythmFormationNotes: Record<string, string> = {
   Receive:
     "Receiving comes before striving. Let the passage speak first about who God is and what He gives before you turn it into a list of things you must prove.",
@@ -531,15 +567,19 @@ const weeklyProgressionNotes = [
 function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
   const dayInWeek = ((day - 1) % 7) + 1;
   const pastoralNote = focusPastoralNotes[week.focus] ?? focusPastoralNotes["Strengthening Faith"];
+  const heartNote = focusHeartNotes[week.focus] ?? focusHeartNotes["Strengthening Faith"];
   const rhythmNote = rhythmFormationNotes[rhythm.name] ?? rhythm.lens;
   const progressionNote = weeklyProgressionNotes[dayInWeek - 1] ?? weeklyProgressionNotes[0];
+  const storyOpening = storyOpenings[(day - 1) % storyOpenings.length];
 
   return [
-    `This step in Daily Bread Foundations focuses on ${week.summary}. The aim is not to collect religious facts quickly, but to let Scripture build a bridge between what you know, what you trust, and how you live before God today.`,
-    `The passage for today, ${week.scriptureReference}, gives you a doorway into ${week.theme.toLowerCase()}. Read it slowly enough to notice the movement of the verse: what God reveals, what He invites, what He promises, or what He corrects. A devotional life becomes stronger when Scripture is allowed to set the agenda before your worries, plans, or assumptions do.`,
+    `${storyOpening} This is the kind of place where ${week.theme.toLowerCase()} begins: not as a slogan, but as a real meeting between the Word of God and the life you actually woke up inside today.`,
+    `This step in Daily Bread Foundations focuses on ${week.summary}. The aim is not to collect religious facts quickly or rush ahead just to stay on schedule. The aim is to let Scripture build a bridge between what you know, what you trust, and how you live before God in the ordinary details of this day.`,
+    `The passage for today, ${week.scriptureReference}, gives you a doorway into ${week.theme.toLowerCase()}. Read it slowly enough to notice the movement of the verse: what God reveals, what He invites, what He promises, and what He gently corrects. Let one phrase linger. Sometimes one phrase, carried honestly, can do more in the heart than a whole chapter read in a hurry.`,
+    heartNote,
     pastoralNote,
-    `${rhythmNote} ${rhythm.lens} If the instruction feels simple, stay with it anyway. The deepest formation is often built through ordinary repetition: returning, listening, praying, obeying, remembering, and beginning again with grace.`,
-    `${progressionNote} Before you move on, name one place where this reading touches your actual life. Let that place become the meeting ground between God's Word and today's next faithful step.`
+    `${rhythmNote} ${rhythm.lens} If the instruction feels simple, stay with it anyway. A life with God is often formed through ordinary repetition: returning, listening, praying, obeying, remembering, and beginning again with grace when yesterday did not go the way you hoped.`,
+    `${progressionNote} Before you move on, name one place where this reading touches your actual life: a relationship, a fear, a hope, a habit, a decision, or a wound. Let that place become holy ground where God's Word meets today's next faithful step.`
   ].join("\n\n");
 }
 

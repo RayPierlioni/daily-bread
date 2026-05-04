@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
+import { getDevotionalImage } from "@/lib/devotional-media";
 import { jsonArray } from "@/lib/devotionals";
 import { formatDate } from "@/lib/utils";
 
@@ -20,13 +21,31 @@ export function DevotionalCard({
   personalizedNote?: string;
   displayDate?: string;
 }) {
+  const image = getDevotionalImage(devotional);
+
   return (
     <Card className="overflow-hidden">
+      <div
+        className="relative min-h-[18rem] overflow-hidden bg-[#24302f] sm:min-h-[23rem]"
+        role="img"
+        aria-label={image.alt}
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(24,35,33,0.72), rgba(24,35,33,0.24) 55%, rgba(24,35,33,0.08)), url('${image.src}')`,
+          backgroundPosition: "center",
+          backgroundSize: "cover"
+        }}
+      >
+        <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/72">{displayDate ?? formatDate(devotional.date)}</p>
+          <h2 className="font-sanctuary mt-2 max-w-3xl text-4xl leading-tight sm:text-5xl">{devotional.title}</h2>
+          <p className="mt-3 text-sm font-medium text-white/82">{devotional.scriptureReference}</p>
+        </div>
+      </div>
       <CardHeader className="border-b border-[#eee5d8] bg-[#fffdf8]">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-sm text-[#68706e]">{displayDate ?? formatDate(devotional.date)}</p>
-            <CardTitle className="mt-1 text-2xl">{devotional.title}</CardTitle>
+            <p className="text-sm text-[#68706e]">Today&apos;s reading</p>
+            <CardTitle className="mt-1 text-2xl">{devotional.scriptureReference}</CardTitle>
           </div>
           <div className="flex flex-wrap gap-2">
             {jsonArray(devotional.tags).slice(0, 3).map((tag) => (

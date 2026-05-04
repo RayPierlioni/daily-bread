@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { SearchInput } from "@/components/search-input";
 import { TagFilter } from "@/components/tag-filter";
 import { requireUser } from "@/lib/current-user";
+import { getDevotionalImage } from "@/lib/devotional-media";
 import { jsonArray } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
@@ -55,22 +56,37 @@ export default async function DevotionalArchivePage({
         </div>
       </Card>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {filtered.map((item) => (
-          <Card key={item.id} className="p-5">
-            <div className="flex items-center gap-2 text-sm text-[#68706e]">
-              <BookOpen className="h-4 w-4 text-[#345d6f]" aria-hidden="true" />
-              {formatDate(item.date)}
-            </div>
-            <h2 className="mt-3 text-lg font-semibold text-[#24302f]">{item.title}</h2>
-            <p className="mt-1 text-sm font-medium text-[#345d6f]">{item.scriptureReference}</p>
-            <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#52605d]">{item.body}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {[...jsonArray(item.tags), ...jsonArray(item.spiritualFocusCategories)].slice(0, 4).map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
-              ))}
-            </div>
-          </Card>
-        ))}
+        {filtered.map((item) => {
+          const image = getDevotionalImage(item);
+          return (
+            <Card key={item.id} className="overflow-hidden">
+              <div
+                className="min-h-36 bg-[#d8c08e]"
+                role="img"
+                aria-label={image.alt}
+                style={{
+                  backgroundImage: `linear-gradient(180deg, rgba(36,48,47,0.05), rgba(36,48,47,0.22)), url('${image.src}')`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover"
+                }}
+              />
+              <div className="p-5">
+                <div className="flex items-center gap-2 text-sm text-[#68706e]">
+                  <BookOpen className="h-4 w-4 text-[#345d6f]" aria-hidden="true" />
+                  {formatDate(item.date)}
+                </div>
+                <h2 className="mt-3 text-lg font-semibold text-[#24302f]">{item.title}</h2>
+                <p className="mt-1 text-sm font-medium text-[#345d6f]">{item.scriptureReference}</p>
+                <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#52605d]">{item.body}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {[...jsonArray(item.tags), ...jsonArray(item.spiritualFocusCategories)].slice(0, 4).map((tag) => (
+                    <Badge key={tag}>{tag}</Badge>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
