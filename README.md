@@ -188,23 +188,23 @@ Next Faithful Step includes public SEO pages, a generated sitemap, robots.txt, a
 After the production domain is live:
 
 1. Open Google Search Console.
-2. Add the domain property for `ourdailybreadhub.com`.
+2. Add the domain property for `nextfaithfulstep.com`.
 3. Verify ownership with DNS, or paste Google's verification token into the hosting dashboard as `GOOGLE_SITE_VERIFICATION`.
 4. Submit the sitemap:
 
 ```text
-https://ourdailybreadhub.com/sitemap.xml
+https://nextfaithfulstep.com/sitemap.xml
 ```
 
 5. Use URL Inspection for the homepage and request indexing.
 
 Public crawlable pages:
 
-- `https://ourdailybreadhub.com/`
-- `https://ourdailybreadhub.com/daily-devotional`
-- `https://ourdailybreadhub.com/prayer-journal`
-- `https://ourdailybreadhub.com/ask-faith-questions`
-- `https://ourdailybreadhub.com/christian-prayer-groups`
+- `https://nextfaithfulstep.com/`
+- `https://nextfaithfulstep.com/daily-devotional`
+- `https://nextfaithfulstep.com/prayer-journal`
+- `https://nextfaithfulstep.com/ask-faith-questions`
+- `https://nextfaithfulstep.com/christian-prayer-groups`
 
 Most app pages remain private behind sign-in and are intentionally excluded from the sitemap.
 
