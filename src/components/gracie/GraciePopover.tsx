@@ -3,17 +3,20 @@
 import Image from "next/image";
 import { Heart, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { GracieMessage } from "@/components/gracie/gracieMessages";
+import { graciePoseSources, type GracieMessage, type GraciePose } from "@/components/gracie/gracieMessages";
 import { Button, LinkButton } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function GraciePopover({
   message,
+  pose = "default",
   onClose,
   onDismissToday,
   onSnooze,
   onCtaClick
 }: {
   message: GracieMessage;
+  pose?: GraciePose;
   onClose: () => void;
   onDismissToday: () => void;
   onSnooze: () => void;
@@ -21,6 +24,9 @@ export function GraciePopover({
 }) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const [imageFailed, setImageFailed] = useState(false);
+  const poseSource = graciePoseSources[pose] ?? graciePoseSources.default;
+  const mascotMotionClass =
+    pose === "wave" || pose === "happy" ? "gracie-wave-motion" : pose === "thoughtful" ? "gracie-thinking-motion" : "gracie-popover-mascot";
 
   useEffect(() => {
     closeButtonRef.current?.focus();
@@ -43,11 +49,18 @@ export function GraciePopover({
       className="w-[calc(100vw-2rem)] max-w-sm rounded-2xl border border-[#e4dccd] bg-[#fffdf8] p-4 text-left shadow-[0_24px_70px_rgba(36,48,47,0.18)] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2"
     >
       <div className="flex items-start gap-3">
-        <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#e4dccd] bg-[#f7fbf8]">
+        <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#e4dccd] bg-[#f7fbf8]">
           {imageFailed ? (
             <Heart className="h-7 w-7 text-[#345d6f]" aria-hidden="true" />
           ) : (
-            <Image src="/mascots/gracie.png" alt="" fill sizes="56px" className="object-cover object-center" onError={() => setImageFailed(true)} />
+            <Image
+              src={poseSource}
+              alt=""
+              fill
+              sizes="80px"
+              className={cn("object-contain object-center p-1.5", mascotMotionClass)}
+              onError={() => setImageFailed(true)}
+            />
           )}
         </div>
         <div className="min-w-0 flex-1">

@@ -63,3 +63,70 @@ select {
 .prose-soft p + p {
   margin-top: 1rem;
 }
+
+@keyframes gracie-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  45% {
+    transform: translate3d(0, -6px, 0) rotate(-1deg);
+  }
+}
+
+@keyframes gracie-pop {
+  0% {
+    transform: translate3d(0, 6px, 0) scale(0.96);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes gracie-wave {
+  0%,
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  35% {
+    transform: rotate(-3deg) translate3d(0, -2px, 0);
+  }
+
+  70% {
+    transform: rotate(2deg) translate3d(0, 1px, 0);
+  }
+}
+
+@keyframes gracie-thinking {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(2px) rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gracie-floating-button {
+    animation: gracie-float 4.8s ease-in-out infinite;
+  }
+
+  .gracie-popover-mascot {
+    animation: gracie-pop 520ms ease-out both;
+  }
+
+  .gracie-wave-motion {
+    animation: gracie-wave 3.2s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  .gracie-thinking-motion {
+    animation: gracie-thinking 3.8s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+}

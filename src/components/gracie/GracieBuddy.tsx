@@ -46,6 +46,7 @@ export function GracieBuddy() {
   const allowed = loaded && settings.enabled && canShowOnRoute(pathname);
 
   const message = activeMessage ?? candidateMessage;
+  const pose = message.pose ?? "default";
 
   const showMessage = useCallback(
     (source: "auto" | "manual") => {
@@ -155,13 +156,14 @@ export function GracieBuddy() {
       {open ? (
         <GraciePopover
           message={message}
+          pose={pose}
           onClose={handleClose}
           onDismissToday={handleDismiss}
           onSnooze={handleSnooze}
           onCtaClick={handleCtaClick}
         />
       ) : null}
-      <GracieButton open={open} onClick={handleButtonClick} />
+      <GracieButton open={open} pose={pose} onClick={handleButtonClick} />
     </div>
   );
 }
