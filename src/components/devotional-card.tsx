@@ -1,5 +1,5 @@
 import type { Devotional, DevotionalFeedback, UserDevotional } from "@prisma/client";
-import { CheckCircle2, Heart, MessageSquare, Share2 } from "lucide-react";
+import { MessageSquare, Share2 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -88,7 +88,7 @@ export function DevotionalCard({
         <div className="flex flex-wrap gap-2">
           <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
             <DevotionalSubmitButton
-              icon={CheckCircle2}
+              icon="check"
               label={state?.completed ? "Completed" : "Mark complete"}
               pendingLabel="Marking..."
               variant={state?.completed ? "gold" : "primary"}
@@ -97,7 +97,7 @@ export function DevotionalCard({
           </form>
           <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
             <DevotionalSubmitButton
-              icon={Heart}
+              icon="heart"
               label={state?.saved ? "Saved" : "Save"}
               pendingLabel="Saving..."
               variant="secondary"

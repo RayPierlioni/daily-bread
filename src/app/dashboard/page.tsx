@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarCheck, Heart, MessageCircleQuestion, PenLine, Share2, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, MessageCircleQuestion, PenLine, Share2, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button, LinkButton } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/form-fields";
@@ -101,7 +101,7 @@ export default async function DashboardPage() {
                     <div className="flex items-center gap-2 text-[#52605d]">
                       <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
                         <DevotionalIconSubmitButton
-                          icon={Heart}
+                          icon="heart"
                           label={state?.saved ? "Devotional saved" : "Save devotional"}
                           pendingLabel="Saving devotional"
                           disabled={Boolean(state?.saved)}
@@ -123,7 +123,7 @@ export default async function DashboardPage() {
                     </LinkButton>
                     <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
                       <DevotionalSubmitButton
-                        icon={CalendarCheck}
+                        icon="calendar"
                         label={state?.completed ? "Completed" : "Mark complete"}
                         pendingLabel="Marking..."
                         variant={state?.completed ? "gold" : "secondary"}

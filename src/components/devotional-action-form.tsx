@@ -1,20 +1,30 @@
 "use client";
 
-import type { ComponentProps, ComponentType } from "react";
+import type { ComponentProps } from "react";
 import { useFormStatus } from "react-dom";
+import { CalendarCheck, CheckCircle2, Heart } from "lucide-react";
 import { Button as UIButton } from "@/components/ui/button";
 
 type ButtonVariant = NonNullable<ComponentProps<typeof UIButton>["variant"]>;
+type DevotionalActionIcon = "calendar" | "check" | "heart";
+
+function DevotionalActionIcon({ name }: { name: DevotionalActionIcon }) {
+  const iconClassName = "h-4 w-4";
+
+  if (name === "calendar") return <CalendarCheck className={iconClassName} aria-hidden={true} />;
+  if (name === "heart") return <Heart className={iconClassName} aria-hidden={true} />;
+  return <CheckCircle2 className={iconClassName} aria-hidden={true} />;
+}
 
 export function DevotionalSubmitButton({
-  icon: Icon,
+  icon,
   label,
   pendingLabel,
   variant,
   disabled,
   className
 }: {
-  icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: DevotionalActionIcon;
   label: string;
   pendingLabel: string;
   variant: ButtonVariant;
@@ -25,20 +35,20 @@ export function DevotionalSubmitButton({
 
   return (
     <UIButton type="submit" variant={variant} disabled={disabled || pending} className={className}>
-      <Icon className="h-4 w-4" aria-hidden={true} />
+      <DevotionalActionIcon name={icon} />
       {pending ? pendingLabel : label}
     </UIButton>
   );
 }
 
 export function DevotionalIconSubmitButton({
-  icon: Icon,
+  icon,
   label,
   pendingLabel,
   disabled,
   className
 }: {
-  icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: DevotionalActionIcon;
   label: string;
   pendingLabel: string;
   disabled?: boolean;
@@ -53,7 +63,7 @@ export function DevotionalIconSubmitButton({
       aria-label={pending ? pendingLabel : label}
       disabled={disabled || pending}
     >
-      <Icon className="h-4 w-4" aria-hidden={true} />
+      <DevotionalActionIcon name={icon} />
     </button>
   );
 }
