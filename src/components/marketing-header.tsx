@@ -7,7 +7,7 @@ const links = [
   { href: "/daily-devotional", label: "Devotionals" },
   { href: "/prayer-journal", label: "Prayer Journal" },
   { href: "/ask-faith-questions", label: "Faith Questions" },
-  { href: "/christian-prayer-groups", label: "Groups" },
+  { href: "/churches", label: "Churches" },
   { href: "/learn", label: "Learn" },
   { href: "/support", label: "Support" }
 ];

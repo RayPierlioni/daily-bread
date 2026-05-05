@@ -38,6 +38,11 @@ export const publicMarketingPages = [
     description: "Prayer-centered groups for encouragement, shared devotionals, testimonies, and community."
   },
   {
+    path: "/churches",
+    title: "For Churches and Small Groups",
+    description: "A free devotional companion churches can recommend to people who struggle to stay consistent with Scripture and prayer."
+  },
+  {
     path: "/support",
     title: "Support Next Faithful Step",
     description: "Help keep Next Faithful Step free for people who need Scripture, prayer, honest faith questions, and a private devotional path."
