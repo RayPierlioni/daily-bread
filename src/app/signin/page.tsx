@@ -22,6 +22,9 @@ export default function SignInPage() {
             <p className="mt-1">
               Sign in to save your place, begin the Foundations path, and personalize later only if you want to.
             </p>
+            <p className="mt-2 text-xs leading-5 text-[#68706e]">
+              Google sign-in is used only so your private path, prayers, questions, and notes stay saved to your account.
+            </p>
           </div>
           <SignInButtons googleConfigured={isGoogleAuthConfigured} />
           {!isGoogleAuthConfigured ? (

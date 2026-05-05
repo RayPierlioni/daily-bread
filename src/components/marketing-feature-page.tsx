@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -56,6 +57,7 @@ export function MarketingFeaturePage({ eyebrow, title, description, primaryActio
           </Card>
         ))}
       </section>
+      <MarketingFooter />
     </main>
   );
 }

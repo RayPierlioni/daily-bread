@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Bookmark, MessageSquareText } from "lucide-react";
+import { Bookmark, MessageSquareText, ShieldCheck } from "lucide-react";
 import { BlogCard } from "@/components/blog-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -64,6 +64,15 @@ export default async function ProfilePage() {
           {privacy.showDenomination && user.denomination ? <span>{user.denomination}</span> : null}
         </div>
       </section>
+
+      <Card className="border-[#d9cfbd] bg-[#fffdf8] p-5">
+        <div className="flex items-start gap-3 text-sm leading-6 text-[#52605d]">
+          <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#345d6f]" aria-hidden="true" />
+          <p>
+            This profile is privacy-aware. Private prayers, faith questions, assessment answers, and devotional notes never appear here. Only profile fields you enable, saved devotionals, and public posts you choose to publish are shown.
+          </p>
+        </div>
+      </Card>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>

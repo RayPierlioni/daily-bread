@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { DonationSection } from "@/components/donation-section";
+import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { authOptions } from "@/lib/auth";
 import { recordAnalyticsEvent } from "@/lib/analytics";
@@ -30,6 +31,7 @@ export default async function SupportPage() {
     <main>
       {!session ? <MarketingHeader /> : null}
       <DonationSection className={session ? "py-10 sm:py-12" : "min-h-[calc(100vh-4rem)] py-20 sm:py-24"} compact impactStats={impactStats} />
+      {!session ? <MarketingFooter /> : null}
     </main>
   );
 }

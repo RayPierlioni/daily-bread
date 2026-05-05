@@ -48,7 +48,9 @@ export default async function PrayersPage({
       <Card className="border-[#d9cfbd] bg-[#fffdf8] p-4">
         <div className="flex items-start gap-3 text-sm leading-6 text-[#52605d]">
           <Lock className="mt-0.5 h-5 w-5 shrink-0 text-[#345d6f]" aria-hidden="true" />
-          <p>Prayers are private by default. Sharing to a group requires an intentional privacy change.</p>
+          <p>
+            Prayers are private by default. They are not shown in community, groups, your profile, or analytics. Sharing to a group requires an intentional privacy change.
+          </p>
         </div>
       </Card>
 

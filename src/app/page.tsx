@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, BookmarkCheck, ClipboardList, HeartHandshake, Loc
 import Link from "next/link";
 import type { Metadata } from "next";
 import { DonationSection } from "@/components/donation-section";
+import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -216,6 +217,7 @@ export default function LandingPage() {
       </section>
 
       <DonationSection className="border-t border-[#e4dccd] bg-[#fffdf8]/55" />
+      <MarketingFooter />
     </main>
   );
 }

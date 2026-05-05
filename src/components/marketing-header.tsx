@@ -9,6 +9,7 @@ const links = [
   { href: "/ask-faith-questions", label: "Faith Questions" },
   { href: "/churches", label: "Churches" },
   { href: "/learn", label: "Learn" },
+  { href: "/privacy", label: "Privacy" },
   { href: "/support", label: "Support" }
 ];
 

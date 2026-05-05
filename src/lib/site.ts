@@ -46,6 +46,11 @@ export const publicMarketingPages = [
     path: "/support",
     title: "Support Next Faithful Step",
     description: "Help keep Next Faithful Step free for people who need Scripture, prayer, honest faith questions, and a private devotional path."
+  },
+  {
+    path: "/privacy",
+    title: "Privacy",
+    description: "Plain-language privacy information about what stays private and what users choose to share."
   }
 ];
 

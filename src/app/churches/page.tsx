@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpenCheck, HeartHandshake, Lock, MessageCircleQuestion, QrCode, ShieldCheck, Users } from "lucide-react";
+import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { PrintPageButton } from "@/components/print-page-button";
 import { LinkButton } from "@/components/ui/button";
@@ -232,6 +233,7 @@ export default async function ChurchesPage() {
           </p>
         </div>
       </section>
+      <MarketingFooter />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { Card } from "@/components/ui/card";
 import { publicResourcePages } from "@/lib/site";
@@ -43,6 +44,7 @@ export default function LearnPage() {
           ))}
         </div>
       </section>
+      <MarketingFooter />
     </main>
   );
 }

@@ -34,6 +34,9 @@ export default async function OnboardingPage({
           <p className="mt-3 max-w-3xl text-sm leading-6 text-[#68706e]">
             You can start without answering personal questions. Faithful Foundations is available to everyone, and the private assessment is only here if you want a more personalized path.
           </p>
+          <p className="mt-3 max-w-3xl rounded-lg border border-[#d9cfbd] bg-[#fffdf8] p-3 text-sm leading-6 text-[#52605d]">
+            You can change your path later. Assessment answers are private and are used only to choose a devotional track.
+          </p>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-2">
@@ -92,6 +95,9 @@ export default async function OnboardingPage({
           <CardTitle className="text-2xl">{isRetake ? "Retake your spiritual assessment" : "A gentle spiritual check-in"}</CardTitle>
           <p className="text-sm leading-6 text-[#68706e]">
             This is private. It connects your answers to the devotional course track you see, so Next Faithful Step can meet your current faith season without judging where you are.
+          </p>
+          <p className="text-sm leading-6 text-[#68706e]">
+            Your answers are not shown on your public profile, community posts, blog posts, or prayer groups.
           </p>
           {isRetake ? (
             <p className="text-sm leading-6 text-[#68706e]">
