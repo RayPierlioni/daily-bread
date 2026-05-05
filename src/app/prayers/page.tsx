@@ -75,7 +75,13 @@ export default async function PrayersPage({
             </form>
           </Card>
 
-          {active.length ? active.map((prayer) => <PrayerCard key={prayer.id} prayer={prayer} />) : <EmptyState title="No active prayers found" description="Try a different filter or write a new prayer." />}
+          {active.length ? (
+            active.map((prayer) => <PrayerCard key={prayer.id} prayer={prayer} />)
+          ) : prayers.length ? (
+            <EmptyState title="No active prayers found" description="Try a different filter or write a new prayer." />
+          ) : (
+            <EmptyState title="Start with one honest sentence" description="Try: God, today I feel... Your first prayer can be simple, private, and unfinished." />
+          )}
 
           <section className="space-y-3">
             <h2 className="text-xl font-semibold text-[#24302f]">Answered prayers</h2>
@@ -87,7 +93,7 @@ export default async function PrayersPage({
           <Card>
             <CardHeader>
               <CardTitle>New prayer</CardTitle>
-              <p className="text-sm leading-6 text-[#68706e]">Text prayer now, audio prayer where your browser allows, transcript placeholder included.</p>
+              <p className="text-sm leading-6 text-[#68706e]">Your prayer does not need to be polished. Start with what is true, and keep it private unless you choose otherwise.</p>
             </CardHeader>
             <CardContent>
               <PrayerForm />

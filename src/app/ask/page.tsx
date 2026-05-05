@@ -5,9 +5,14 @@ import { Card } from "@/components/ui/card";
 import { requireUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 
-export default async function AskPage() {
+export default async function AskPage({
+  searchParams
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
   const user = await requireUser();
   if (!user.onboardingCompleted) redirect("/onboarding");
+  const params = await searchParams;
 
   const previous = await prisma.faithQuestion.findMany({
     where: { userId: user.id },
@@ -29,6 +34,7 @@ export default async function AskPage() {
       </Card>
       <AskFaithDisclaimer />
       <FaithQuestionChat
+        initialQuestion={params.q ?? ""}
         previous={previous.map((item) => ({
           question: item.question,
           answer: item.aiAnswer,

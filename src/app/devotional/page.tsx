@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { BookOpenCheck, CheckCircle2, PenLine } from "lucide-react";
 import { DevotionalCard } from "@/components/devotional-card";
 import { EmptyState } from "@/components/empty-state";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,11 +23,12 @@ export default async function DevotionalPage() {
   }
 
   const trackRecommendations = getUpcomingDevotionalsFromProgress(current.progress, current.sequence, devotional.id);
-  const [recommendations, feedback] = await Promise.all([
+  const [recommendations, feedback, completedCount] = await Promise.all([
     trackRecommendations.length ? Promise.resolve(trackRecommendations) : getRecommendedDevotionals(user.spiritualFocusProfile, devotional.id),
     prisma.devotionalFeedback.findUnique({
       where: { userId_devotionalId: { userId: user.id, devotionalId: devotional.id } }
-    })
+    }),
+    prisma.userDevotional.count({ where: { userId: user.id, completed: true } })
   ]);
   const todaysDate = formatDate(new Date());
   const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
@@ -61,6 +63,36 @@ export default async function DevotionalPage() {
           Browse archive
         </LinkButton>
       </div>
+
+      {!current.state?.completed ? (
+        <Card className="border-[#d9cfbd] bg-[#fffdf8] p-5">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="flex gap-3">
+              <BookOpenCheck className="mt-1 h-5 w-5 shrink-0 text-[#345d6f]" aria-hidden="true" />
+              <div>
+                <p className="font-semibold text-[#24302f]">Read slowly</p>
+                <p className="mt-1 text-sm leading-6 text-[#68706e]">One sentence may be enough to carry with you today.</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <PenLine className="mt-1 h-5 w-5 shrink-0 text-[#345d6f]" aria-hidden="true" />
+              <div>
+                <p className="font-semibold text-[#24302f]">Write a note or prayer</p>
+                <p className="mt-1 text-sm leading-6 text-[#68706e]">Turn one thought into one honest response to God.</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#345d6f]" aria-hidden="true" />
+              <div>
+                <p className="font-semibold text-[#24302f]">Mark complete when ready</p>
+                <p className="mt-1 text-sm leading-6 text-[#68706e]">
+                  {completedCount === 0 ? "This finishes your first step. No rush." : "This moves you to the next step in your path."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </Card>
+      ) : null}
 
       <DevotionalCard
         devotional={devotional}

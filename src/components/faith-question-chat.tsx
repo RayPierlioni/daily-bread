@@ -25,8 +25,8 @@ type Answer = {
   sources: string[];
 };
 
-export function FaithQuestionChat({ previous }: { previous: Answer[] }) {
-  const [question, setQuestion] = useState("");
+export function FaithQuestionChat({ previous, initialQuestion = "" }: { previous: Answer[]; initialQuestion?: string }) {
+  const [question, setQuestion] = useState(initialQuestion.slice(0, 500));
   const [answers, setAnswers] = useState(previous);
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -57,6 +57,11 @@ export function FaithQuestionChat({ previous }: { previous: Answer[] }) {
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_19rem]">
       <section className="space-y-4">
         <Card className="p-4">
+          {!previous.length ? (
+            <div className="mb-4 rounded-lg bg-[#f7fbf8] p-3 text-sm leading-6 text-[#52605d]">
+              Ask honestly. You will not be shamed here. A clear sentence is enough, and your question is saved privately.
+            </div>
+          ) : null}
           <label htmlFor="faith-question" className="text-sm font-medium text-[#31413f]">
             Ask honestly
           </label>

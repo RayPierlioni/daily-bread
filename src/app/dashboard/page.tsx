@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { PrivacyBadge } from "@/components/privacy-badge";
 import { SupportNudgeBanner } from "@/components/support-nudge-banner";
 import { DevotionalIconSubmitButton, DevotionalSubmitButton } from "@/components/devotional-action-form";
+import { FirstStepGuide } from "@/components/first-step-guide";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { getDevotionalImage } from "@/lib/devotional-media";
@@ -30,7 +31,7 @@ export default async function DashboardPage() {
   const current = await getCurrentDevotionalForUser(user);
   const devotional = current.devotional;
   const state = current.state;
-  const [prayers, posts, completedCount] = await Promise.all([
+  const [prayers, posts, completedCount, faithQuestionsCount] = await Promise.all([
     prisma.prayer.findMany({
       where: { userId: user.id },
       orderBy: { createdAt: "desc" },
@@ -42,7 +43,8 @@ export default async function DashboardPage() {
       orderBy: { createdAt: "desc" },
       take: 3
     }),
-    prisma.userDevotional.count({ where: { userId: user.id, completed: true } })
+    prisma.userDevotional.count({ where: { userId: user.id, completed: true } }),
+    prisma.faithQuestion.count({ where: { userId: user.id } })
   ]);
 
   const trackPercent = current.total ? Math.round((Math.min(current.sequence, current.total) / current.total) * 100) : 0;
@@ -66,6 +68,13 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-7">
       <SupportNudgeBanner completedCount={completedCount} />
+      <FirstStepGuide
+        completedDevotionals={completedCount}
+        prayersCreated={prayers.length}
+        faithQuestionsAsked={faithQuestionsCount}
+        currentStep={currentStep}
+        trackTitle={current.track?.title ?? "Faithful Foundations"}
+      />
       <section className="soft-panel overflow-hidden rounded-2xl border border-[#e4dccd]">
         <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_19rem]">
           <div className="space-y-7 p-5 sm:p-7 lg:p-9">
@@ -236,7 +245,10 @@ export default async function DashboardPage() {
                 </div>
               ))
             ) : (
-              <p className="text-sm leading-6 text-[#68706e]">Your private prayer journal is ready when you are.</p>
+              <div className="rounded-lg border border-[#eee5d8] bg-[#fffdf8] p-4">
+                <p className="font-medium text-[#24302f]">Start with one honest sentence.</p>
+                <p className="mt-2 text-sm leading-6 text-[#68706e]">Try: God, today I feel... Your prayer does not need to be polished.</p>
+              </div>
             )}
             <LinkButton href="/prayers" variant="ghost" size="sm">
               Open prayer journal

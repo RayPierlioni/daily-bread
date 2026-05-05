@@ -89,7 +89,7 @@ export function PrayerForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="text">Prayer</Label>
-        <Textarea id="text" placeholder="Write honestly. This is private by default." {...form.register("text")} />
+        <Textarea id="text" placeholder="God, today I feel... This is private by default." {...form.register("text")} />
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="space-y-2">
