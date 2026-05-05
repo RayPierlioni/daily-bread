@@ -1,11 +1,12 @@
 import type { Devotional, DevotionalFeedback, UserDevotional } from "@prisma/client";
 import { CheckCircle2, Heart, MessageSquare, Share2 } from "lucide-react";
-import { Button, LinkButton } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { DevotionalFeedbackPrompt } from "@/components/devotional-feedback-prompt";
+import { DevotionalActionForm } from "@/components/devotional-action-form";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { getDevotionalImage } from "@/lib/devotional-media";
 import { publicDevotionalTags } from "@/lib/devotionals";
@@ -85,18 +86,22 @@ export function DevotionalCard({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
-            <Button variant={state?.completed ? "gold" : "primary"} type="submit">
-              <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-              {state?.completed ? "Completed" : "Mark complete"}
-            </Button>
-          </form>
-          <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
-            <Button variant="secondary" type="submit">
-              <Heart className="h-4 w-4" aria-hidden="true" />
-              {state?.saved ? "Saved" : "Save"}
-            </Button>
-          </form>
+          <DevotionalActionForm
+            action={toggleDevotionalComplete.bind(null, devotional.id)}
+            icon={CheckCircle2}
+            label={state?.completed ? "Completed" : "Mark complete"}
+            pendingLabel="Marking..."
+            variant={state?.completed ? "gold" : "primary"}
+            disabled={Boolean(state?.completed)}
+          />
+          <DevotionalActionForm
+            action={toggleDevotionalSaved.bind(null, devotional.id)}
+            icon={Heart}
+            label={state?.saved ? "Saved" : "Save"}
+            pendingLabel="Saving..."
+            variant="secondary"
+            disabled={Boolean(state?.saved)}
+          />
           <LinkButton href="/groups" variant="ghost">
             <Share2 className="h-4 w-4" aria-hidden="true" />
             Prayer groups

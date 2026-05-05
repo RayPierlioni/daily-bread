@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/form-fields";
 import { Badge } from "@/components/ui/badge";
 import { PrivacyBadge } from "@/components/privacy-badge";
 import { SupportNudgeBanner } from "@/components/support-nudge-banner";
+import { DevotionalActionForm, DevotionalIconActionForm } from "@/components/devotional-action-form";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { requireUser } from "@/lib/current-user";
 import { getDevotionalImage } from "@/lib/devotional-media";
@@ -98,11 +99,13 @@ export default async function DashboardPage() {
                   <div className="flex items-center justify-between gap-3">
                     <Badge className="bg-[#dfe9dd] text-[#52633f]">Today&apos;s step</Badge>
                     <div className="flex items-center gap-2 text-[#52605d]">
-                      <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
-                        <button className="rounded-full p-2 transition hover:bg-[#f3eee4]" type="submit" aria-label="Save devotional">
-                          <Heart className="h-4 w-4" aria-hidden="true" />
-                        </button>
-                      </form>
+                      <DevotionalIconActionForm
+                        action={toggleDevotionalSaved.bind(null, devotional.id)}
+                        icon={Heart}
+                        label={state?.saved ? "Devotional saved" : "Save devotional"}
+                        pendingLabel="Saving devotional"
+                        disabled={Boolean(state?.saved)}
+                      />
                       <Link className="rounded-full p-2 transition hover:bg-[#f3eee4]" href="/community?type=DEVOTIONAL_DISCUSSION" aria-label="Discuss this devotional in community">
                         <Share2 className="h-4 w-4" aria-hidden="true" />
                       </Link>
@@ -117,12 +120,14 @@ export default async function DashboardPage() {
                       Open devotional
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </LinkButton>
-                    <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
-                      <Button type="submit" variant={state?.completed ? "gold" : "secondary"}>
-                        <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-                        {state?.completed ? "Completed" : "Mark complete"}
-                      </Button>
-                    </form>
+                    <DevotionalActionForm
+                      action={toggleDevotionalComplete.bind(null, devotional.id)}
+                      icon={CalendarCheck}
+                      label={state?.completed ? "Completed" : "Mark complete"}
+                      pendingLabel="Marking..."
+                      variant={state?.completed ? "gold" : "secondary"}
+                      disabled={Boolean(state?.completed)}
+                    />
                   </div>
                 </Card>
 

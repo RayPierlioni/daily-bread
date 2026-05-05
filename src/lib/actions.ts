@@ -281,6 +281,21 @@ export async function toggleDevotionalComplete(devotionalId?: string) {
   const devotional = devotionalId ? await prisma.devotional.findUnique({ where: { id: devotionalId } }) : current.devotional;
   if (!devotional) return;
 
+  if (current.devotional && devotional.id !== current.devotional.id) {
+    revalidatePath("/dashboard");
+    revalidatePath("/devotional");
+    return;
+  }
+
+  if (
+    current.progress?.lastAdvancedAt &&
+    Date.now() - current.progress.lastAdvancedAt.getTime() < 45_000
+  ) {
+    revalidatePath("/dashboard");
+    revalidatePath("/devotional");
+    return;
+  }
+
   const existing = await prisma.userDevotional.findUnique({
     where: { userId_devotionalId: { userId: user.id, devotionalId: devotional.id } }
   });
@@ -305,7 +320,12 @@ export async function toggleDevotionalComplete(devotionalId?: string) {
     }
   });
 
-  await advanceUserDevotionalProgress(user.id, devotional.id);
+  const advanceResult = await advanceUserDevotionalProgress(user.id, devotional.id);
+  if (!advanceResult.advanced && advanceResult.reason !== "no-progress") {
+    revalidatePath("/dashboard");
+    revalidatePath("/devotional");
+    return;
+  }
 
   await recordAnalyticsEvent({
     eventName: "devotional_completed",
@@ -329,12 +349,27 @@ export async function toggleDevotionalSaved(devotionalId: string) {
     where: { userId_devotionalId: { userId: user.id, devotionalId } }
   });
 
+  if (existing?.saved) {
+    revalidatePath("/dashboard");
+    revalidatePath("/devotional");
+    revalidatePath("/profile");
+    return;
+  }
+
   await prisma.userDevotional.upsert({
     where: { userId_devotionalId: { userId: user.id, devotionalId } },
-    update: { saved: !existing?.saved },
+    update: { saved: true },
     create: { userId: user.id, devotionalId, saved: true }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "devotional_saved",
+    userId: user.id,
+    route: "/devotional",
+    properties: { devotionalId }
+  });
+
+  revalidatePath("/dashboard");
   revalidatePath("/devotional");
   revalidatePath("/profile");
 }

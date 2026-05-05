@@ -4,6 +4,7 @@ import { todayAtMidnight } from "@/lib/utils";
 
 const fallbackFocus = "Strengthening Faith";
 const foundationTrackSlug = "daily-bread-foundations";
+const accidentalAdvanceWindowMs = 45_000;
 
 export async function getTodayDevotional() {
   const today = todayAtMidnight();
@@ -209,24 +210,42 @@ export async function getCurrentDevotionalForUser(user: Pick<User, "id" | "spiri
 
 export async function advanceUserDevotionalProgress(userId: string, devotionalId: string) {
   const progress = await getProgressWithTrack(userId);
-  if (!progress) return;
+  if (!progress) return { advanced: false, reason: "no-progress" };
 
   const publishedItems = progress.track.items.filter((item) => item.devotional.status === DevotionalStatus.PUBLISHED);
   const currentItem = publishedItems.find((item) => item.sequence >= progress.currentSequence) ?? publishedItems.at(-1);
 
-  if (!currentItem || currentItem.devotionalId !== devotionalId) return;
+  if (!currentItem) return { advanced: false, reason: "no-current-item" };
+  if (currentItem.devotionalId !== devotionalId) return { advanced: false, reason: "not-current-devotional" };
+
+  if (progress.lastAdvancedAt && Date.now() - progress.lastAdvancedAt.getTime() < accidentalAdvanceWindowMs) {
+    return { advanced: false, reason: "recently-advanced" };
+  }
 
   const total = publishedItems.length;
   const nextSequence = Math.min(currentItem.sequence + 1, total + 1);
 
-  await prisma.userDevotionalProgress.update({
-    where: { userId },
+  const result = await prisma.userDevotionalProgress.updateMany({
+    where: {
+      userId,
+      trackId: progress.trackId,
+      currentSequence: currentItem.sequence
+    },
     data: {
       currentSequence: nextSequence,
       lastAdvancedAt: new Date(),
       completedTrackAt: nextSequence > total ? new Date() : null
     }
   });
+
+  return {
+    advanced: result.count > 0,
+    reason: result.count > 0 ? "advanced" : "stale-progress",
+    sequence: currentItem.sequence,
+    nextSequence,
+    total,
+    trackSlug: progress.track.slug
+  };
 }
 
 export async function getRecommendedDevotionals(profile?: string | null, excludeId?: string) {
