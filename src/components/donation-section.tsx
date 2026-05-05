@@ -1,5 +1,6 @@
 import { BookOpen, Gift, HeartHandshake, MessageCircleQuestion, PenLine, Target, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { TrackedExternalLink } from "@/components/tracked-external-link";
 import type { SupportImpactStats } from "@/lib/support-impact";
 import { monthlySupportGoal, monthlySupportOptions, oneTimeSupportOptions, sponsorSupportOptions, supportUrl } from "@/lib/support";
 import { cn } from "@/lib/utils";
@@ -86,10 +87,16 @@ export function DonationSection({ className, compact = false, impactStats }: { c
           <div className="grid gap-3 sm:grid-cols-3">
             {oneTimeSupportOptions.map((option) => (
               <Card key={option.amount} className="bg-white/74 transition hover:-translate-y-0.5 hover:border-[#cdbf9f] hover:bg-white">
-                <a href={supportUrl} target="_blank" rel="noreferrer" className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]">
+                <TrackedExternalLink
+                  href={supportUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  analytics={{ amount: option.amount, supportType: "one_time", source: "donation_section" }}
+                  className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]"
+                >
                   <span className="text-2xl font-semibold">{option.amount}</span>
                   <span className="mt-2 text-sm font-medium text-[#52605d]">{option.label}</span>
-                </a>
+                </TrackedExternalLink>
               </Card>
             ))}
           </div>
@@ -100,10 +107,16 @@ export function DonationSection({ className, compact = false, impactStats }: { c
           <div className="grid gap-3 sm:grid-cols-3">
             {monthlySupportOptions.map((option) => (
               <Card key={option.amount} className="bg-white/74 transition hover:-translate-y-0.5 hover:border-[#cdbf9f] hover:bg-white">
-                <a href={supportUrl} target="_blank" rel="noreferrer" className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]">
+                <TrackedExternalLink
+                  href={supportUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  analytics={{ amount: option.amount, supportType: "monthly", source: "donation_section" }}
+                  className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]"
+                >
                   <span className="text-2xl font-semibold">{option.amount}</span>
                   <span className="mt-2 text-sm font-medium text-[#52605d]">{option.label}</span>
-                </a>
+                </TrackedExternalLink>
               </Card>
             ))}
           </div>
@@ -114,18 +127,30 @@ export function DonationSection({ className, compact = false, impactStats }: { c
           <div className="grid gap-3 sm:grid-cols-3">
             {sponsorSupportOptions.map((option) => (
               <Card key={option.amount} className="bg-white/74 transition hover:-translate-y-0.5 hover:border-[#cdbf9f] hover:bg-white">
-                <a href={supportUrl} target="_blank" rel="noreferrer" className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]">
+                <TrackedExternalLink
+                  href={supportUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  analytics={{ amount: option.amount, supportType: "sponsor", source: "donation_section" }}
+                  className="flex min-h-28 flex-col items-center justify-center px-4 py-5 text-[#24302f]"
+                >
                   <span className="text-2xl font-semibold">{option.amount}</span>
                   <span className="mt-2 text-sm font-medium text-[#52605d]">{option.label}</span>
-                </a>
+                </TrackedExternalLink>
               </Card>
             ))}
           </div>
         </div>
 
-        <a href={supportUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex text-sm font-semibold text-[#345d6f] hover:underline">
+        <TrackedExternalLink
+          href={supportUrl}
+          target="_blank"
+          rel="noreferrer"
+          analytics={{ amount: "custom", supportType: "custom", source: "give_another_amount" }}
+          className="mt-6 inline-flex text-sm font-semibold text-[#345d6f] hover:underline"
+        >
           Give another amount
-        </a>
+        </TrackedExternalLink>
 
         <Card className="mx-auto mt-8 max-w-2xl bg-[#f7fbf8] p-5 text-left">
           <div className="flex items-start gap-3">

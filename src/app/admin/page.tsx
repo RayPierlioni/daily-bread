@@ -1,4 +1,4 @@
-import { FileText, Library, ShieldAlert, Users } from "lucide-react";
+import { BarChart3, FileText, Library, ShieldAlert, Users } from "lucide-react";
 import { AdminTable } from "@/components/admin-table";
 import { SponsorBadge } from "@/components/sponsor-badge";
 import { Card } from "@/components/ui/card";
@@ -8,14 +8,29 @@ import { setUserSponsorStatus } from "@/lib/actions";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 
+function getThirtyDaysAgo() {
+  const date = new Date();
+  date.setDate(date.getDate() - 30);
+  return date;
+}
+
 export default async function AdminPage() {
   await requireAdmin();
 
-  const [devotionals, reports, users, sources] = await Promise.all([
+  const analyticsSince = getThirtyDaysAgo();
+  const [devotionals, reports, users, sources, analyticsEvents, analyticsCounts] = await Promise.all([
     prisma.devotional.count(),
     prisma.report.count({ where: { status: "OPEN" } }),
     prisma.user.count(),
-    prisma.sourceLibraryItem.count()
+    prisma.sourceLibraryItem.count(),
+    prisma.analyticsEvent.count({ where: { createdAt: { gte: analyticsSince } } }),
+    prisma.analyticsEvent.groupBy({
+      by: ["eventName"],
+      where: { createdAt: { gte: analyticsSince } },
+      _count: { eventName: true },
+      orderBy: { _count: { eventName: "desc" } },
+      take: 12
+    })
   ]);
   const recentUsers = await prisma.user.findMany({
     select: {
@@ -35,7 +50,8 @@ export default async function AdminPage() {
     { label: "Devotionals", value: devotionals, icon: FileText, href: "/admin/devotionals" },
     { label: "Open reports", value: reports, icon: ShieldAlert, href: "/admin/reports" },
     { label: "Users", value: users, icon: Users, href: "/admin" },
-    { label: "Source items", value: sources, icon: Library, href: "/admin/source-library" }
+    { label: "Source items", value: sources, icon: Library, href: "/admin/source-library" },
+    { label: "Tracked events, 30 days", value: analyticsEvents, icon: BarChart3, href: "/admin" }
   ];
 
   return (
@@ -45,7 +61,7 @@ export default async function AdminPage() {
         <h1 className="mt-2 text-3xl font-semibold text-[#24302f]">Manage content with care.</h1>
       </div>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {cards.map((item) => {
           const Icon = item.icon;
           return (
@@ -66,9 +82,26 @@ export default async function AdminPage() {
         rows={[
           ["Manage users", "Placeholder for account review and role changes"],
           ["Review AI-generated devotional drafts", "Placeholder for future generation workflow"],
-          ["Advanced analytics", "Placeholder for engagement and safety insights"]
+          ["Advanced analytics", "Privacy-safe event counts are now being collected below."]
         ]}
       />
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Product funnel, last 30 days</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            These counts help you see whether people are signing in, starting a path, reading devotionals, completing devotionals, and considering support. Private prayer text, journal text, and faith-question text are not stored in analytics.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Event", "Count"]}
+          rows={
+            analyticsCounts.length
+              ? analyticsCounts.map((event) => [event.eventName.replaceAll("_", " "), event._count.eventName])
+              : [["No events yet", "Analytics will appear after people use the app."]]
+          }
+        />
+      </section>
 
       <section className="space-y-3">
         <div>

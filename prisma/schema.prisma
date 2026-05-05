@@ -115,6 +115,7 @@ model User {
   blogs                  Blog[]
   blogComments           BlogComment[]
   reportsMade            Report[]              @relation("ReportsMade")
+  analyticsEvents        AnalyticsEvent[]
 }
 
 model Account {
@@ -393,4 +394,19 @@ model SourceLibraryItem {
   tags                Json
   createdAt           DateTime       @default(now())
   updatedAt           DateTime       @updatedAt
+}
+
+model AnalyticsEvent {
+  id              String   @id @default(cuid())
+  userId          String?
+  eventName       String
+  eventProperties Json?
+  route           String?
+  createdAt       DateTime @default(now())
+
+  user            User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([eventName, createdAt])
+  @@index([userId, createdAt])
+  @@map("analytics_events")
 }

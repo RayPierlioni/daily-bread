@@ -13,6 +13,7 @@ import {
 } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { recordAnalyticsEvent } from "@/lib/analytics";
 import { determineAssessmentOutcome } from "@/lib/assessment";
 import { advanceUserDevotionalProgress, assignUserDevotionalTrack, assignUserFoundationTrack, getCurrentDevotionalForUser } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
@@ -77,9 +78,37 @@ export async function completeOnboarding(formData: FormData) {
     })
   ]);
 
-  await assignUserDevotionalTrack({
+  const progress = await assignUserDevotionalTrack({
     id: user.id,
     spiritualFocusProfile: generatedProfile
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "onboarding_choice_selected",
+    userId: user.id,
+    route: "/onboarding",
+    properties: { choice: "personalize" }
+  });
+  await recordAnalyticsEvent({
+    eventName: "assessment_completed",
+    userId: user.id,
+    route: "/onboarding",
+    properties: {
+      generatedProfile,
+      growthAreaCount: growthAreas.length,
+      struggleCount: struggles.length,
+      recommendedTopicCount: Array.isArray(recommendedTopics) ? recommendedTopics.length : 0
+    }
+  });
+  await recordAnalyticsEvent({
+    eventName: "track_started",
+    userId: user.id,
+    route: "/onboarding",
+    properties: {
+      source: "assessment",
+      trackSlug: progress?.track.slug ?? "unknown",
+      trackTitle: progress?.track.title ?? "Unknown track"
+    }
   });
 
   redirect("/dashboard");
@@ -114,7 +143,24 @@ export async function startFoundationsPath() {
     }
   });
 
-  await assignUserFoundationTrack(user.id);
+  const progress = await assignUserFoundationTrack(user.id);
+
+  await recordAnalyticsEvent({
+    eventName: "onboarding_choice_selected",
+    userId: user.id,
+    route: "/onboarding",
+    properties: { choice: "foundations" }
+  });
+  await recordAnalyticsEvent({
+    eventName: "track_started",
+    userId: user.id,
+    route: "/onboarding",
+    properties: {
+      source: "foundations",
+      trackSlug: progress?.track.slug ?? "unknown",
+      trackTitle: progress?.track.title ?? "Unknown track"
+    }
+  });
 
   redirect("/dashboard");
 }
@@ -188,6 +234,16 @@ export async function saveDevotionalNote(devotionalId: string, formData: FormDat
     create: { userId: user.id, devotionalId, notes }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "devotional_note_saved",
+    userId: user.id,
+    route: "/devotional",
+    properties: {
+      devotionalId,
+      noteLengthBucket: notes.trim().length > 500 ? "long" : notes.trim().length > 120 ? "medium" : notes.trim().length > 0 ? "short" : "empty"
+    }
+  });
+
   revalidatePath("/devotional");
 }
 
@@ -249,6 +305,18 @@ export async function toggleDevotionalComplete(devotionalId?: string) {
   });
 
   await advanceUserDevotionalProgress(user.id, devotional.id);
+
+  await recordAnalyticsEvent({
+    eventName: "devotional_completed",
+    userId: user.id,
+    route: "/devotional",
+    properties: {
+      devotionalId: devotional.id,
+      trackSlug: current.track?.slug ?? "daily",
+      sequence: current.sequence,
+      total: current.total
+    }
+  });
 
   revalidatePath("/dashboard");
   revalidatePath("/devotional");

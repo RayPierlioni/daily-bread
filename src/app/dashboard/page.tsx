@@ -13,6 +13,7 @@ import { getDevotionalImage } from "@/lib/devotional-media";
 import { formatTrackStepTitle, getCurrentDevotionalForUser, jsonArray } from "@/lib/devotionals";
 import { prisma } from "@/lib/prisma";
 import { formatDate, humanizeEnum } from "@/lib/utils";
+import { recordAnalyticsEvent } from "@/lib/analytics";
 
 function greeting() {
   const hour = new Date().getHours();
@@ -49,6 +50,17 @@ export default async function DashboardPage() {
   const devotionalImage = getDevotionalImage(devotional);
   const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
   const devotionalTitle = devotional ? formatTrackStepTitle(devotional.title, currentStep) : "Today's devotional";
+
+  await recordAnalyticsEvent({
+    eventName: "dashboard_viewed",
+    userId: user.id,
+    route: "/dashboard",
+    properties: {
+      trackSlug: current.track?.slug ?? "daily",
+      sequence: current.sequence,
+      total: current.total
+    }
+  });
 
   return (
     <div className="space-y-7">

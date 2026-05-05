@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { recordAnalyticsEvent } from "@/lib/analytics";
 import { prisma } from "@/lib/prisma";
 
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
@@ -92,6 +93,19 @@ export const authOptions: NextAuthOptions = {
       }
 
       return session;
+    }
+  },
+  events: {
+    async signIn({ user, account, isNewUser }) {
+      await recordAnalyticsEvent({
+        eventName: "signin_completed",
+        userId: user.id,
+        route: "/api/auth",
+        properties: {
+          provider: account?.provider ?? "unknown",
+          isNewUser: Boolean(isNewUser)
+        }
+      });
     }
   }
 };

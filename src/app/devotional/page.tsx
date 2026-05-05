@@ -6,6 +6,7 @@ import { LinkButton } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { requireUser } from "@/lib/current-user";
 import { formatTrackStepTitle, getCurrentDevotionalForUser, getRecommendedDevotionals, getUpcomingDevotionalsFromProgress, jsonArray } from "@/lib/devotionals";
+import { recordAnalyticsEvent } from "@/lib/analytics";
 import { formatDate } from "@/lib/utils";
 
 export default async function DevotionalPage() {
@@ -25,6 +26,18 @@ export default async function DevotionalPage() {
   const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
   const displayTitle = formatTrackStepTitle(devotional.title, currentStep);
   const recommendationStartStep = trackRecommendations.length ? currentStep + 1 : null;
+
+  await recordAnalyticsEvent({
+    eventName: "devotional_viewed",
+    userId: user.id,
+    route: "/devotional",
+    properties: {
+      devotionalId: devotional.id,
+      trackSlug: current.track?.slug ?? "daily",
+      sequence: current.sequence,
+      total: current.total
+    }
+  });
 
   return (
     <div className="space-y-6">
