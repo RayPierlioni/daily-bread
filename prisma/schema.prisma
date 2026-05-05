@@ -81,6 +81,12 @@ enum SourceCategory {
   PASTORAL
 }
 
+enum DevotionalFeedbackResponse {
+  MET_ME
+  SOMEWHAT
+  NOT_TODAY
+}
+
 model User {
   id                     String                @id @default(cuid())
   name                   String?
@@ -104,6 +110,7 @@ model User {
   sessions               Session[]
   spiritualAssessments   SpiritualAssessment[]
   devotionals            UserDevotional[]
+  devotionalFeedback      DevotionalFeedback[]
   devotionalProgress     UserDevotionalProgress?
   createdDevotionals     Devotional[]          @relation("CreatedDevotionals")
   faithQuestions         FaithQuestion[]
@@ -185,6 +192,7 @@ model Devotional {
 
   creator                  User?              @relation("CreatedDevotionals", fields: [createdBy], references: [id], onDelete: SetNull)
   userDevotionals          UserDevotional[]
+  feedback                 DevotionalFeedback[]
   trackItems               DevotionalTrackItem[]
 }
 
@@ -246,6 +254,22 @@ model UserDevotional {
   devotional    Devotional  @relation(fields: [devotionalId], references: [id], onDelete: Cascade)
 
   @@unique([userId, devotionalId])
+}
+
+model DevotionalFeedback {
+  id            String                     @id @default(cuid())
+  userId        String
+  devotionalId  String
+  response      DevotionalFeedbackResponse
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @updatedAt
+
+  user          User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  devotional    Devotional                 @relation(fields: [devotionalId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, devotionalId])
+  @@index([devotionalId, response])
+  @@map("devotional_feedback")
 }
 
 model FaithQuestion {

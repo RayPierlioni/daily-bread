@@ -18,7 +18,7 @@ export default async function AdminPage() {
   await requireAdmin();
 
   const analyticsSince = getThirtyDaysAgo();
-  const [devotionals, reports, users, sources, analyticsEvents, analyticsCounts] = await Promise.all([
+  const [devotionals, reports, users, sources, analyticsEvents, analyticsCounts, devotionalFeedbackCounts] = await Promise.all([
     prisma.devotional.count(),
     prisma.report.count({ where: { status: "OPEN" } }),
     prisma.user.count(),
@@ -30,6 +30,11 @@ export default async function AdminPage() {
       _count: { eventName: true },
       orderBy: { _count: { eventName: "desc" } },
       take: 12
+    }),
+    prisma.devotionalFeedback.groupBy({
+      by: ["response"],
+      _count: { response: true },
+      orderBy: { _count: { response: "desc" } }
     })
   ]);
   const recentUsers = await prisma.user.findMany({
@@ -75,6 +80,23 @@ export default async function AdminPage() {
             </Card>
           );
         })}
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Devotional feedback</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            This shows whether completed devotionals are connecting with people. It stores only button responses, not private notes or prayers.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Response", "Count"]}
+          rows={
+            devotionalFeedbackCounts.length
+              ? devotionalFeedbackCounts.map((feedback) => [feedback.response.replaceAll("_", " ").toLowerCase(), feedback._count.response])
+              : [["No feedback yet", "Feedback appears after completed devotionals."]]
+          }
+        />
       </section>
 
       <AdminTable

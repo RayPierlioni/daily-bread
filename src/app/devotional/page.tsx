@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { requireUser } from "@/lib/current-user";
 import { formatTrackStepTitle, getCurrentDevotionalForUser, getRecommendedDevotionals, getUpcomingDevotionalsFromProgress, jsonArray } from "@/lib/devotionals";
 import { recordAnalyticsEvent } from "@/lib/analytics";
+import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 
 export default async function DevotionalPage() {
@@ -21,7 +22,12 @@ export default async function DevotionalPage() {
   }
 
   const trackRecommendations = getUpcomingDevotionalsFromProgress(current.progress, current.sequence, devotional.id);
-  const recommendations = trackRecommendations.length ? trackRecommendations : await getRecommendedDevotionals(user.spiritualFocusProfile, devotional.id);
+  const [recommendations, feedback] = await Promise.all([
+    trackRecommendations.length ? Promise.resolve(trackRecommendations) : getRecommendedDevotionals(user.spiritualFocusProfile, devotional.id),
+    prisma.devotionalFeedback.findUnique({
+      where: { userId_devotionalId: { userId: user.id, devotionalId: devotional.id } }
+    })
+  ]);
   const todaysDate = formatDate(new Date());
   const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
   const displayTitle = formatTrackStepTitle(devotional.title, currentStep);
@@ -61,6 +67,7 @@ export default async function DevotionalPage() {
         state={current.state}
         displayDate={todaysDate}
         displayTitle={displayTitle}
+        feedback={feedback}
         personalizedNote={`This is step ${currentStep} in your ${current.track?.title ?? user.spiritualFocusProfile ?? "Strengthening Faith"} path. Retaking the assessment starts the assigned path at step 1. Missing days will not skip this sequence.`}
       />
 

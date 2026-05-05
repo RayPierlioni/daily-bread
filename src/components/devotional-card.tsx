@@ -1,10 +1,11 @@
-import type { Devotional, UserDevotional } from "@prisma/client";
+import type { Devotional, DevotionalFeedback, UserDevotional } from "@prisma/client";
 import { CheckCircle2, Heart, MessageSquare, Share2 } from "lucide-react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
+import { DevotionalFeedbackPrompt } from "@/components/devotional-feedback-prompt";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { getDevotionalImage } from "@/lib/devotional-media";
 import { publicDevotionalTags } from "@/lib/devotionals";
@@ -15,13 +16,15 @@ export function DevotionalCard({
   state,
   personalizedNote,
   displayDate,
-  displayTitle
+  displayTitle,
+  feedback
 }: {
   devotional: Devotional;
   state?: UserDevotional | null;
   personalizedNote?: string;
   displayDate?: string;
   displayTitle?: string;
+  feedback?: DevotionalFeedback | null;
 }) {
   const image = getDevotionalImage(devotional);
   const title = displayTitle ?? devotional.title;
@@ -103,6 +106,8 @@ export function DevotionalCard({
             Discuss in community
           </LinkButton>
         </div>
+
+        {state?.completed ? <DevotionalFeedbackPrompt devotionalId={devotional.id} feedback={feedback} /> : null}
 
         <DevotionalNoteForm devotionalId={devotional.id} initialNotes={state?.notes ?? ""} />
       </CardContent>

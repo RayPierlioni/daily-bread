@@ -11,6 +11,7 @@ export const analyticsEventNames = [
   "devotional_viewed",
   "devotional_completed",
   "devotional_note_saved",
+  "devotional_feedback_submitted",
   "support_page_viewed",
   "support_cta_clicked"
 ] as const;

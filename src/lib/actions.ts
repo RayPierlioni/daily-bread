@@ -3,6 +3,7 @@
 import {
   BlogStatus,
   DevotionalStatus,
+  DevotionalFeedbackResponse,
   GroupPrivacy,
   PostType,
   PrayerStatus,
@@ -336,6 +337,35 @@ export async function toggleDevotionalSaved(devotionalId: string) {
 
   revalidatePath("/devotional");
   revalidatePath("/profile");
+}
+
+export async function submitDevotionalFeedback(devotionalId: string, response: DevotionalFeedbackResponse) {
+  const user = await requireUser();
+
+  if (!Object.values(DevotionalFeedbackResponse).includes(response)) return;
+
+  await prisma.devotionalFeedback.upsert({
+    where: { userId_devotionalId: { userId: user.id, devotionalId } },
+    update: { response },
+    create: {
+      userId: user.id,
+      devotionalId,
+      response
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "devotional_feedback_submitted",
+    userId: user.id,
+    route: "/devotional",
+    properties: {
+      devotionalId,
+      response
+    }
+  });
+
+  revalidatePath("/devotional");
+  revalidatePath("/admin");
 }
 
 export async function createCommunityPost(formData: FormData) {

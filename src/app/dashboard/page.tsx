@@ -69,20 +69,34 @@ export default async function DashboardPage() {
         <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_19rem]">
           <div className="space-y-7 p-5 sm:p-7 lg:p-9">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#b38b4d]">Welcome Home</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#b38b4d]">Your next faithful step</p>
               <h1 className="font-sanctuary mt-3 text-4xl leading-tight text-[#152322] sm:text-5xl">
-                {greeting()}, {firstName}.
+                {greeting()}, {firstName}. Your next step is ready.
               </h1>
-              <p className="font-sanctuary mt-4 max-w-2xl text-base italic leading-8 text-[#53605b]">
-                Your devotional path is personal and sequential. If you miss two weeks, you will return to the next reading in your track, not a skipped calendar day.
+              <p className="mt-4 max-w-2xl text-base leading-8 text-[#53605b]">
+                You are not behind. Continue with {devotionalTitle}, write one honest prayer, or bring a question to Ask in Faith.
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <LinkButton href="/devotional" variant="primary">
+                  Begin today&apos;s step
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </LinkButton>
+                <LinkButton href="/prayers" variant="secondary">
+                  <PenLine className="h-4 w-4" aria-hidden="true" />
+                  Write a prayer
+                </LinkButton>
+                <LinkButton href="/ask" variant="ghost">
+                  <MessageCircleQuestion className="h-4 w-4" aria-hidden="true" />
+                  Ask in Faith
+                </LinkButton>
+              </div>
             </div>
 
             {devotional ? (
               <div className="grid gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(17rem,0.85fr)]">
                 <Card className="relative overflow-hidden rounded-2xl border-[#e7decd] bg-white/92 p-6 shadow-[0_18px_40px_rgba(36,48,47,0.07)]">
                   <div className="flex items-center justify-between gap-3">
-                    <Badge className="bg-[#dfe9dd] text-[#52633f]">Verse of the Day</Badge>
+                    <Badge className="bg-[#dfe9dd] text-[#52633f]">Today&apos;s step</Badge>
                     <div className="flex items-center gap-2 text-[#52605d]">
                       <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
                         <button className="rounded-full p-2 transition hover:bg-[#f3eee4]" type="submit" aria-label="Save devotional">
@@ -100,7 +114,7 @@ export default async function DashboardPage() {
                   </div>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <LinkButton href="/devotional" variant="primary">
-                      Read today&apos;s devotional
+                      Open devotional
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </LinkButton>
                     <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
