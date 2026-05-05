@@ -10,7 +10,10 @@ type ClientAnalyticsEvent =
   | "gracie_cta_clicked"
   | "gracie_dismissed"
   | "gracie_snoozed"
-  | "gracie_settings_changed";
+  | "gracie_settings_changed"
+  | "gracie_chat_submitted"
+  | "gracie_chat_answered"
+  | "gracie_chat_error";
 
 export function trackClientEvent(eventName: ClientAnalyticsEvent, properties: ClientAnalyticsProperties = {}) {
   const payload = JSON.stringify({

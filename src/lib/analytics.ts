@@ -18,6 +18,9 @@ export const analyticsEventNames = [
   "gracie_dismissed",
   "gracie_snoozed",
   "gracie_settings_changed",
+  "gracie_chat_submitted",
+  "gracie_chat_answered",
+  "gracie_chat_error",
   "support_page_viewed",
   "support_cta_clicked"
 ] as const;
@@ -33,7 +36,10 @@ const clientEventNames = [
   "gracie_cta_clicked",
   "gracie_dismissed",
   "gracie_snoozed",
-  "gracie_settings_changed"
+  "gracie_settings_changed",
+  "gracie_chat_submitted",
+  "gracie_chat_answered",
+  "gracie_chat_error"
 ] as const;
 type ClientAnalyticsEventName = (typeof clientEventNames)[number];
 
@@ -102,6 +108,7 @@ export function sanitizeClientAnalyticsEvent(input: unknown):
         ctaType: safeString(rawProperties.ctaType, "none"),
         tone: safeString(rawProperties.tone, "gentle"),
         source: safeString(rawProperties.source, "gracie"),
+        questionLengthBucket: safeString(rawProperties.questionLengthBucket, "unknown"),
         enabled: safeBoolean(rawProperties.enabled),
         dailyAutoOpen: safeBoolean(rawProperties.dailyAutoOpen)
       }

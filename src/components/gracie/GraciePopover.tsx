@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Heart, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { GracieChatPanel } from "@/components/gracie/GracieChatPanel";
 import { graciePoseSources, type GracieMessage, type GraciePose } from "@/components/gracie/gracieMessages";
 import { Button, LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -46,7 +47,7 @@ export function GraciePopover({
       role="dialog"
       aria-modal="false"
       aria-labelledby="gracie-title"
-      className="w-[calc(100vw-2rem)] max-w-sm rounded-2xl border border-[#e4dccd] bg-[#fffdf8] p-4 text-left shadow-[0_24px_70px_rgba(36,48,47,0.18)] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2"
+      className="max-h-[calc(100vh-8rem)] w-[calc(100vw-2rem)] max-w-lg overflow-y-auto rounded-2xl border border-[#e4dccd] bg-[#fffdf8] p-4 text-left shadow-[0_24px_70px_rgba(36,48,47,0.18)] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 lg:max-h-[calc(100vh-3rem)]"
     >
       <div className="flex items-start gap-3">
         <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#e4dccd] bg-[#f7fbf8]">
@@ -82,9 +83,13 @@ export function GraciePopover({
             </button>
           </div>
           <p className="mt-4 text-base leading-7 text-[#31413f]">{message.text}</p>
-          <p className="mt-3 text-xs leading-5 text-[#68706e]">Gracie offers app guidance only. Scripture, prayer, pastors, counselors, and trusted support matter most.</p>
+          <p className="mt-3 text-xs leading-5 text-[#68706e]">
+            Gracie can guide you and help ask faith questions. Scripture, prayer, pastors, counselors, and trusted support matter most.
+          </p>
         </div>
       </div>
+
+      <GracieChatPanel />
 
       <div className="mt-4 flex flex-wrap gap-2">
         {message.ctaHref && message.ctaLabel ? (
