@@ -1,3 +1,4 @@
+import { DevotionalFeedbackResponse, DevotionalStatus } from "@prisma/client";
 import { BarChart3, FileText, Library, ShieldAlert, Users } from "lucide-react";
 import { AdminTable } from "@/components/admin-table";
 import { SponsorBadge } from "@/components/sponsor-badge";
@@ -44,6 +45,10 @@ const supportEvents = [
   ["Sponsor badge changed", "sponsor_badge_enabled"]
 ] as const;
 
+function mapCounts<T extends { devotionalId: string; _count: { _all: number } }>(items: T[]) {
+  return new Map(items.map((item) => [item.devotionalId, item._count._all]));
+}
+
 export default async function AdminPage() {
   await requireAdmin();
 
@@ -60,7 +65,12 @@ export default async function AdminPage() {
     usersWithPrayers,
     usersWithFaithQuestions,
     sponsorUsers,
-    recentAnalyticsEvents
+    recentAnalyticsEvents,
+    qualityDevotionals,
+    completedByDevotional,
+    savedByDevotional,
+    notedByDevotional,
+    feedbackByDevotional
   ] = await Promise.all([
     prisma.devotional.count(),
     prisma.report.count({ where: { status: "OPEN" } }),
@@ -95,6 +105,44 @@ export default async function AdminPage() {
       include: { user: { select: { name: true, email: true } } },
       orderBy: { createdAt: "desc" },
       take: 10
+    }),
+    prisma.devotional.findMany({
+      where: { status: DevotionalStatus.PUBLISHED },
+      select: {
+        id: true,
+        title: true,
+        scriptureReference: true,
+        date: true,
+        trackItems: {
+          select: {
+            sequence: true,
+            track: { select: { title: true } }
+          },
+          orderBy: { sequence: "asc" },
+          take: 1
+        }
+      },
+      orderBy: { date: "asc" },
+      take: 24
+    }),
+    prisma.userDevotional.groupBy({
+      by: ["devotionalId"],
+      where: { completed: true },
+      _count: { _all: true }
+    }),
+    prisma.userDevotional.groupBy({
+      by: ["devotionalId"],
+      where: { saved: true },
+      _count: { _all: true }
+    }),
+    prisma.userDevotional.groupBy({
+      by: ["devotionalId"],
+      where: { notes: { not: null } },
+      _count: { _all: true }
+    }),
+    prisma.devotionalFeedback.groupBy({
+      by: ["devotionalId", "response"],
+      _count: { _all: true }
     })
   ]);
   const recentUsers = await prisma.user.findMany({
@@ -120,6 +168,42 @@ export default async function AdminPage() {
   ];
   const analyticsCountMap = new Map(analyticsCounts.map((event) => [event.eventName, event._count.eventName]));
   const countFor = (eventName: string) => analyticsCountMap.get(eventName) ?? 0;
+  const completedMap = mapCounts(completedByDevotional);
+  const savedMap = mapCounts(savedByDevotional);
+  const notedMap = mapCounts(notedByDevotional);
+  const feedbackMap = new Map(feedbackByDevotional.map((item) => [`${item.devotionalId}:${item.response}`, item._count._all]));
+  const feedbackCount = (devotionalId: string, response: DevotionalFeedbackResponse) => feedbackMap.get(`${devotionalId}:${response}`) ?? 0;
+  const contentQualityRows = qualityDevotionals.map((devotional) => {
+    const completed = completedMap.get(devotional.id) ?? 0;
+    const saved = savedMap.get(devotional.id) ?? 0;
+    const notes = notedMap.get(devotional.id) ?? 0;
+    const met = feedbackCount(devotional.id, DevotionalFeedbackResponse.MET_ME);
+    const somewhat = feedbackCount(devotional.id, DevotionalFeedbackResponse.SOMEWHAT);
+    const notToday = feedbackCount(devotional.id, DevotionalFeedbackResponse.NOT_TODAY);
+    const positive = met + somewhat;
+    const signal =
+      completed === 0
+        ? "Waiting for readers"
+        : notToday > positive
+          ? "Review soon"
+          : met > 0 || saved > 0 || notes > 0
+            ? "Connecting"
+            : "Needs more feedback";
+    const trackItem = devotional.trackItems[0];
+
+    return [
+      <div key={`${devotional.id}-title`}>
+        <p className="font-medium text-[#24302f]">{devotional.title}</p>
+        <p className="text-xs text-[#68706e]">{devotional.scriptureReference}</p>
+      </div>,
+      trackItem ? `${trackItem.track.title} · Step ${trackItem.sequence}` : formatDate(devotional.date),
+      completed,
+      saved,
+      notes,
+      `${met} / ${somewhat} / ${notToday}`,
+      signal
+    ];
+  });
 
   return (
     <div className="space-y-6">
@@ -158,6 +242,19 @@ export default async function AdminPage() {
               ? devotionalFeedbackCounts.map((feedback) => [feedback.response.replaceAll("_", " ").toLowerCase(), feedback._count.response])
               : [["No feedback yet", "Feedback appears after completed devotionals."]]
           }
+        />
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Content quality by devotional</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            This compares completion, saves, private-note counts, and button feedback by reading. It helps you find devotionals to rewrite without showing anyone&apos;s private notes or prayers.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Devotional", "Track position", "Completed", "Saved", "Notes", "Met / Somewhat / Not", "Signal"]}
+          rows={contentQualityRows.length ? contentQualityRows : [["No published devotionals", "-", "-", "-", "-", "-", "-"]]}
         />
       </section>
 
