@@ -753,6 +753,188 @@ const editorialDevotionals: Record<number, EditorialDevotional> = {
     prayerPrompt:
       "Lord, thank You for meeting me in both quiet and noise. Help me remember that You are God, that I am held, and that I can keep returning without shame.",
     actionStep: "Write two sentences: one thing you noticed about your hurry, and one way you want to practice stillness next week."
+  },
+  15: {
+    body: [
+      "There is a small lamp in many homes that does not light the whole room. It only lights the chair beside it, the page beneath it, the next few steps across the floor. No one complains that it fails to illuminate the entire neighborhood. Its gift is smaller and kinder than that: it gives enough light for where a person actually is.",
+      "Psalm 119:105 says God's Word is a lamp unto our feet and a light unto our path. Notice the tenderness of that image. Scripture is not described as a floodlight that removes every mystery at once. It is a lamp close enough for walking. It gives enough light for obedience, enough truth for trust, enough direction for the next faithful step.",
+      "Many people feel intimidated by the Bible because they think they must understand everything before they can begin. But a lamp does not ask you to understand the whole road. It asks you to take the step made visible. Today's beginning is not mastery. It is receiving Scripture as a gift from the God who knows how much light you need today.",
+      "If the Bible has ever felt confusing, distant, or heavy with pressure, start again gently. Ask one simple question: What does this passage show me about God? Then ask another: What is one step this light makes possible?",
+      "You are not behind because you do not know everything. You are invited because God still speaks, still guides, and still gives light for the path beneath your feet."
+    ].join("\n\n"),
+    reflectionQuestion: "Where do you need Scripture to give you enough light for the next step, not the whole road?",
+    prayerPrompt:
+      "Lord, thank You for giving Your Word as light. Help me receive Scripture without fear or performance. Show me enough truth for today's next faithful step.",
+    actionStep: "Read Psalm 119:105 slowly three times. After the third time, write one sentence that begins: Today, God's Word gives light for..."
+  },
+  16: {
+    body: [
+      "A child learning to walk does not need a lecture on every road they will ever travel. They need a hand nearby, a voice of encouragement, and enough space to take the next step. They wobble. They stop. They try again. Progress happens through trust before it happens through skill.",
+      "Learning Scripture can feel like that. You may open the Bible and feel unsure where to begin. You may wonder whether you are reading it correctly or whether everyone else understands more than you do. Psalm 119:105 gives a quieter picture: God's Word is a lamp. Lamps are meant to be used slowly, close to the ground, step by step.",
+      "Today is about listening. Let one phrase become a companion. Do not rush to application before you have listened for God's character. The verse says Your word. Scripture is not merely inspirational material. It belongs to the Lord. It carries His voice, His wisdom, His authority, and His invitation.",
+      "If one word stands out, stay there. Light. Lamp. Feet. Path. Each word has room. Maybe you need light because life feels unclear. Maybe you need feet because obedience has to become practical. Maybe you need path because you are tired of wandering without direction.",
+      "The goal is not to sound spiritual. The goal is to listen long enough for the Word to become near."
+    ].join("\n\n"),
+    reflectionQuestion: "Which word or phrase from Psalm 119:105 feels most important for your actual life today?",
+    prayerPrompt:
+      "God, teach me to listen to Your Word with humility. Let one phrase stay with me today and guide the way I think, speak, choose, and pray.",
+    actionStep: "Choose one word from the verse and carry it with you today. Put it on a note, lock screen, or journal page."
+  },
+  17: {
+    body: [
+      "There are moments when a person wants God to hand them the whole map. The job decision. The relationship question. The family concern. The future that feels uncertain. We ask for a map because maps make us feel safer. But Scripture often gives something more relational than a map: God gives light and asks us to walk with Him.",
+      "A lamp does not remove the need for trust. It creates a place where trust can move. Psalm 119:105 does not promise that every turn will be visible from the beginning. It promises that God's Word is sufficient for the step in front of you.",
+      "This can be frustrating when you want certainty. But it can also be freeing. You do not have to solve your entire life today. You do not have to predict every consequence. You can ask what Scripture makes clear right now: tell the truth, seek wisdom, forgive as you have been forgiven, pray instead of spiraling, love your neighbor, refuse bitterness, take courage.",
+      "Trusting Scripture means letting God's revealed wisdom outrank the loudest voice in the room, even when that voice is fear, pride, or hurry inside your own mind. It means asking not only, What do I want? but, What has God already made light enough for obedience?",
+      "Take one concern and bring it under the lamp. Let Scripture show you one faithful step."
+    ].join("\n\n"),
+    reflectionQuestion: "What situation are you asking God to fully map out when He may be giving enough light for one step?",
+    prayerPrompt:
+      "Lord, I want the whole map, but I trust You with the path. Let Your Word show me one faithful step, and give me courage to take it.",
+    actionStep: "Name one decision or concern. Write one biblical truth that can guide your next step in it."
+  },
+  18: {
+    body: [
+      "A lamp left on the shelf does not help anyone cross a dark room. It may be beautiful. It may be expensive. It may have a story behind it. But light is meant to be brought near to the place where walking happens.",
+      "The Bible can become something we respect from a distance without letting it guide us up close. We may agree that Scripture is true while still making decisions mostly from fear, habit, impulse, or the expectations of others. Psalm 119:105 invites a closer kind of trust: Your word is a lamp unto my feet.",
+      "Feet are practical. They go places. They stand in kitchens, offices, school hallways, hospital rooms, churches, grocery lines, and quiet bedrooms. If Scripture is a lamp to our feet, then God's Word is meant to meet real movement, not only private thought.",
+      "Today is a practice day. Choose one ordinary moment where Scripture can become visible. Let patience become a slower answer. Let honesty become a truthful sentence. Let mercy become a text you send. Let trust become a decision not to rehearse the same fear all afternoon.",
+      "The step may be small, but small obedience under God's light is never wasted."
+    ].join("\n\n"),
+    reflectionQuestion: "What is one practical place where Scripture needs to move from agreement into action today?",
+    prayerPrompt:
+      "Lord, let Your Word become light for my actual feet. Teach me to practice one truth in one ordinary place today.",
+    actionStep: "Choose one concrete action that matches Scripture: tell the truth, pause before reacting, apologize, pray, or encourage someone."
+  },
+  19: {
+    body: [
+      "Some questions come from rebellion, but many come from hunger. A person reads Scripture and wonders, Why does this matter? How do I understand this? What if I have misunderstood God? What if I cannot live up to what I read? Those questions can become barriers, or they can become doorways.",
+      "Psalm 119:105 welcomes questions by giving us an image we can return to. If God's Word is a lamp, then confusion is not the end of the story. A lamp can be picked up. A path can be walked slowly. Understanding can grow over time.",
+      "Faithful Bible reading does not mean every passage is instantly clear. It means we keep bringing our minds and hearts to the God who speaks. We ask for wisdom. We read in context. We listen with the church. We remain humble about difficult passages. We obey what is clear while continuing to learn what is not.",
+      "If a question rises today, do not hide it. Write it down. Ask it reverently. Bring it to prayer or Ask in Faith or a trusted believer. The goal is not to win an argument with the Bible. The goal is to be formed by the God who gave it.",
+      "A sincere question, held under the light, can become part of the path."
+    ].join("\n\n"),
+    reflectionQuestion: "What honest question do you have about Scripture, guidance, obedience, or trusting God's Word?",
+    prayerPrompt:
+      "God, meet me in my questions about Your Word. Keep me humble, patient, and open to wisdom. Help me seek truth without fear.",
+    actionStep: "Write one question about Scripture and bring it to prayer. If it still feels heavy, ask it in Ask in Faith later."
+  },
+  20: {
+    body: [
+      "A person walking with a lamp has to keep carrying it. Light for one step does not mean the whole journey is finished. The lamp is lifted again, and again, and again. This repeated receiving is not failure. It is how walking works.",
+      "Scripture is meant to travel with us. The verse you read in the morning may become necessary at noon. The truth you underlined may return when your patience thins, when fear starts talking, or when a choice asks for wisdom.",
+      "Walking with God's Word means letting Scripture interrupt the automatic path. Maybe your automatic path is worry. Maybe it is anger. Maybe it is avoidance, people-pleasing, self-protection, or despair. The lamp does not shame you for needing light. It simply gives light where the path has grown dark.",
+      "Today, imagine carrying Psalm 119:105 into one interaction. What would change if God's Word, not your first impulse, lit the next step? Would you listen better? Speak less sharply? Ask for help? Refuse a hidden compromise? Rest instead of proving yourself?",
+      "Let the Word walk with you. Not as a rulebook held at arm's length, but as light near your feet."
+    ].join("\n\n"),
+    reflectionQuestion: "How could Scripture interrupt one automatic habit or reaction in your life today?",
+    prayerPrompt:
+      "Lord, let Your Word travel with me. When I drift into old reactions, bring Your light near and help me walk differently.",
+    actionStep: "Before one interaction or task today, pause and ask: What would Scripture make light here?"
+  },
+  21: {
+    body: [
+      "Looking back over a week with Scripture can reveal more than we noticed while the days were happening. One verse may have been easy to forget, but not useless. One small act of obedience may have seemed unimpressive, but not meaningless. One honest question may still be unanswered, but it may have moved into the light.",
+      "Psalm 119:105 gives a picture of steady guidance, not spiritual fireworks. A lamp does not usually surprise us. It simply keeps making the next step visible. Many people miss God's faithfulness because they only look for dramatic rescue and overlook quiet guidance.",
+      "This week, maybe Scripture gave you comfort. Maybe it corrected you. Maybe it exposed your desire for control. Maybe it helped you pray. Maybe it showed you how much you still need to learn. All of that belongs in the life of faith.",
+      "Do not measure this week by how perfectly you remembered the verse. Measure it by whether you returned. The path is formed by returning to the light. If you missed a day, the path did not leave you. If you forgot a practice, grace still invites you back.",
+      "Remember one way God's Word gave light, and carry that gratitude into the next step."
+    ].join("\n\n"),
+    reflectionQuestion: "Where did Scripture give even a small amount of light, correction, comfort, or direction this week?",
+    prayerPrompt:
+      "Lord, thank You for the light of Your Word. Help me remember where You guided me this week, and keep teaching me to return without shame.",
+    actionStep: "Write two sentences: one way Scripture helped you this week, and one place you still need light."
+  },
+  22: {
+    body: [
+      "Some people stop praying because they think they are bad at it. Their words feel clumsy. Their attention wanders. They imagine other people praying with beautiful sentences and steady emotions, while their own prayer sounds like a grocery list, a sigh, or a whispered help.",
+      "Jesus gives a different picture. In Matthew 6:6, He points away from performance and toward the Father who sees in secret. Prayer is not a stage. It is not a speech contest. It is not a way to sound impressive to God or to yourself. It is communion with the Father who already knows you.",
+      "This is deeply freeing. You do not have to polish your prayer before God will receive it. You do not have to make it long enough to count. You do not have to feel holy enough to begin. The secret place is not a hiding place from God; it is a place where pretense can fall away.",
+      "Today begins a week of prayer without performance. Start small. Start honest. Start in the language you actually have. God is not waiting for a better version of you to show up. He is inviting you to come as a child.",
+      "A short honest prayer is still a prayer."
+    ].join("\n\n"),
+    reflectionQuestion: "What pressure or expectation makes prayer feel harder than it needs to be?",
+    prayerPrompt:
+      "Father, teach me to pray without performing. Help me come to You honestly, briefly, and trustingly, knowing You see me in secret and receive me with love.",
+    actionStep: "Pray one honest sentence today. Let it be simple enough that you can actually mean it."
+  },
+  23: {
+    body: [
+      "There is a difference between being quiet and being honest. A person can sit in silence while still hiding. They can say the right religious words while keeping the real ache locked away. Jesus does not invite us into secrecy so we can pretend better. He invites us into secrecy so we can stop pretending.",
+      "When Jesus says to enter your room and shut the door, He is not creating a rule about architecture. He is describing prayer freed from the need to be watched. No audience. No spiritual image to manage. No need to prove that you know the right phrases.",
+      "Listening in prayer may begin with noticing what you are actually carrying. Anxiety. Gratitude. Anger. Shame. Confusion. Hope. Desire. Exhaustion. Instead of editing those things out, bring them before the Father. He already sees in secret. Prayer becomes honest when we stop acting as though He does not.",
+      "If you do not know what to say, begin there. Father, I do not know what to say. If you are distracted, say that. If you are grateful, say that. If you are afraid, say that. Honest words can become the doorway to deeper prayer.",
+      "Today, listen for what is real inside you, then speak to God from that place."
+    ].join("\n\n"),
+    reflectionQuestion: "What is one honest thing you have been carrying that you can bring into prayer today?",
+    prayerPrompt:
+      "Father, You see what is hidden and still invite me near. Help me pray from the truth, not from the image I try to manage.",
+    actionStep: "Begin prayer with this sentence: Father, what is true in me right now is..."
+  },
+  24: {
+    body: [
+      "Many of us treat prayer like a test we have already failed. We wonder if we prayed enough, felt enough, believed enough, or said the right thing. Before long, prayer becomes another place where the soul keeps score.",
+      "Jesus moves prayer away from scorekeeping. The Father who sees in secret is not confused by simple words. He is not impressed by religious theater. He is not reluctant to hear the person who comes quietly, awkwardly, or with a distracted mind that keeps returning.",
+      "Trusting God in prayer means believing that the Father receives you before your words are impressive. This does not make prayer careless. It makes prayer safe. You can confess sin, ask for help, give thanks, lament honestly, and sit silently because prayer is grounded in relationship, not performance.",
+      "Today, trust may look like praying even though you do not feel spiritual. It may look like returning after distraction. It may look like believing that God heard the first honest sentence, not only the polished one you wish you had said.",
+      "The Father is not grading your prayer. He is inviting your presence."
+    ].join("\n\n"),
+    reflectionQuestion: "Where do you need to trust that God receives your prayer even when it feels small, distracted, or imperfect?",
+    prayerPrompt:
+      "Father, help me trust Your welcome more than my performance. Teach me to pray because I am loved, not because I am trying to earn Your attention.",
+    actionStep: "Pray for two minutes without correcting yourself. If you get distracted, gently return with: Father, I am here."
+  },
+  25: {
+    body: [
+      "Practice can sound cold until we remember that practice is how love learns a language. A musician practices so the song can move through them more freely. A child practices writing letters until words become possible. Prayer practice is not about earning love. It is about making room to respond to love.",
+      "Jesus' words in Matthew 6:6 give us a practice: go in, shut the door, pray to your Father. The instruction is simple enough to be lived. Find a hidden place, even if it is only a quiet corner of the heart. Turn from the audience. Speak to the Father.",
+      "You may not have a literal private room. You may have a parked car, a shower, a short walk, a moment before sleep, or a chair before anyone else wakes up. The physical place matters less than the movement away from performance and toward God.",
+      "Today, practice prayer like a small appointment with love. Not long. Not dramatic. Just real. Let the hiddenness become a gift. You are not trying to be seen praying. You are meeting the One who already sees.",
+      "One faithful minute can begin to reshape the way a person comes to God."
+    ].join("\n\n"),
+    reflectionQuestion: "What small hidden place or moment could become a regular place of prayer for you?",
+    prayerPrompt:
+      "Father, help me build a simple rhythm of prayer. Meet me in hidden places and teach me to come without needing to impress anyone.",
+    actionStep: "Choose one specific time and place for a one-minute prayer today. Keep it simple and repeatable."
+  },
+  26: {
+    body: [
+      "It is possible to ask God questions while trying to sound more settled than we are. We dress up confusion in careful language. We soften anger until it sounds acceptable. We avoid the questions that might make us feel exposed.",
+      "But the Father who sees in secret already knows the question beneath the sentence. Prayer without performance gives us permission to ask plainly. Lord, why am I so afraid? Why do I avoid You when I need You most? Why does prayer feel difficult? What am I protecting by staying busy?",
+      "Questions in prayer are not automatically unbelief. They can become a form of turning toward God. The danger is not having a question. The danger is carrying the question everywhere except into God's presence.",
+      "Today, let one question become prayer. Do not demand an instant answer. Do not pretend the question is smaller than it is. Hold it before the Father who sees, knows, and loves with more patience than you can measure.",
+      "The secret place is safe enough for honest questions."
+    ].join("\n\n"),
+    reflectionQuestion: "What question about prayer, God, yourself, or trust do you need to bring honestly before the Father?",
+    prayerPrompt:
+      "Father, I bring You the question I have been carrying. Keep me near while I wait for wisdom, and help me trust Your love in the asking.",
+    actionStep: "Write one honest question as a prayer. Begin with: Father, I do not understand..."
+  },
+  27: {
+    body: [
+      "Prayer does not end when the quiet moment ends. A person can leave the room and carry the secret place into the day. Not by staying withdrawn, but by remembering that the Father who heard in private is still present in public.",
+      "Matthew 6:6 frees us from living for the eyes of others. If the Father sees, then we do not need every act of faithfulness to be noticed. We can serve quietly. We can apologize without announcing our growth. We can resist temptation when no one applauds. We can choose mercy without turning it into a performance.",
+      "Walking in prayer means letting communion with God shape ordinary behavior. The hidden conversation becomes visible in patience, humility, courage, honesty, and love. The point is not to display spirituality. The point is to become more whole before God and therefore more present with people.",
+      "Today, carry one private prayer into one public action. If you prayed for patience, practice it in a real conversation. If you prayed for courage, tell the truth gently. If you prayed for gratitude, express thanks to someone.",
+      "The Father who sees in secret also forms us for visible love."
+    ].join("\n\n"),
+    reflectionQuestion: "How could one private prayer become visible through one loving action today?",
+    prayerPrompt:
+      "Father, let my hidden prayer become patient love, honest speech, and quiet faithfulness in the people and places I meet today.",
+    actionStep: "Connect one prayer to one action: pray for patience, then practice patience; pray for courage, then take one truthful step."
+  },
+  28: {
+    body: [
+      "A week of prayer without performance may not make prayer feel easy yet. You may still get distracted. You may still feel awkward. You may still wonder if you are doing it right. But perhaps something important has begun: prayer is becoming less like a stage and more like a room where you can be honest with God.",
+      "Jesus' invitation in Matthew 6:6 is tender because it brings prayer back to the Father. Not the crowd. Not the image. Not the pressure to sound mature. The Father. The One who sees in secret and rewards in ways deeper than applause.",
+      "Look back gently. Did you pray one honest sentence? Did you notice what you were carrying? Did you return after distraction? Did you ask a real question? Did one private prayer become one public act of love? These are not small things. They are roots.",
+      "Do not despise a beginning because it is quiet. Many lasting things in the kingdom begin hidden: seeds in soil, yeast in dough, prayers behind closed doors, grace working beneath what anyone else can measure.",
+      "Carry this forward: you can pray as you are, and the Father sees you with love."
+    ].join("\n\n"),
+    reflectionQuestion: "What changed, even slightly, in how you think about prayer this week?",
+    prayerPrompt:
+      "Father, thank You for seeing me in secret. Keep teaching me to pray honestly, return gently, and trust that hidden communion with You matters.",
+    actionStep: "Write two sentences: one honest prayer from this week, and one simple prayer rhythm you want to continue."
   }
 };
 
