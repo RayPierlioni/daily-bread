@@ -14,11 +14,54 @@ function getThirtyDaysAgo() {
   return date;
 }
 
+const activationFunnelEvents = [
+  ["Sign-in started", "signin_started"],
+  ["Sign-in completed", "signin_completed"],
+  ["Onboarding choice selected", "onboarding_choice_selected"],
+  ["Assessment completed", "assessment_completed"],
+  ["Track started", "track_started"],
+  ["Dashboard viewed", "dashboard_viewed"],
+  ["Devotional viewed", "devotional_viewed"],
+  ["Devotional completed", "devotional_completed"]
+] as const;
+
+const engagementEvents = [
+  ["Prayer created", "prayer_created"],
+  ["Prayer marked answered", "prayer_marked_answered"],
+  ["Faith question submitted", "faith_question_submitted"],
+  ["Faith answer served", "faith_answer_served"],
+  ["Community post created", "community_post_created"],
+  ["Community comment created", "community_comment_created"],
+  ["Blog post created", "blog_post_created"],
+  ["Blog post updated", "blog_post_updated"],
+  ["Group created", "group_created"],
+  ["Group joined", "group_joined"]
+] as const;
+
+const supportEvents = [
+  ["Support page viewed", "support_page_viewed"],
+  ["Support button clicked", "support_cta_clicked"],
+  ["Sponsor badge changed", "sponsor_badge_enabled"]
+] as const;
+
 export default async function AdminPage() {
   await requireAdmin();
 
   const analyticsSince = getThirtyDaysAgo();
-  const [devotionals, reports, users, sources, analyticsEvents, analyticsCounts, devotionalFeedbackCounts] = await Promise.all([
+  const [
+    devotionals,
+    reports,
+    users,
+    sources,
+    analyticsEvents,
+    analyticsCounts,
+    devotionalFeedbackCounts,
+    usersWithCompletedDevotionals,
+    usersWithPrayers,
+    usersWithFaithQuestions,
+    sponsorUsers,
+    recentAnalyticsEvents
+  ] = await Promise.all([
     prisma.devotional.count(),
     prisma.report.count({ where: { status: "OPEN" } }),
     prisma.user.count(),
@@ -35,6 +78,23 @@ export default async function AdminPage() {
       by: ["response"],
       _count: { response: true },
       orderBy: { _count: { response: "desc" } }
+    }),
+    prisma.userDevotional.groupBy({
+      by: ["userId"],
+      where: { completed: true }
+    }),
+    prisma.prayer.groupBy({
+      by: ["userId"]
+    }),
+    prisma.faithQuestion.groupBy({
+      by: ["userId"]
+    }),
+    prisma.user.count({ where: { isSponsor: true } }),
+    prisma.analyticsEvent.findMany({
+      where: { createdAt: { gte: analyticsSince } },
+      include: { user: { select: { name: true, email: true } } },
+      orderBy: { createdAt: "desc" },
+      take: 10
     })
   ]);
   const recentUsers = await prisma.user.findMany({
@@ -58,6 +118,8 @@ export default async function AdminPage() {
     { label: "Source items", value: sources, icon: Library, href: "/admin/source-library" },
     { label: "Tracked events, 30 days", value: analyticsEvents, icon: BarChart3, href: "/admin" }
   ];
+  const analyticsCountMap = new Map(analyticsCounts.map((event) => [event.eventName, event._count.eventName]));
+  const countFor = (eventName: string) => analyticsCountMap.get(eventName) ?? 0;
 
   return (
     <div className="space-y-6">
@@ -110,6 +172,24 @@ export default async function AdminPage() {
 
       <section className="space-y-3">
         <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Activation snapshot</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            These numbers show how many people have reached core app behaviors. The goal is not just signups; it is people taking a first faithful step.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Metric", "Count"]}
+          rows={[
+            ["Users with at least one completed devotional", usersWithCompletedDevotionals.length],
+            ["Users with at least one prayer", usersWithPrayers.length],
+            ["Users with at least one faith question", usersWithFaithQuestions.length],
+            ["Supporters marked with badge", sponsorUsers]
+          ]}
+        />
+      </section>
+
+      <section className="space-y-3">
+        <div>
           <h2 className="text-xl font-semibold text-[#24302f]">Product funnel, last 30 days</h2>
           <p className="mt-2 text-sm leading-6 text-[#68706e]">
             These counts help you see whether people are signing in, starting a path, reading devotionals, completing devotionals, and considering support. Private prayer text, journal text, and faith-question text are not stored in analytics.
@@ -117,10 +197,54 @@ export default async function AdminPage() {
         </div>
         <AdminTable
           headers={["Event", "Count"]}
+          rows={activationFunnelEvents.map(([label, eventName]) => [label, countFor(eventName)])}
+        />
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Engagement events, last 30 days</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            These track meaningful actions without storing the private content of prayers, journals, faith questions, comments, or posts inside analytics.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Event", "Count"]}
+          rows={engagementEvents.map(([label, eventName]) => [label, countFor(eventName)])}
+        />
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Support funnel, last 30 days</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            This helps you see whether people are viewing the mission, clicking support, and receiving sponsor recognition.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Event", "Count"]}
+          rows={supportEvents.map(([label, eventName]) => [label, countFor(eventName)])}
+        />
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-[#24302f]">Recent privacy-safe events</h2>
+          <p className="mt-2 text-sm leading-6 text-[#68706e]">
+            This is a quick debugging feed for app behavior. It shows event names, routes, users, and dates, but not private message text.
+          </p>
+        </div>
+        <AdminTable
+          headers={["Event", "Route", "User", "Date"]}
           rows={
-            analyticsCounts.length
-              ? analyticsCounts.map((event) => [event.eventName.replaceAll("_", " "), event._count.eventName])
-              : [["No events yet", "Analytics will appear after people use the app."]]
+            recentAnalyticsEvents.length
+              ? recentAnalyticsEvents.map((event) => [
+                  event.eventName.replaceAll("_", " "),
+                  event.route ?? "Unknown route",
+                  event.user?.email ?? event.user?.name ?? "Anonymous/unknown",
+                  formatDate(event.createdAt)
+                ])
+              : [["No recent events", "Analytics will appear after people use the app.", "-", "-"]]
           }
         />
       </section>

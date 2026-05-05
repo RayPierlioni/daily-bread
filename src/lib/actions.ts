@@ -22,6 +22,15 @@ import { requireAdmin, requireUser } from "@/lib/current-user";
 import { blogSchema, devotionalSchema, groupSchema, onboardingSchema, postSchema, prayerSchema } from "@/lib/validations";
 import { toTagArray } from "@/lib/utils";
 
+function lengthBucket(value: string) {
+  const length = value.trim().length;
+  if (length === 0) return "empty";
+  if (length > 1200) return "very_long";
+  if (length > 500) return "long";
+  if (length > 120) return "medium";
+  return "short";
+}
+
 export async function completeOnboarding(formData: FormData) {
   const user = await requireUser();
   const growthAreas = formData.getAll("growthAreas").map(String);
@@ -182,6 +191,19 @@ export async function createQuickPrayer(formData: FormData) {
     }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "prayer_created",
+    userId: user.id,
+    route: "/dashboard",
+    properties: {
+      source: "quick_prayer",
+      privacyLevel: "PRIVATE",
+      status: "ONGOING",
+      tagCount: 1,
+      textLengthBucket: lengthBucket(text)
+    }
+  });
+
   revalidatePath("/dashboard");
   revalidatePath("/prayers");
 }
@@ -207,6 +229,21 @@ export async function createPrayerAction(input: unknown) {
     }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "prayer_created",
+    userId: user.id,
+    route: "/prayers",
+    properties: {
+      source: "prayer_journal",
+      privacyLevel: parsed.privacyLevel,
+      status: parsed.status,
+      tagCount: parsed.tags.length,
+      hasAudio: Boolean(parsed.audioUrl),
+      hasTranscript: Boolean(parsed.transcript),
+      textLengthBucket: lengthBucket(parsed.text)
+    }
+  });
+
   revalidatePath("/prayers");
   return { ok: true, message: "Prayer saved privately." };
 }
@@ -214,11 +251,21 @@ export async function createPrayerAction(input: unknown) {
 export async function markPrayerAnswered(prayerId: string) {
   const user = await requireUser();
 
-  await prisma.prayer.update({
+  const prayer = await prisma.prayer.update({
     where: { id: prayerId, userId: user.id },
     data: {
       status: PrayerStatus.ANSWERED,
       answeredAt: new Date()
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "prayer_marked_answered",
+    userId: user.id,
+    route: "/prayers",
+    properties: {
+      daysSinceCreated: Math.max(0, Math.round((Date.now() - prayer.createdAt.getTime()) / 86_400_000)),
+      tagCount: Array.isArray(prayer.tags) ? prayer.tags.length : 0
     }
   });
 
@@ -241,7 +288,7 @@ export async function saveDevotionalNote(devotionalId: string, formData: FormDat
     route: "/devotional",
     properties: {
       devotionalId,
-      noteLengthBucket: notes.trim().length > 500 ? "long" : notes.trim().length > 120 ? "medium" : notes.trim().length > 0 ? "short" : "empty"
+      noteLengthBucket: lengthBucket(notes)
     }
   });
 
@@ -426,6 +473,19 @@ export async function createCommunityPost(formData: FormData) {
     }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "community_post_created",
+    userId: user.id,
+    route: "/community",
+    properties: {
+      postType: parsed.type,
+      visibility: parsed.visibility,
+      tagCount: parsed.tags.length,
+      bodyLengthBucket: lengthBucket(parsed.body),
+      sharedToGroup: Boolean(parsed.groupId)
+    }
+  });
+
   revalidatePath("/community");
 }
 
@@ -439,6 +499,15 @@ export async function createComment(postId: string, formData: FormData) {
       postId,
       userId: user.id,
       body
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "community_comment_created",
+    userId: user.id,
+    route: "/community",
+    properties: {
+      bodyLengthBucket: lengthBucket(body)
     }
   });
 
@@ -485,6 +554,15 @@ export async function createGroup(formData: FormData) {
     }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "group_created",
+    userId: user.id,
+    route: "/groups",
+    properties: {
+      privacy: parsed.privacy
+    }
+  });
+
   revalidatePath("/groups");
   redirect(`/groups/${group.id}`);
 }
@@ -499,6 +577,13 @@ export async function joinGroup(groupId: string) {
       groupId,
       userId: user.id
     }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "group_joined",
+    userId: user.id,
+    route: "/groups",
+    properties: { groupId }
   });
 
   revalidatePath("/groups");
@@ -521,6 +606,17 @@ export async function createBlogPost(formData: FormData) {
       body: parsed.body,
       tags: parsed.tags,
       status: parsed.status as BlogStatus
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "blog_post_created",
+    userId: user.id,
+    route: "/blog",
+    properties: {
+      status: parsed.status,
+      tagCount: parsed.tags.length,
+      bodyLengthBucket: lengthBucket(parsed.body)
     }
   });
 
@@ -554,6 +650,17 @@ export async function updateBlogPost(blogId: string, formData: FormData) {
     }
   });
 
+  await recordAnalyticsEvent({
+    eventName: "blog_post_updated",
+    userId: user.id,
+    route: `/blog/${blogId}/edit`,
+    properties: {
+      status: parsed.status,
+      tagCount: parsed.tags.length,
+      bodyLengthBucket: lengthBucket(parsed.body)
+    }
+  });
+
   revalidatePath("/blog");
   revalidatePath(`/blog/${blogId}`);
   revalidatePath(`/blog/${blogId}/edit`);
@@ -570,6 +677,15 @@ export async function createBlogComment(blogId: string, formData: FormData) {
       blogId,
       userId: user.id,
       body
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "blog_comment_created",
+    userId: user.id,
+    route: `/blog/${blogId}`,
+    properties: {
+      bodyLengthBucket: lengthBucket(body)
     }
   });
 
@@ -744,6 +860,15 @@ export async function setUserSponsorStatus(userId: string, isSponsor: boolean) {
     data: {
       isSponsor,
       sponsorSince: isSponsor ? new Date() : null
+    }
+  });
+
+  await recordAnalyticsEvent({
+    eventName: "sponsor_badge_enabled",
+    userId,
+    route: "/admin",
+    properties: {
+      enabled: isSponsor
     }
   });
 
