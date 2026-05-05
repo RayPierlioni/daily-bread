@@ -564,7 +564,202 @@ const weeklyProgressionNotes = [
   "Today gathers the week in remembrance. Name what God showed you, and carry one phrase forward."
 ];
 
+type EditorialDevotional = {
+  body: string;
+  reflectionQuestion: string;
+  prayerPrompt: string;
+  actionStep: string;
+};
+
+const editorialDevotionals: Record<number, EditorialDevotional> = {
+  1: {
+    body: [
+      "There is a particular kind of mercy that shows up before the house is awake. The room is still dim. The phone is close enough to reach, but for once it stays quiet. Yesterday may still be sitting on the edge of the bed: the unfinished conversation, the thing you regret saying, the worry you carried into sleep. Nothing has been fixed yet, but morning has arrived anyway.",
+      "Lamentations 3 was not written from a life that had gone smoothly. It rises out of grief, ruin, and honest sorrow. That matters. When Jeremiah says God's mercies are new every morning, he is not giving a pretty sentence for people whose lives are already easy. He is testifying that mercy can meet a person in the rubble and still be real.",
+      "This is where Faithful Foundations begins: not with your effort, your consistency, your Bible knowledge, or your ability to feel spiritual on command. It begins with mercy. You are not invited to prove you deserve another morning with God. You are invited to receive the morning as a gift from the God whose compassion has not run out.",
+      "Some days, faith starts small. It may look like sitting still for thirty seconds and saying, Lord, I am here. It may look like opening Scripture even though your attention feels scattered. It may look like admitting that you need mercy before you need a plan. That is not failure. That is a true beginning.",
+      "Let this first step be gentle and honest. You are not behind. You are not disqualified by the days you missed before this one. The path begins where mercy meets you today, and mercy is already here."
+    ].join("\n\n"),
+    reflectionQuestion: "Where do you most need to receive God's mercy before trying to improve, explain, or fix yourself?",
+    prayerPrompt:
+      "Father, thank You that Your mercies are new this morning. Meet me honestly where I am, not where I pretend to be. Teach me to begin with grace before effort, and let one small faithful step be enough for today.",
+    actionStep: "Before checking messages or moving to tasks, pause for ten seconds and say aloud: God's mercy is new for me today."
+  },
+  2: {
+    body: [
+      "A person can read the same verse for years and suddenly hear it differently on an ordinary morning. Maybe it is because life has made the words heavier. Maybe it is because weariness has made the heart quieter. Maybe it is simply because the Spirit is kind, and He knows when a familiar truth needs to become personal.",
+      "The mercies of the Lord are not only large rescue moments. They are also small provisions: breath in your lungs, enough light for the next decision, a softened answer where anger could have risen, a memory of Scripture arriving before panic takes over. Mercy often comes quietly enough that a hurried soul can miss it.",
+      "Today is about listening. Not listening for a dramatic sign, and not forcing yourself to feel something impressive. Listen to the verse as if it is being spoken into the exact life you have today. His compassions fail not. They are new every morning. Great is thy faithfulness.",
+      "If your mind starts making a list of reasons you should have done better by now, let the verse interrupt the list. God's faithfulness is not fragile. His compassion does not depend on your emotional weather. The invitation is not to perform for mercy, but to notice it and receive it.",
+      "Carry one phrase with you today. Let it sit beside you while you work, drive, clean, text, wait, or rest. You may find that one phrase from God can become a quiet companion in places where your thoughts usually run alone."
+    ].join("\n\n"),
+    reflectionQuestion: "Which phrase from Lamentations 3:22-23 feels most needed in your life today, and why?",
+    prayerPrompt:
+      "Lord, slow me down enough to hear Your mercy. Let Your Word travel with me into the ordinary parts of this day. Help me notice compassion I would normally rush past.",
+    actionStep: "Write one phrase from the verse somewhere visible and return to it at least twice today."
+  },
+  3: {
+    body: [
+      "There are mornings when mercy sounds true for other people but difficult to trust for yourself. You can believe God is kind in general while still wondering if He is patient with the particular messiness of your own heart. Many people live there more often than they admit.",
+      "Lamentations gives us mercy in the language of survival: we are not consumed because His compassions fail not. That means God's compassion is not thin decoration over life. It is the reason despair does not get the final word. It is the reason judgment is not the only sentence. It is the reason a person can begin again without pretending yesterday was harmless.",
+      "Trust does not always feel like confidence. Sometimes trust sounds like, Lord, I want this to be true for me. Sometimes it looks like bringing one shame-filled memory into the light and refusing to let it name you more loudly than God does. Sometimes it is simply choosing to stay near the verse instead of running from it.",
+      "Mercy is not permission to stay numb, careless, or unchanged. Mercy is the safest place to tell the truth. Because God is faithful, you can face what needs healing. Because His compassion has not failed, you can confess what needs forgiveness. Because His morning is new, you can take the next step without being owned by the last one.",
+      "Today, let mercy become concrete. Name one place where you are tempted to believe you are beyond help, and place that place under the faithfulness of God."
+    ].join("\n\n"),
+    reflectionQuestion: "Where is God inviting you to trust His mercy instead of rehearsing shame, fear, or regret?",
+    prayerPrompt:
+      "Merciful God, help me trust that Your compassion is stronger than my fear. Bring truth where I am hiding and hope where I have grown tired. Teach me to stand under Your faithfulness today.",
+    actionStep: "Name one regret or fear in prayer, then answer it with this phrase: His compassions fail not."
+  },
+  4: {
+    body: [
+      "Mercy becomes more than an idea when it changes how we move through the day. A father lowers his voice instead of snapping. A woman answers a difficult message with honesty but not cruelty. A tired person chooses not to numb out, but to pray one sentence before reaching for distraction. These moments may never be noticed by a crowd, but they matter.",
+      "The mercy of God is not meant to stay in the morning reading. It is meant to become patience in the kitchen, courage in the meeting, tenderness in the apology, endurance in the waiting room, and humility in the conversation you would rather avoid.",
+      "Lamentations says God's mercies are new every morning. If mercy is new for you, it can also become new through you. You do not have to manufacture a heroic act. The practice of faith often begins with one small response that matches the truth you have received.",
+      "Ask yourself: if I really believed mercy had met me this morning, what would be different before the day ends? Would I speak differently? Rest differently? Confess faster? Thank God for something small? Offer someone else the gentleness I am asking God to give me?",
+      "Do not make the practice too large. Grace grows well in ordinary soil. Choose one faithful action, and let it be your way of saying yes to the mercy of God today."
+    ].join("\n\n"),
+    reflectionQuestion: "What is one concrete act of patience, gratitude, honesty, or mercy that would fit today's Scripture?",
+    prayerPrompt:
+      "Lord, let the mercy I receive become mercy I practice. Shape one ordinary moment today so that Your compassion is visible in my words, choices, or pace.",
+    actionStep: "Choose one small act of mercy to practice today: a gentle reply, an apology, a thank-you, or a quiet prayer before reacting."
+  },
+  5: {
+    body: [
+      "Questions often arrive after the devotional book is closed. If God's mercies are new every morning, why do I still feel tired? If His compassion does not fail, why did that wound happen? If God is faithful, why do I still struggle to trust Him?",
+      "Faith does not become stronger by pretending those questions are not there. Lamentations itself is full of grief. The Bible does not rush sorrow out of the room so faith can sound more polished. It gives sorrow language, then teaches sorrow where to look.",
+      "Today's step is to ask honestly without letting the question become a locked door. A faithful question is not an accusation dressed up in religious words. It is a real ache brought into the presence of God. Lord, help me understand. Lord, help me wait. Lord, keep me from becoming hard while I do not yet see clearly.",
+      "Some answers come through study. Some come through wise counsel. Some come slowly as the heart heals enough to receive them. Some remain mysterious, but even then, God does not abandon the person who asks from a humble and wounded place.",
+      "Bring one question into prayer today. Do not tidy it up first. Let mercy meet you in the asking."
+    ].join("\n\n"),
+    reflectionQuestion: "What honest question rises when you hear that God's mercies are new every morning?",
+    prayerPrompt:
+      "God of mercy, I bring You my questions without pretending they are easy. Keep my heart open to Scripture, wisdom, and Your patient care. Help me ask without running away from You.",
+    actionStep: "Write one question you have about mercy, suffering, trust, or beginning again. Turn it into a one-sentence prayer."
+  },
+  6: {
+    body: [
+      "Mercy is tested in traffic, in family tension, in the quiet irritation that comes when plans change, and in the private thoughts no one else hears. It is one thing to receive mercy in the morning. It is another to walk in it when the day starts pressing on the tender places.",
+      "The faithfulness of God is not only comfort for private reflection. It is strength for public and ordinary obedience. Because His compassion has not failed, you do not have to spend the day protecting yourself with harshness. Because His mercy is new, you can risk a softer answer, a truthful confession, a slower judgment, a more patient presence.",
+      "Walking with God today does not mean you will feel peaceful every minute. It means returning to mercy when you notice yourself drifting. It means letting the verse interrupt the spiral. It means asking, What would it look like to carry God's compassion into this next interaction?",
+      "You may only remember once. That is still a gift. One remembered moment can become a doorway. One pause before speaking can change the temperature of a room. One quiet prayer can keep resentment from becoming the script of the day.",
+      "Let mercy travel with you. Not as a slogan, but as a way of being present with God and with people."
+    ].join("\n\n"),
+    reflectionQuestion: "How would your next conversation or decision change if you carried God's fresh mercy into it?",
+    prayerPrompt:
+      "Lord, let Your mercy travel with me today. When I become hurried, defensive, or discouraged, bring me back to Your compassion and teach me to walk gently.",
+    actionStep: "Before one conversation today, pause and pray: Lord, let mercy shape what I say next."
+  },
+  7: {
+    body: [
+      "At the end of a week, people often remember what went wrong more easily than what held them up. The sharp word. The missed prayer. The distracted reading. The thing still unresolved. The mind can become very skilled at collecting evidence against hope.",
+      "But Lamentations invites another kind of remembering. Not denial. Not pretending the week was easier than it was. Remembering mercy means looking back truthfully and asking, Where was I not consumed? Where did compassion meet me quietly? Where did God give enough strength for one more step?",
+      "Maybe mercy looked like endurance. Maybe it looked like conviction. Maybe it looked like sleep after a hard day, a text from a friend, a verse that stayed with you, or the simple fact that you are still here and still turning toward God.",
+      "Great is thy faithfulness is not a slogan for perfect weeks. It is a confession for real ones. The faithfulness of God is seen not only in what felt victorious, but also in the grace that kept you when you were weak.",
+      "Before you move to the next theme, gather the week with honesty. Name one mercy. Name one place you still need help. Then let both become prayer."
+    ].join("\n\n"),
+    reflectionQuestion: "Looking back over this week, where can you recognize mercy that you might have missed at first?",
+    prayerPrompt:
+      "Faithful God, thank You for carrying me through this week. Help me remember mercy truthfully, receive correction humbly, and continue the path without shame.",
+    actionStep: "Write two sentences: one naming a mercy from this week, and one naming where you still need God's help."
+  },
+  8: {
+    body: [
+      "Stillness can feel almost suspicious in a world that rewards noise. The day starts, and immediately there are messages, headlines, errands, responsibilities, and the inner pressure to prove you are keeping up. Even silence can feel like wasted time when the soul has been trained to hurry.",
+      "Psalm 46 speaks into a world that is not calm. Mountains move. Waters roar. Nations rage. The command to be still is not given because life is simple. It is given because God is God in the middle of what feels unstable.",
+      "Be still, and know that I am God is not a demand to empty your mind or pretend nothing is wrong. It is an invitation to stop clutching the controls long enough to remember who holds the world. Stillness is not passivity. It is trust making room to breathe.",
+      "Today begins a week of learning to be still. You may only manage a minute. That is fine. A minute honestly offered is better than a long performance full of resentment. Bring your noisy self to God. Sit before Him without trying to become impressive.",
+      "The path does not skip ahead when you are slow. Stillness itself may be today's faithful step."
+    ].join("\n\n"),
+    reflectionQuestion: "What makes stillness difficult for you right now: fear, hurry, distraction, responsibility, or something else?",
+    prayerPrompt:
+      "Lord, teach me to be still without pretending life is easy. Help me remember that You are God, and I am safe to pause in Your presence.",
+    actionStep: "Set a timer for one quiet minute. Sit before God, breathe slowly, and repeat: You are God, and I am here."
+  },
+  9: {
+    body: [
+      "Sometimes a room becomes quiet before the heart does. You can turn off the television, silence the phone, and close the door, but still hear the arguments, worries, plans, and unfinished lists moving around inside you.",
+      "Psalm 46 does not shame that inner noise. It simply gives the soul a stronger center: know that I am God. Stillness grows as attention returns again and again to the Lord. Not once perfectly, but many times gently.",
+      "Listening in stillness is different from waiting for a dramatic feeling. It is more like sitting with someone trustworthy long enough to stop performing. You may notice a phrase from Scripture. You may notice a fear you have been avoiding. You may notice how tired you are. All of that can become prayer.",
+      "The point is not to master silence. The point is to make room for the truth of God to become louder than the pressure of everything else. Be still does not mean you have nothing to do. It means you are not alone in what must be done.",
+      "Today, listen for one word or phrase in the verse. Let it become a quiet anchor."
+    ].join("\n\n"),
+    reflectionQuestion: "Which word or phrase from Psalm 46:10 do you most need to sit with today?",
+    prayerPrompt:
+      "God, quiet me enough to listen. When my thoughts scatter, gently bring me back to who You are. Let one phrase from Your Word steady me today.",
+    actionStep: "Choose one word from the verse and write it down. Return to it whenever you feel hurried."
+  },
+  10: {
+    body: [
+      "Control often disguises itself as responsibility. We tell ourselves we are only being careful, only thinking ahead, only making sure nothing falls apart. Sometimes that is true. But sometimes beneath the planning is fear: if I do not hold everything tightly, everything will collapse.",
+      "Be still, and know that I am God gently exposes the limits of control. It does not invite carelessness. It invites trust. You can do the next right thing without pretending to be sovereign over every outcome.",
+      "There is relief in admitting you are not God. You do not have to know every answer by noon. You do not have to fix every person. You do not have to carry every possible future in your body today. The Lord is not asking you to be absent from your life. He is asking you to live it as a creature held by the Creator.",
+      "Trust may look like releasing one outcome in prayer. It may look like doing one task faithfully and refusing to mentally live in ten more. It may look like saying, Lord, this matters to me, but it belongs to You before it belongs to me.",
+      "Stillness is where clenched hands begin to open."
+    ].join("\n\n"),
+    reflectionQuestion: "What outcome, person, problem, or future are you trying to hold more tightly than God is asking you to hold it?",
+    prayerPrompt:
+      "Lord, I confess that control often feels safer than trust. Help me do what love requires today and release what belongs to You.",
+    actionStep: "Name one concern in prayer, open your hands physically, and say: This matters, Lord, and I entrust it to You."
+  },
+  11: {
+    body: [
+      "Stillness becomes real when it interrupts a habit. The hand reaches for the phone, and instead there is a pause. The sharp reply forms, and instead there is a breath. The anxious thought begins its familiar loop, and instead the heart turns toward God.",
+      "Psalm 46:10 is not only a verse for quiet mornings. It is a practice for tense afternoons. Be still can become a small act of resistance against the belief that hurry, fear, or reaction must be in charge.",
+      "You may not be able to change the whole pace of your life today. But you can create one small sanctuary inside it. A minute before lunch. A breath before responding. A walk without headphones. A prayer before opening the next app.",
+      "The purpose is not to become impressive at spiritual discipline. The purpose is to remember God in the body you have, the schedule you have, and the day you are actually living. Stillness practiced in ordinary places becomes a quiet declaration: God is God here too.",
+      "Choose one small pause today and guard it gently."
+    ].join("\n\n"),
+    reflectionQuestion: "Where could one small pause change the way you respond today?",
+    prayerPrompt:
+      "Lord, teach me to practice stillness in real life. Help me pause before I react, breathe before I rush, and remember You in ordinary moments.",
+    actionStep: "Choose one daily habit, such as unlocking your phone or entering your car, and attach a ten-second prayer to it today."
+  },
+  12: {
+    body: [
+      "Stillness often raises questions. What if I slow down and fall behind? What if I stop distracting myself and feel things I have been avoiding? What if silence shows me how tired I really am?",
+      "Those questions are not enemies. They may be invitations. Sometimes hurry protects us from grief. Sometimes noise protects us from conviction. Sometimes busyness protects us from the ache of wanting God but not knowing how to draw near.",
+      "Psalm 46 gives a safe place for these questions because the center is not your ability to manage silence. The center is God Himself. Be still, and know that I am God. The Lord can meet what rises when you stop running.",
+      "If discomfort appears in stillness, do not panic. Bring it with you. Lord, I feel restless. Lord, I am afraid of being quiet. Lord, I do not know what to do with this sadness. Honest prayer is one way stillness becomes communion instead of mere quiet.",
+      "Ask one honest question today, then stay with God long enough to let the question be held."
+    ].join("\n\n"),
+    reflectionQuestion: "What question or discomfort comes up when you consider being still with God?",
+    prayerPrompt:
+      "God, meet me in the questions that surface when I slow down. Help me bring restlessness, fear, grief, or distraction into Your patient presence.",
+    actionStep: "Write one honest question about stillness, hurry, or trust. Offer it to God without trying to solve it immediately."
+  },
+  13: {
+    body: [
+      "A still person can change the atmosphere of a room. Not because they are passive or detached, but because they are less ruled by panic. Their words come slower. Their listening becomes deeper. Their presence makes space for others to breathe.",
+      "Psalm 46:10 is personal, but it is not private in the sense of being disconnected from others. When you remember that God is God, you do not need to make yourself the savior of every moment. You can enter conversations with more humility, patience, and courage.",
+      "Stillness may help you listen before correcting. It may help you ask a better question. It may help you notice someone else's burden instead of only your own urgency. It may help you refuse the pressure to win an argument and instead seek peace with truth.",
+      "This does not mean avoiding hard conversations. Sometimes stillness gives the courage to have them without cruelty. Sometimes knowing God is God frees you to tell the truth without trying to control how every person responds.",
+      "Let stillness become love today. Carry it into one interaction."
+    ].join("\n\n"),
+    reflectionQuestion: "How could remembering that God is God change the way you enter one relationship or conversation today?",
+    prayerPrompt:
+      "Lord, let stillness become love in me. Slow my defensiveness, deepen my listening, and help me speak with truth and gentleness.",
+    actionStep: "In one conversation today, listen fully before answering. Let your pause become prayer."
+  },
+  14: {
+    body: [
+      "A week of stillness may not make life suddenly quiet. The same responsibilities may remain. The same unanswered questions may still be waiting. But something can begin to shift beneath the surface: a little more space between pressure and reaction, a little more honesty in prayer, a little more remembrance that you are not carrying the world alone.",
+      "Psalm 46 does not end with human calm as the greatest reality. It points to God exalted among the nations and in the earth. Stillness is not only about personal peace. It is about worship. It is the soul yielding to the truth that the Lord is greater than the noise.",
+      "Look back gently. Where did you notice hurry? Where did you pause? Where did stillness feel difficult? Where did God meet you anyway? Do not grade yourself harshly. This path is not built on spiritual performance. It is built on returning.",
+      "Maybe the only victory this week was noticing how restless you are. That is not small. Awareness can become an altar when it leads you back to God. Maybe you practiced one quiet minute. Maybe you prayed one honest sentence. Maybe you are still learning to want stillness. Grace can work with all of that.",
+      "Carry this forward: you are allowed to slow down in the presence of God. Your path waits. Your Father is not rushed."
+    ].join("\n\n"),
+    reflectionQuestion: "What did this week teach you about stillness, hurry, trust, or God's presence?",
+    prayerPrompt:
+      "Lord, thank You for meeting me in both quiet and noise. Help me remember that You are God, that I am held, and that I can keep returning without shame.",
+    actionStep: "Write two sentences: one thing you noticed about your hurry, and one way you want to practice stillness next week."
+  }
+};
+
 function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
+  const editorial = editorialDevotionals[day];
+  if (editorial) return editorial.body;
+
   const dayInWeek = ((day - 1) % 7) + 1;
   const pastoralNote = focusPastoralNotes[week.focus] ?? focusPastoralNotes["Strengthening Faith"];
   const heartNote = focusHeartNotes[week.focus] ?? focusHeartNotes["Strengthening Faith"];
@@ -611,9 +806,9 @@ export function buildFoundationDevotionals() {
       scriptureReference: week.scriptureReference,
       scriptureText: week.scriptureText,
       body: buildBody(day, week, rhythm),
-      reflectionQuestion: buildReflectionQuestion(week, rhythm),
-      prayerPrompt: buildPrayerPrompt(week, rhythm),
-      actionStep: buildActionStep(rhythm),
+      reflectionQuestion: editorialDevotionals[day]?.reflectionQuestion ?? buildReflectionQuestion(week, rhythm),
+      prayerPrompt: editorialDevotionals[day]?.prayerPrompt ?? buildPrayerPrompt(week, rhythm),
+      actionStep: editorialDevotionals[day]?.actionStep ?? buildActionStep(rhythm),
       tags: ["daily-bread-foundations", `day-${String(day).padStart(3, "0")}`, ...week.tags],
       categories: [week.focus, "Growing in Scripture", "Building Discipline"]
     });
