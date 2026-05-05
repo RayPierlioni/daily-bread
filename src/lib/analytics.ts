@@ -12,6 +12,12 @@ export const analyticsEventNames = [
   "devotional_completed",
   "devotional_note_saved",
   "devotional_feedback_submitted",
+  "gracie_button_clicked",
+  "gracie_message_shown",
+  "gracie_cta_clicked",
+  "gracie_dismissed",
+  "gracie_snoozed",
+  "gracie_settings_changed",
   "support_page_viewed",
   "support_cta_clicked"
 ] as const;
@@ -19,7 +25,16 @@ export const analyticsEventNames = [
 export type AnalyticsEventName = (typeof analyticsEventNames)[number];
 export type AnalyticsProperties = Record<string, string | number | boolean | null>;
 
-const clientEventNames = ["signin_started", "support_cta_clicked"] as const;
+const clientEventNames = [
+  "signin_started",
+  "support_cta_clicked",
+  "gracie_button_clicked",
+  "gracie_message_shown",
+  "gracie_cta_clicked",
+  "gracie_dismissed",
+  "gracie_snoozed",
+  "gracie_settings_changed"
+] as const;
 type ClientAnalyticsEventName = (typeof clientEventNames)[number];
 
 function isAnalyticsEventName(value: unknown): value is AnalyticsEventName {
@@ -73,6 +88,22 @@ export function sanitizeClientAnalyticsEvent(input: unknown):
         supportType: safeString(rawProperties.supportType, "custom"),
         source: safeString(rawProperties.source, "support_link"),
         signedIn: safeBoolean(rawProperties.signedIn)
+      }
+    };
+  }
+
+  if (body.eventName.startsWith("gracie_")) {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        messageId: safeString(rawProperties.messageId, "none"),
+        messageCategory: safeString(rawProperties.messageCategory, "general"),
+        ctaType: safeString(rawProperties.ctaType, "none"),
+        tone: safeString(rawProperties.tone, "gentle"),
+        source: safeString(rawProperties.source, "gracie"),
+        enabled: safeBoolean(rawProperties.enabled),
+        dailyAutoOpen: safeBoolean(rawProperties.dailyAutoOpen)
       }
     };
   }

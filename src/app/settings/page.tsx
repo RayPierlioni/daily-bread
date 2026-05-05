@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { BookOpenCheck, Download, Trash2 } from "lucide-react";
+import { GracieSettingsPanel } from "@/components/gracie/GracieSettingsPanel";
 import { NotificationSettingsForm } from "@/components/notification-settings-form";
 import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -85,6 +86,8 @@ export default async function SettingsPage() {
             <NotificationSettingsForm notificationSettings={user.notificationSettings} />
           </CardContent>
         </Card>
+
+        <GracieSettingsPanel />
 
         <Card>
           <CardHeader>

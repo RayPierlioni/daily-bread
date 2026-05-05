@@ -2,7 +2,17 @@
 
 type ClientAnalyticsProperties = Record<string, string | number | boolean | null>;
 
-export function trackClientEvent(eventName: "signin_started" | "support_cta_clicked", properties: ClientAnalyticsProperties = {}) {
+type ClientAnalyticsEvent =
+  | "signin_started"
+  | "support_cta_clicked"
+  | "gracie_button_clicked"
+  | "gracie_message_shown"
+  | "gracie_cta_clicked"
+  | "gracie_dismissed"
+  | "gracie_snoozed"
+  | "gracie_settings_changed";
+
+export function trackClientEvent(eventName: ClientAnalyticsEvent, properties: ClientAnalyticsProperties = {}) {
   const payload = JSON.stringify({
     eventName,
     route: window.location.pathname,
