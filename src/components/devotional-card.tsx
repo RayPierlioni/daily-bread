@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { DevotionalFeedbackPrompt } from "@/components/devotional-feedback-prompt";
-import { DevotionalActionForm } from "@/components/devotional-action-form";
+import { DevotionalSubmitButton } from "@/components/devotional-action-form";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
 import { getDevotionalImage } from "@/lib/devotional-media";
 import { publicDevotionalTags } from "@/lib/devotionals";
@@ -86,22 +86,24 @@ export function DevotionalCard({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <DevotionalActionForm
-            action={toggleDevotionalComplete.bind(null, devotional.id)}
-            icon={CheckCircle2}
-            label={state?.completed ? "Completed" : "Mark complete"}
-            pendingLabel="Marking..."
-            variant={state?.completed ? "gold" : "primary"}
-            disabled={Boolean(state?.completed)}
-          />
-          <DevotionalActionForm
-            action={toggleDevotionalSaved.bind(null, devotional.id)}
-            icon={Heart}
-            label={state?.saved ? "Saved" : "Save"}
-            pendingLabel="Saving..."
-            variant="secondary"
-            disabled={Boolean(state?.saved)}
-          />
+          <form action={toggleDevotionalComplete.bind(null, devotional.id)}>
+            <DevotionalSubmitButton
+              icon={CheckCircle2}
+              label={state?.completed ? "Completed" : "Mark complete"}
+              pendingLabel="Marking..."
+              variant={state?.completed ? "gold" : "primary"}
+              disabled={Boolean(state?.completed)}
+            />
+          </form>
+          <form action={toggleDevotionalSaved.bind(null, devotional.id)}>
+            <DevotionalSubmitButton
+              icon={Heart}
+              label={state?.saved ? "Saved" : "Save"}
+              pendingLabel="Saving..."
+              variant="secondary"
+              disabled={Boolean(state?.saved)}
+            />
+          </form>
           <LinkButton href="/groups" variant="ghost">
             <Share2 className="h-4 w-4" aria-hidden="true" />
             Prayer groups
