@@ -935,6 +935,188 @@ const editorialDevotionals: Record<number, EditorialDevotional> = {
     prayerPrompt:
       "Father, thank You for seeing me in secret. Keep teaching me to pray honestly, return gently, and trust that hidden communion with You matters.",
     actionStep: "Write two sentences: one honest prayer from this week, and one simple prayer rhythm you want to continue."
+  },
+  29: {
+    body: [
+      "There are prayers that sound brave because they are honest. The father in Mark 9 did not bring Jesus a polished sentence. He brought a desperate need, a hurting child, and a divided heart. His words were not clean and confident. They were trembling and true: Lord, I believe; help thou mine unbelief.",
+      "That prayer matters because Jesus did not shame him for it. The man's mixed faith was not treated as a reason to turn away. It became the very place where he met Christ. He brought the faith he had and the unbelief he could not hide, and both were placed before Jesus.",
+      "This week begins with permission to be honest. Faith with questions is not the same as faith without God. Doubt can become dangerous when it isolates us, hardens us, or teaches us to stop seeking. But doubt brought to Jesus can become part of discipleship.",
+      "If you have questions about God, Scripture, suffering, prayer, church, history, or your own heart, you are not automatically failing. You are invited to bring those questions into the presence of Christ with humility and hope.",
+      "The first faithful step is not pretending certainty. It is bringing your real faith, however small, to Jesus."
+    ].join("\n\n"),
+    reflectionQuestion: "Where do belief and unbelief both feel present in you right now?",
+    prayerPrompt:
+      "Jesus, I bring You the faith I have and the questions I cannot hide. Help my unbelief, strengthen what is weak, and keep me near to You.",
+    actionStep: "Write one honest sentence that begins: Lord, I believe, but I need help with..."
+  },
+  30: {
+    body: [
+      "Some people learned to hide questions because questions were treated like disrespect. They were told that real Christians never wonder, never struggle, never ask why. So the questions went underground, where they became heavier in the dark.",
+      "But Mark 9 gives us a different picture. A man stood in front of Jesus with a sentence that held both trust and struggle. He did not solve the contradiction before coming. He came with the contradiction. Jesus was not fragile in the presence of his honesty.",
+      "Listening to this story means noticing the mercy of Christ. Jesus can receive a person who is not neatly settled. He can hear a prayer that has tears in it. He can meet someone whose faith is reaching for Him while fear is still pulling in the other direction.",
+      "Today, listen for the part of you that has been afraid to be honest with God. Maybe it is a theological question. Maybe it is disappointment. Maybe it is anger, confusion, grief, or exhaustion. You do not have to shout it. You can simply name it in Christ's presence.",
+      "The Lord who welcomed this father's mixed prayer is not offended by honest seeking."
+    ].join("\n\n"),
+    reflectionQuestion: "What question or struggle have you been tempted to keep hidden from God or other trusted believers?",
+    prayerPrompt:
+      "Lord Jesus, help me listen honestly to what is happening inside me. Give me courage to bring my questions into Your mercy instead of carrying them alone.",
+    actionStep: "Name one question privately in your journal. Do not answer it yet. Simply bring it to Jesus."
+  },
+  31: {
+    body: [
+      "Trust does not always feel like calm. Sometimes trust looks like stepping toward Jesus while your hands are still shaking. Sometimes it sounds less like a hymn and more like help. The father in Mark 9 trusted Jesus enough to admit he needed help trusting Jesus.",
+      "That is a beautiful kind of faith. It refuses the lie that we must fix our own hearts before coming to Christ. The prayer itself becomes an act of dependence: I believe, and I need You to help what is still unbelieving in me.",
+      "Many people wait for doubt to disappear before they pray, read Scripture, or return to church. But the path of faith often works the other way around. We bring the doubt with us, and as we keep walking toward Christ, He begins to form us in ways we could not force.",
+      "Trusting Jesus with questions means believing He is safer than silence. It means letting Him see the places where your faith feels thin. It means refusing to let uncertainty become exile.",
+      "You do not need perfect faith to move toward Jesus. You need enough honesty to ask for help."
+    ].join("\n\n"),
+    reflectionQuestion: "Where have you been waiting to feel stronger before coming honestly to Jesus?",
+    prayerPrompt:
+      "Jesus, teach me to trust You with the parts of my faith that feel weak. Help me come before I feel ready and stay near while You strengthen me.",
+    actionStep: "Choose one small act of trust today: pray honestly, read one passage, ask one question, or talk with a trusted believer."
+  },
+  32: {
+    body: [
+      "A person can carry a question for so long that it becomes part of the background noise of life. It is always there, humming quietly behind decisions, worship, prayer, and doubt. Sometimes the most faithful practice is to stop pretending not to hear it.",
+      "The father in Mark 9 did something practical with his need: he brought it to Jesus. He did not keep the pain abstract. He did not turn it into an argument from a distance. He stepped close enough to ask for mercy.",
+      "Questions are similar. They need a faithful place to go. Some questions belong in prayer. Some need Scripture. Some need wise counsel, church history, careful study, or patient conversation. Some are tied to wounds that may need pastoral or professional care. Bringing a question to Jesus does not mean rushing to the simplest answer. It means refusing to carry it alone.",
+      "Today, practice giving one question a next step. Not a full solution. A next step. Write it down. Pray it. Search Scripture. Ask in Faith. Talk with someone steady. Let the question move toward light.",
+      "A question carried toward Jesus is already different from a question carried alone."
+    ].join("\n\n"),
+    reflectionQuestion: "What is one faithful next step you can take with a question you have been carrying?",
+    prayerPrompt:
+      "Lord, guide my questions toward truth, wisdom, humility, and healing. Keep me from hiding, hardening, or rushing past what needs patient care.",
+    actionStep: "Write one question and choose its next faithful place: prayer, Scripture, Ask in Faith, or a trusted conversation."
+  },
+  33: {
+    body: [
+      "There is a kind of question that is really a wound speaking. Why did this happen? Why did God feel silent? Why did people who used His name cause harm? Why did the prayer seem unanswered? These questions should not be handled carelessly.",
+      "Mark 9 does not give us a detached classroom scene. It gives us a father, a child, tears, helpless disciples, and Jesus entering real pain. The man's words come from suffering, not curiosity alone. His unbelief is tangled with years of fear and disappointment.",
+      "Jesus meets him there. This does not answer every question about suffering, but it shows us something important: Christ is not embarrassed by pain. He does not require people to make their wounds sound neat before they come near.",
+      "If your questions come from hurt, move slowly and gently. You may need Scripture and prayer. You may also need a pastor, counselor, or trusted person who can sit with the pain without rushing you. Faith with questions should never require pretending that wounds do not matter.",
+      "Jesus can receive the question beneath the tears."
+    ].join("\n\n"),
+    reflectionQuestion: "Is one of your questions connected to pain, disappointment, or something that happened to you?",
+    prayerPrompt:
+      "Jesus, meet me tenderly in the questions that come from pain. Give me safe people, wise help, and enough hope to keep turning toward You.",
+    actionStep: "If a question feels tied to deep pain, write down one safe person you could talk with. You do not have to carry it alone."
+  },
+  34: {
+    body: [
+      "Faith with questions is not meant to stay trapped inside the mind. It can become a way of walking. The father in Mark 9 did not only think about whether Jesus could help. He moved toward Him. He asked. He cried out. He entrusted his need to Christ.",
+      "There is an honest difference between asking questions as a path toward God and using questions as a wall against Him. One stays open. One stays defended. One says, help me understand. The other says, I will not come close unless every fear is removed first.",
+      "Most of us know both movements. Some days we are open and seeking. Other days we are guarded, tired, or proud. Jesus is patient enough to meet us in the struggle and truthful enough to call us forward.",
+      "Today, let one question lead to one act of faithfulness. If you wonder whether God hears, pray one sentence anyway. If you wonder whether Scripture can guide you, read one verse slowly. If you wonder whether community is safe, reach out carefully to one trustworthy person.",
+      "Questions do not have to freeze the path. They can become places where the next faithful step begins."
+    ].join("\n\n"),
+    reflectionQuestion: "How could one question you have become a doorway to a faithful action instead of a reason to stop moving?",
+    prayerPrompt:
+      "Lord, keep my questions open toward You. Let honest seeking lead me into prayer, Scripture, humility, courage, and love.",
+    actionStep: "Connect one question to one action: pray, read, ask, study, apologize, seek counsel, or take one step of obedience."
+  },
+  35: {
+    body: [
+      "At the end of a week like this, it is worth remembering that Jesus did not ask the father to clean up his prayer before bringing it. The words were mixed. The need was urgent. The faith was real and incomplete. Christ received him anyway.",
+      "That matters for your own path. You may still have questions. You may still feel tension between belief and unbelief. You may still need help. None of that means this week failed. Faith is not measured only by how few questions remain. Sometimes faith is seen in where we bring them.",
+      "Look back gently. Did you name something honestly? Did you pray from a truer place? Did you see that doubt and seeking are not the same thing? Did you take one question into the light instead of leaving it alone in the dark?",
+      "This path is not asking you to become fearless overnight. It is inviting you to keep bringing your whole self to Jesus: trust, questions, wounds, hope, confusion, and desire. He is not less Lord because your faith feels small.",
+      "Remember the prayer: Lord, I believe; help thou mine unbelief."
+    ].join("\n\n"),
+    reflectionQuestion: "What did this week teach you about bringing questions, doubts, or mixed faith to Jesus?",
+    prayerPrompt:
+      "Jesus, thank You for receiving honest faith. Help me remember that I can bring my questions to You and keep walking with You one step at a time.",
+    actionStep: "Write one sentence of belief and one sentence asking for help. Keep both in prayer."
+  },
+  36: {
+    body: [
+      "Some people hear the word father and feel warmth immediately. Others feel distance, grief, confusion, or even pain. That means Romans 8:15 needs to be approached with tenderness. Scripture does not flatten our stories. It invites them into the healing truth of who God is.",
+      "Paul writes that believers have not received the spirit of bondage again to fear, but the Spirit of adoption. The Christian life is not only a change of behavior. It is a change of belonging. In Christ, God does not merely tolerate you from a distance. He welcomes you as His own.",
+      "This does not erase the complexity of human fathers. Some were loving. Some were absent. Some tried and failed. Some caused harm. But God's fatherhood is not a larger version of every earthly father we have known. He is the true Father by whom all fatherhood is judged and healed.",
+      "To receive God as Father is to receive a new starting place. You do not begin with fear as your master. You begin with adoption as a gift. You are invited to cry, Abba, Father, with the Spirit helping your heart learn what grace has made true.",
+      "Today, receive this slowly: in Christ, you are not a spiritual orphan."
+    ].join("\n\n"),
+    reflectionQuestion: "What feelings or memories rise in you when you think about God as Father?",
+    prayerPrompt:
+      "Father, help me receive Your love truthfully and gently. Heal what the word father has carried for me, and teach me what it means to belong to You in Christ.",
+    actionStep: "Write one sentence that begins: When I hear God called Father, I feel..."
+  },
+  37: {
+    body: [
+      "A child knows the difference between being allowed in the house and belonging there. Permission can still feel temporary. Belonging lets a person exhale. Romans 8 speaks of adoption because the gospel gives more than access. It gives family.",
+      "Listening to Romans 8:15 means hearing both what is refused and what is given. Not bondage again to fear. Not slavery to the old way of relating to God. Not a life where every mistake threatens your place. Instead, the Spirit of adoption. A new cry in the heart: Abba, Father.",
+      "This is not sentimental language. It is strong comfort. Adoption means the initiative belongs to God. The Father brings His children near. The Spirit teaches them to call on Him. The anxious heart learns a new address.",
+      "If fear has shaped your view of God, listen carefully today. Reverence is not the same as terror. Conviction is not the same as condemnation. Discipline is not rejection. The Father who adopts also forms, corrects, comforts, and keeps.",
+      "Let the word adoption settle slowly. You are not merely visiting grace. In Christ, you have been brought home."
+    ].join("\n\n"),
+    reflectionQuestion: "Where do you still relate to God more like a fearful visitor than an adopted child?",
+    prayerPrompt:
+      "Father, let the Spirit teach my heart to belong. Replace bondage to fear with the steady confidence of adoption in Christ.",
+    actionStep: "Say Romans 8:15 aloud slowly. Notice which phrase feels hardest to believe and bring that to prayer."
+  },
+  38: {
+    body: [
+      "Fear can make God seem like someone waiting for us to fail. It turns prayer into pleading for tolerance, obedience into panic, and repentance into despair. Paul names that old atmosphere as bondage. It is a life governed by fear rather than love.",
+      "Romans 8:15 does not deny that God is holy. It does not make Him casual or small. It tells us that in Christ, holiness does not come to adopted children as a threat to their belonging. It comes as the good Father forming His family in love.",
+      "Trusting God as Father means letting adoption speak louder than accusation. When you sin, you can confess without running away. When you are weak, you can ask for help without pretending. When you are unsure, you can cry Abba instead of hiding.",
+      "This kind of trust may take time, especially if fear has been your spiritual language for years. Be patient with the places in you that still flinch. The Spirit is gentle and faithful. He teaches the heart to cry what the gospel has made true.",
+      "You are not being dragged back into bondage. You are being invited deeper into belonging."
+    ].join("\n\n"),
+    reflectionQuestion: "What fear most often shapes the way you approach God?",
+    prayerPrompt:
+      "Father, help me trust Your adoption more than my fear. Teach me to confess, ask, and return as Your child in Christ.",
+    actionStep: "When a fear about God rises today, answer it with this sentence: In Christ, I have received the Spirit of adoption."
+  },
+  39: {
+    body: [
+      "Adoption is not only a doctrine to understand. It is a truth to practice when ordinary life tries to convince you otherwise. The email, the bill, the argument, the old habit, the quiet loneliness, the shame after failure: each place asks what story you will live from.",
+      "Romans 8:15 gives a practice hidden inside the verse. Cry Abba, Father. Not perform. Not explain perfectly. Cry. The word carries dependence, nearness, and need. It is the language of a child who knows where to turn.",
+      "Today, practice turning toward the Father in one ordinary moment. Before you react, whisper Father. Before you spiral, whisper Father. Before you numb yourself, whisper Father. Not as a magic phrase, but as a way of remembering where you belong.",
+      "A child learning belonging may need to repeat it often. That is not failure. Repetition is how the heart learns a new home. The Spirit helps us return to the Father again and again until fear no longer feels like the only familiar road.",
+      "Let one small cry of trust interrupt one old pattern today."
+    ].join("\n\n"),
+    reflectionQuestion: "What ordinary moment today could become a place to practice crying Abba, Father?",
+    prayerPrompt:
+      "Father, meet me in ordinary moments. When fear or shame rises, teach me to turn toward You instead of away from You.",
+    actionStep: "Choose one cue today, such as before checking your phone or before answering a message, and whisper: Father, I belong to You in Christ."
+  },
+  40: {
+    body: [
+      "Sometimes the deepest question beneath our questions is not, Is this true? but, Am I safe with God? Can I come close? Will I be rejected if I am honest? Does He only want the improved version of me?",
+      "Romans 8:15 answers with adoption. The Spirit does not train believers to speak to God as strangers. He teaches the cry of children. Abba, Father is not a slogan for people who have no struggles. It is a Spirit-given cry for people who need the Father and are learning to trust His welcome.",
+      "You can ask God to help you receive this. You can ask Him to heal distorted pictures of fatherhood. You can ask Him to untangle reverence from terror. You can ask Him to make adoption more than a word on a page.",
+      "These requests may not be answered in one morning. Deep trust is often formed slowly. But slow formation is still real formation. The Father is patient with children who are learning how to come home.",
+      "Ask for the grace to know Him as Father, not only as an idea, but as the One who has welcomed you in Christ."
+    ].join("\n\n"),
+    reflectionQuestion: "What do you most need to ask God for as you learn to receive Him as Father?",
+    prayerPrompt:
+      "Father, teach me what Your fatherly love is truly like. Heal false pictures, quiet fear, and help me receive the Spirit's cry of adoption.",
+    actionStep: "Write one prayer asking God to help you know His fatherly care in a specific area of your life."
+  },
+  41: {
+    body: [
+      "Belonging changes the way a person walks into a room. It does not make every room easy, but it changes what they carry. They are not trying to earn the right to exist there. They are not waiting to be removed. They have a place.",
+      "Romans 8:15 forms that kind of life before God. If you have received the Spirit of adoption, then fear does not get to define your deepest identity. You may still feel afraid, but fear is no longer your master. You may still struggle, but struggle is no longer proof that you are outside the family.",
+      "Walking as an adopted child can look very practical. You tell the truth because you are not trying to protect a false self. You confess because you are not running from the Father. You serve because you are already loved. You rest because your worth is not up for vote.",
+      "Today, let belonging shape one action. What would you do differently if you did not have to prove you were worthy of love? What would change if you believed the Father was not waiting to cast you out?",
+      "The Spirit of adoption does not only comfort the heart. He teaches the feet how to walk."
+    ].join("\n\n"),
+    reflectionQuestion: "How could living from adoption change one action, conversation, or decision today?",
+    prayerPrompt:
+      "Father, let my belonging in Christ shape how I walk today. Free me from proving, hiding, and fear-driven choices.",
+    actionStep: "Choose one action that reflects belonging: confess honestly, rest without guilt, encourage someone, or ask for help."
+  },
+  42: {
+    body: [
+      "A week with Romans 8:15 may bring comfort, but it may also uncover tender places. That is not a problem. Sometimes healing begins when a word like Father stops being abstract and starts touching the story you actually carry.",
+      "Look back gently. Where did fear show up? Where did belonging feel hard to believe? Where did the idea of adoption bring relief, resistance, longing, or grief? All of that can be brought before God. He is not impatient with children who need time to trust Him.",
+      "The promise of this week is not that you now feel perfectly secure. The promise is that the gospel gives you a deeper truth than your fluctuating feelings. In Christ, you have not received bondage again to fear. You have received the Spirit of adoption.",
+      "Carry this forward with tenderness. When you fail, return to the Father. When you are afraid, cry Abba. When old stories speak loudly, let Scripture speak again. Your belonging is not built on your emotional steadiness. It is built on God's grace in Christ.",
+      "Remember: you are not a spiritual orphan. You are invited to come home again and again."
+    ].join("\n\n"),
+    reflectionQuestion: "What do you want to remember about God as Father when fear or shame rises again?",
+    prayerPrompt:
+      "Father, thank You for the Spirit of adoption. Help me remember that I belong to You in Christ, and teach me to return home without fear.",
+    actionStep: "Write one sentence to carry into next week: Because I am adopted in Christ, I can..."
   }
 };
 
