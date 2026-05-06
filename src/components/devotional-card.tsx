@@ -1,5 +1,5 @@
 import type { Devotional, DevotionalFeedback, UserDevotional } from "@prisma/client";
-import { MessageSquare, Share2 } from "lucide-react";
+import { BookOpen, MessageSquare, Share2 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,7 @@ import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { DevotionalFeedbackPrompt } from "@/components/devotional-feedback-prompt";
 import { DevotionalSubmitButton } from "@/components/devotional-action-form";
 import { toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
+import { getBibleHrefForReference } from "@/lib/bible";
 import { getDevotionalImage } from "@/lib/devotional-media";
 import { publicDevotionalTags } from "@/lib/devotionals";
 import { formatDate } from "@/lib/utils";
@@ -31,6 +32,7 @@ export function DevotionalCard({
   const image = getDevotionalImage(devotional);
   const title = displayTitle ?? devotional.title;
   const tags = publicDevotionalTags(devotional.tags).slice(0, 3);
+  const bibleHref = getBibleHrefForReference(devotional.scriptureReference);
 
   return (
     <Card className="overflow-hidden">
@@ -117,6 +119,10 @@ export function DevotionalCard({
           <LinkButton href="/groups" variant="ghost">
             <Share2 className="h-4 w-4" aria-hidden="true" />
             Prayer groups
+          </LinkButton>
+          <LinkButton href={bibleHref} variant="ghost">
+            <BookOpen className="h-4 w-4" aria-hidden="true" />
+            Open chapter
           </LinkButton>
           <LinkButton href="/community?type=DEVOTIONAL_DISCUSSION" variant="ghost">
             <MessageSquare className="h-4 w-4" aria-hidden="true" />

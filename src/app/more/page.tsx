@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Church, Gift, LibraryBig, Search, Settings, Shield, UserCircle, Users } from "lucide-react";
+import { BookOpen, Church, Gift, LibraryBig, Search, Settings, Shield, UserCircle, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { requireUser } from "@/lib/current-user";
 
 const moreLinks = [
+  {
+    href: "/bible",
+    title: "Bible",
+    body: "Read, search, and listen to the World English Bible inside the app.",
+    icon: BookOpen
+  },
   {
     href: "/support",
     title: "Support the Mission",

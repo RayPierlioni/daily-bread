@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { BookOpenCheck, Download, EyeOff, Lock, ShieldCheck, Trash2 } from "lucide-react";
 import { GracieSettingsPanel } from "@/components/gracie/GracieSettingsPanel";
+import { InstallAppButton } from "@/components/install-app-button";
 import { NotificationSettingsForm } from "@/components/notification-settings-form";
 import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -107,6 +108,18 @@ export default async function SettingsPage() {
           </CardHeader>
           <CardContent>
             <NotificationSettingsForm notificationSettings={user.notificationSettings} />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Install app</CardTitle>
+            <p className="text-sm leading-6 text-[#68706e]">
+              Add Next Faithful Step to your phone home screen. If you dismissed the dashboard reminder, you can still install it here.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <InstallAppButton respectDismissal={false} />
           </CardContent>
         </Card>
 

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { trackClientEvent } from "@/lib/client-analytics";
 import { cn } from "@/lib/utils";
 
+export const INSTALL_DISMISSED_KEY = "next-faithful-step-install-dismissed";
+
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
@@ -22,10 +24,30 @@ function isAppleMobile() {
   return /iphone|ipad|ipod/i.test(navigator.userAgent);
 }
 
-export function InstallAppButton({ className, compact = false }: { className?: string; compact?: boolean }) {
+function isInstallDismissed() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(INSTALL_DISMISSED_KEY) === "true";
+}
+
+export function dismissInstallPrompt() {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(INSTALL_DISMISSED_KEY, "true");
+  window.dispatchEvent(new Event("next-faithful-step-install-dismissed"));
+}
+
+export function InstallAppButton({
+  className,
+  compact = false,
+  respectDismissal = true
+}: {
+  className?: string;
+  compact?: boolean;
+  respectDismissal?: boolean;
+}) {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
   const [isInstalled, setIsInstalled] = useState(() => isStandaloneMode());
+  const [dismissed, setDismissed] = useState(() => (respectDismissal ? isInstallDismissed() : false));
 
   useEffect(() => {
     function handleBeforeInstallPrompt(event: Event) {
@@ -36,19 +58,33 @@ export function InstallAppButton({ className, compact = false }: { className?: s
     function handleInstalled() {
       setIsInstalled(true);
       setShowInstructions(false);
+      dismissInstallPrompt();
       trackClientEvent("pwa_install_completed");
+    }
+
+    function handleDismissed() {
+      if (respectDismissal) setDismissed(true);
     }
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleInstalled);
+    window.addEventListener("next-faithful-step-install-dismissed", handleDismissed);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.removeEventListener("appinstalled", handleInstalled);
+      window.removeEventListener("next-faithful-step-install-dismissed", handleDismissed);
     };
-  }, []);
+  }, [respectDismissal]);
 
-  if (isInstalled) return null;
+  if (isInstalled || dismissed) return null;
+
+  function handleDismiss() {
+    dismissInstallPrompt();
+    if (respectDismissal) setDismissed(true);
+    setShowInstructions(false);
+    trackClientEvent("pwa_install_dismissed");
+  }
 
   async function handleInstallClick() {
     trackClientEvent("pwa_install_clicked", {
@@ -111,6 +147,9 @@ export function InstallAppButton({ className, compact = false }: { className?: s
               </>
             )}
           </div>
+          <button type="button" className="mt-3 text-sm font-medium text-[#345d6f] hover:text-[#24302f]" onClick={handleDismiss}>
+            Not now
+          </button>
         </div>
       ) : null}
     </div>

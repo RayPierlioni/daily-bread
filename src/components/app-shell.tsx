@@ -46,6 +46,7 @@ const primaryNavItems = [
 ];
 
 const secondaryNavItems = [
+  { href: "/bible", label: "Bible", icon: BookOpen },
   { href: "/community", label: "Prayer & Encouragement", icon: Users },
   { href: "/groups", label: "Prayer Groups", icon: Church },
   { href: "/blog", label: "Reflections", icon: LibraryBig },
@@ -55,7 +56,7 @@ const secondaryNavItems = [
 ];
 
 const adminNavItem = { href: "/admin", label: "Admin", icon: Shield };
-const mobileMorePaths = ["/more", "/community", "/groups", "/blog", "/search", "/profile", "/settings", "/support", "/admin"];
+const mobileMorePaths = ["/more", "/bible", "/community", "/groups", "/blog", "/search", "/profile", "/settings", "/support", "/admin"];
 
 function isActivePath(pathname: string, href: string) {
   return pathname === href || (href !== "/dashboard" && pathname.startsWith(href));

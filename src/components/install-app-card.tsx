@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Smartphone } from "lucide-react";
-import { InstallAppButton } from "@/components/install-app-button";
+import { Download, Smartphone, X } from "lucide-react";
+import { dismissInstallPrompt, INSTALL_DISMISSED_KEY, InstallAppButton } from "@/components/install-app-button";
+import { trackClientEvent } from "@/lib/client-analytics";
 
 function isStandaloneMode() {
   if (typeof window === "undefined") return false;
@@ -12,11 +13,29 @@ function isStandaloneMode() {
 
 export function InstallAppCard() {
   const [isInstalled] = useState(() => isStandaloneMode());
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem(INSTALL_DISMISSED_KEY) === "true";
+  });
 
-  if (isInstalled) return null;
+  if (isInstalled || dismissed) return null;
+
+  function handleDismiss() {
+    dismissInstallPrompt();
+    setDismissed(true);
+    trackClientEvent("pwa_install_dismissed", { source: "dashboard_card" });
+  }
 
   return (
-    <section className="rounded-2xl border border-[#d9cfbd] bg-[#fffdf8] p-4 shadow-sm">
+    <section className="relative rounded-2xl border border-[#d9cfbd] bg-[#fffdf8] p-4 pr-11 shadow-sm">
+      <button
+        type="button"
+        className="absolute right-3 top-3 rounded-full p-1 text-[#68706e] transition hover:bg-[#f0eadf] hover:text-[#24302f]"
+        aria-label="Dismiss install app reminder"
+        onClick={handleDismiss}
+      >
+        <X className="h-4 w-4" aria-hidden="true" />
+      </button>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e9f0ea] text-[#345d6f]">
@@ -35,6 +54,9 @@ export function InstallAppCard() {
         <Download className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         On iPhone, the button will show the Share then Add to Home Screen instructions.
       </p>
+      <button type="button" className="mt-2 text-xs font-medium text-[#345d6f] hover:text-[#24302f]" onClick={handleDismiss}>
+        Not now. I can install it later from Settings.
+      </button>
     </section>
   );
 }

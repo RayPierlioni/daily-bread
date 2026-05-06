@@ -21,9 +21,14 @@ type ClientAnalyticsEvent =
   | "devotional_read_aloud_paused"
   | "devotional_read_aloud_resumed"
   | "devotional_read_aloud_stopped"
+  | "bible_read_aloud_started"
+  | "bible_read_aloud_paused"
+  | "bible_read_aloud_resumed"
+  | "bible_read_aloud_stopped"
   | "prayer_audio_recording_started"
   | "prayer_audio_recording_stopped"
-  | "prayer_audio_playback_started";
+  | "prayer_audio_playback_started"
+  | "pwa_install_dismissed";
 
 export function trackClientEvent(eventName: ClientAnalyticsEvent, properties: ClientAnalyticsProperties = {}) {
   const payload = JSON.stringify({
