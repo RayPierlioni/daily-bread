@@ -2,13 +2,14 @@
 
 import { useRef, useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mic, Square, Save } from "lucide-react";
+import { Mic, Square, Save, Volume2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/form-fields";
 import { createPrayerAction } from "@/lib/actions";
+import { trackClientEvent } from "@/lib/client-analytics";
 import { prayerSchema } from "@/lib/validations";
 
 const prayerFormSchema = prayerSchema.extend({
@@ -23,7 +24,9 @@ export function PrayerForm() {
   const [isPending, startTransition] = useTransition();
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
   const [audioUrl, setAudioUrl] = useState("");
+  const [audioError, setAudioError] = useState("");
   const chunks = useRef<BlobPart[]>([]);
+  const recordingStartedAt = useRef<number | null>(null);
   const supported = typeof window !== "undefined" && "MediaRecorder" in window && navigator.mediaDevices;
 
   const form = useForm<PrayerFormInput, unknown, PrayerFormValues>({
@@ -41,22 +44,40 @@ export function PrayerForm() {
 
   async function startRecording() {
     if (!supported) return;
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream);
-    chunks.current = [];
-    mediaRecorder.ondataavailable = (event) => chunks.current.push(event.data);
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(chunks.current, { type: "audio/webm" });
-      setAudioUrl(URL.createObjectURL(blob));
-      stream.getTracks().forEach((track) => track.stop());
-    };
-    mediaRecorder.start();
-    setRecorder(mediaRecorder);
+    try {
+      setAudioError("");
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const preferredType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus" : "audio/webm";
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: preferredType });
+      chunks.current = [];
+      recordingStartedAt.current = Date.now();
+      mediaRecorder.ondataavailable = (event) => chunks.current.push(event.data);
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks.current, { type: preferredType });
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setAudioUrl(String(reader.result ?? ""));
+        };
+        reader.onerror = () => {
+          setAudioError("The recording finished, but the audio could not be saved. Please try again.");
+        };
+        reader.readAsDataURL(blob);
+        stream.getTracks().forEach((track) => track.stop());
+      };
+      mediaRecorder.start();
+      setRecorder(mediaRecorder);
+      trackClientEvent("prayer_audio_recording_started");
+    } catch {
+      setAudioError("Microphone access was not available. You can still type or add transcript notes.");
+    }
   }
 
   function stopRecording() {
     recorder?.stop();
     setRecorder(null);
+    const durationSeconds = recordingStartedAt.current ? Math.max(0, Math.round((Date.now() - recordingStartedAt.current) / 1000)) : 0;
+    trackClientEvent("prayer_audio_recording_stopped", { durationSeconds });
+    recordingStartedAt.current = null;
   }
 
   function onSubmit(values: PrayerFormValues) {
@@ -71,6 +92,7 @@ export function PrayerForm() {
       });
       form.reset();
       setAudioUrl("");
+      setAudioError("");
       router.refresh();
     });
   }
@@ -141,8 +163,20 @@ export function PrayerForm() {
           ) : (
             <p className="text-sm text-[#68706e]">Audio recording is not supported in this browser. You can still save transcript text.</p>
           )}
-          {audioUrl ? <audio src={audioUrl} controls className="h-10" /> : null}
+          {audioUrl ? (
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+              <p className="flex items-center gap-2 text-sm font-medium text-[#345d6f]">
+                <Volume2 className="h-4 w-4" aria-hidden="true" />
+                Recording ready
+              </p>
+              <audio src={audioUrl} controls className="h-10 max-w-full" />
+            </div>
+          ) : null}
         </div>
+        <p className="mt-3 text-xs leading-5 text-[#68706e]">
+          Voice prayers are saved privately with this prayer so you can listen again later. Short recordings work best in this MVP.
+        </p>
+        {audioError ? <p className="mt-2 text-sm leading-6 text-[#9d3b3b]">{audioError}</p> : null}
       </div>
       <Button type="submit" disabled={isPending}>
         <Save className="h-4 w-4" aria-hidden="true" />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
+import { InstallAppButton } from "@/components/install-app-button";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,9 @@ export function MarketingHeader({ variant = "light" }: { variant?: "light" | "he
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <div className="hidden sm:block">
+            <InstallAppButton compact />
+          </div>
           <LinkButton href="/signin" variant={isHero ? "secondary" : "ghost"} size="sm" className={isHero ? "border-white/30 bg-white/14 text-white hover:bg-white/24" : ""}>
             Sign in
           </LinkButton>

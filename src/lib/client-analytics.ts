@@ -13,7 +13,17 @@ type ClientAnalyticsEvent =
   | "gracie_settings_changed"
   | "gracie_chat_submitted"
   | "gracie_chat_answered"
-  | "gracie_chat_error";
+  | "gracie_chat_error"
+  | "pwa_install_clicked"
+  | "pwa_install_prompt_result"
+  | "pwa_install_completed"
+  | "devotional_read_aloud_started"
+  | "devotional_read_aloud_paused"
+  | "devotional_read_aloud_resumed"
+  | "devotional_read_aloud_stopped"
+  | "prayer_audio_recording_started"
+  | "prayer_audio_recording_stopped"
+  | "prayer_audio_playback_started";
 
 export function trackClientEvent(eventName: ClientAnalyticsEvent, properties: ClientAnalyticsProperties = {}) {
   const payload = JSON.stringify({

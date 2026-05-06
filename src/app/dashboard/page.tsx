@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/form-fields";
 import { Badge } from "@/components/ui/badge";
 import { PrivacyBadge } from "@/components/privacy-badge";
 import { SupportNudgeBanner } from "@/components/support-nudge-banner";
+import { InstallAppCard } from "@/components/install-app-card";
 import { DevotionalIconSubmitButton, DevotionalSubmitButton } from "@/components/devotional-action-form";
 import { FirstStepGuide } from "@/components/first-step-guide";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
@@ -68,6 +69,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-7">
       <SupportNudgeBanner completedCount={completedCount} />
+      <InstallAppCard />
       <FirstStepGuide
         completedDevotionals={completedCount}
         prayersCreated={prayers.length}

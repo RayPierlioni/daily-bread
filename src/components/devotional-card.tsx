@@ -3,6 +3,7 @@ import { MessageSquare, Share2 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DevotionalReadAloud } from "@/components/devotional-read-aloud";
 import { ScriptureBlock } from "@/components/scripture-block";
 import { DevotionalNoteForm } from "@/components/devotional-note-form";
 import { DevotionalFeedbackPrompt } from "@/components/devotional-feedback-prompt";
@@ -64,6 +65,15 @@ export function DevotionalCard({
         {personalizedNote ? <p className="rounded-lg bg-[#edf3ed] p-3 text-sm leading-6 text-[#52605d]">{personalizedNote}</p> : null}
       </CardHeader>
       <CardContent className="space-y-5 pt-5">
+        <DevotionalReadAloud
+          title={title}
+          scriptureReference={devotional.scriptureReference}
+          scriptureText={devotional.scriptureText}
+          body={devotional.body}
+          reflectionQuestion={devotional.reflectionQuestion}
+          prayerPrompt={devotional.prayerPrompt}
+          actionStep={devotional.actionStep}
+        />
         <ScriptureBlock reference={devotional.scriptureReference} text={devotional.scriptureText} />
         <div className="prose-soft text-base leading-8 text-[#31413f]">
           {devotional.body.split("\n").map((paragraph) => (

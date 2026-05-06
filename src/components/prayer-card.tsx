@@ -1,5 +1,5 @@
 import type { Prayer } from "@prisma/client";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Volume2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,6 +22,15 @@ export function PrayerCard({ prayer }: { prayer: Prayer }) {
         </div>
       </div>
       <p className="mt-3 whitespace-pre-line text-sm leading-6 text-[#31413f]">{prayer.text}</p>
+      {prayer.audioUrl ? (
+        <div className="mt-3 rounded-lg border border-[#e4dccd] bg-[#fffdf8] p-3">
+          <p className="mb-2 flex items-center gap-2 text-sm font-medium text-[#345d6f]">
+            <Volume2 className="h-4 w-4" aria-hidden="true" />
+            Voice prayer
+          </p>
+          <audio src={prayer.audioUrl} controls className="h-10 w-full max-w-md" preload="metadata" />
+        </div>
+      ) : null}
       {prayer.transcript ? <p className="mt-3 rounded-lg bg-[#fbf7ef] p-3 text-sm leading-6 text-[#52605d]">Transcript: {prayer.transcript}</p> : null}
       {prayer.followUpNotes ? <p className="mt-3 text-sm leading-6 text-[#52605d]">Follow-up: {prayer.followUpNotes}</p> : null}
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">

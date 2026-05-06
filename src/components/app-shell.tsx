@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
 import { GracieBuddy } from "@/components/gracie/GracieBuddy";
+import { InstallAppButton } from "@/components/install-app-button";
 import { NotificationOptInPrompt } from "@/components/notification-opt-in-prompt";
 import { ReminderScheduler } from "@/components/reminder-scheduler";
 import { Button, LinkButton } from "@/components/ui/button";
@@ -171,20 +172,24 @@ export function AppShell({ user, children }: { user: ShellUser; children: React.
           <Link href="/dashboard" className="flex items-center gap-2">
             <BrandMark iconSize={34} />
           </Link>
-          {user ? (
-            <Button variant="ghost" size="sm" aria-label="Sign out" onClick={() => signOut({ callbackUrl: "/" })}>
-              <LogOut className="h-4 w-4" aria-hidden="true" />
-            </Button>
-          ) : (
-            <LinkButton href="/signin" variant="secondary" size="sm">
-              Sign in
-            </LinkButton>
-          )}
+          <div className="flex items-center gap-2">
+            {user ? <InstallAppButton compact /> : null}
+            {user ? (
+              <Button variant="ghost" size="sm" aria-label="Sign out" onClick={() => signOut({ callbackUrl: "/" })}>
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+              </Button>
+            ) : (
+              <LinkButton href="/signin" variant="secondary" size="sm">
+                Sign in
+              </LinkButton>
+            )}
+          </div>
         </div>
       </header>
 
       <main className="mx-auto w-full max-w-7xl px-4 py-6 lg:ml-64 lg:px-8 lg:py-8">
-        <div className="mb-6 hidden items-center justify-end lg:flex">
+        <div className="mb-6 hidden items-center justify-end gap-3 lg:flex">
+          <InstallAppButton />
           <Link href="/search" className="flex h-10 w-64 items-center gap-2 rounded-full border border-[#e4dccd] bg-white/75 px-4 text-sm text-[#8a918d] shadow-sm">
             <Search className="h-4 w-4" aria-hidden="true" />
             Search
