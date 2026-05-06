@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, BookmarkCheck, ClipboardList, HeartHandshake, Loc
 import Link from "next/link";
 import type { Metadata } from "next";
 import { DonationSection } from "@/components/donation-section";
+import { InstallAppButton } from "@/components/install-app-button";
 import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import { LinkButton } from "@/components/ui/button";
@@ -118,6 +119,7 @@ export default function LandingPage() {
               <LinkButton href="#how-it-works" size="lg" variant="secondary" className="border-white/35 bg-white/12 text-white hover:bg-white/20">
                 See How It Works
               </LinkButton>
+              <InstallAppButton />
             </div>
           </div>
           <div className="hidden rounded-xl border border-white/22 bg-white/13 p-5 text-sm leading-6 text-white/88 backdrop-blur md:block">
