@@ -6,11 +6,19 @@ import { recordAnalyticsEvent } from "@/lib/analytics";
 import { prisma } from "@/lib/prisma";
 
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+const ninetyDaysInSeconds = 60 * 60 * 24 * 90;
+const oneDayInSeconds = 60 * 60 * 24;
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: ninetyDaysInSeconds,
+    updateAge: oneDayInSeconds
+  },
+  jwt: {
+    maxAge: ninetyDaysInSeconds
   },
   pages: {
     signIn: "/signin"
