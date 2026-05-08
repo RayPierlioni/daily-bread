@@ -23,6 +23,11 @@ export const publicMarketingPages = [
     description: "Daily Scripture-centered devotionals shaped by your spiritual season and paced by your actual reading journey."
   },
   {
+    path: "/devotional-preview",
+    title: "Preview the First Faithful Step",
+    description: "Read a sample first devotional step before signing in, so you can feel the tone of the path before creating an account."
+  },
+  {
     path: "/prayer-journal",
     title: "Private Prayer Journal",
     description: "A private prayer journal for writing prayers, searching past entries, and marking answered prayers."

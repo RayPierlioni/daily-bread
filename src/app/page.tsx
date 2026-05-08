@@ -2,9 +2,9 @@ import { ArrowRight, BookOpen, BookmarkCheck, ClipboardList, HeartHandshake, Loc
 import Link from "next/link";
 import type { Metadata } from "next";
 import { DonationSection } from "@/components/donation-section";
-import { InstallAppButton } from "@/components/install-app-button";
 import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
+import { PageViewTracker } from "@/components/page-view-tracker";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { publicResourcePages, siteConfig } from "@/lib/site";
@@ -90,6 +90,7 @@ export default function LandingPage() {
 
   return (
     <main>
+      <PageViewTracker eventName="landing_page_viewed" properties={{ source: "homepage" }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <MarketingHeader variant="hero" />
       <section
@@ -105,7 +106,7 @@ export default function LandingPage() {
           <div className="max-w-3xl py-12">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-sm backdrop-blur">
               <HeartHandshake className="h-4 w-4" aria-hidden="true" />
-              Peaceful, private, Scripture-centered
+              For anyone who keeps meaning to get back to it
             </div>
             <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Take the next faithful step, right where you are.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/86">
@@ -116,10 +117,12 @@ export default function LandingPage() {
                 Start Your Free Path
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </LinkButton>
+              <LinkButton href="/devotional-preview" size="lg" variant="secondary" className="border-white/35 bg-white/12 text-white hover:bg-white/20">
+                Read a Sample Step
+              </LinkButton>
               <LinkButton href="#how-it-works" size="lg" variant="secondary" className="border-white/35 bg-white/12 text-white hover:bg-white/20">
                 See How It Works
               </LinkButton>
-              <InstallAppButton />
             </div>
           </div>
           <div className="hidden rounded-xl border border-white/22 bg-white/13 p-5 text-sm leading-6 text-white/88 backdrop-blur md:block">

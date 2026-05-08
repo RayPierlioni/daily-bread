@@ -2,19 +2,34 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export const analyticsEventNames = [
+  "landing_page_viewed",
   "signin_started",
   "signin_completed",
+  "path_resumed_after_gap",
   "onboarding_choice_selected",
   "assessment_completed",
   "track_started",
   "dashboard_viewed",
   "devotional_viewed",
+  "day_one_devotional_viewed",
   "devotional_completed",
+  "day_one_devotional_completed",
   "devotional_saved",
   "devotional_note_saved",
   "devotional_feedback_submitted",
+  "devotional_read_aloud_started",
+  "devotional_read_aloud_paused",
+  "devotional_read_aloud_resumed",
+  "devotional_read_aloud_stopped",
+  "bible_read_aloud_started",
+  "bible_read_aloud_paused",
+  "bible_read_aloud_resumed",
+  "bible_read_aloud_stopped",
   "prayer_created",
   "prayer_marked_answered",
+  "prayer_audio_recording_started",
+  "prayer_audio_recording_stopped",
+  "prayer_audio_playback_started",
   "faith_question_submitted",
   "faith_answer_served",
   "community_post_created",
@@ -35,15 +50,35 @@ export const analyticsEventNames = [
   "gracie_chat_answered",
   "gracie_chat_error",
   "support_page_viewed",
-  "support_cta_clicked"
+  "support_cta_clicked",
+  "pwa_install_clicked",
+  "pwa_install_prompt_result",
+  "pwa_install_completed",
+  "pwa_install_dismissed"
 ] as const;
 
 export type AnalyticsEventName = (typeof analyticsEventNames)[number];
 export type AnalyticsProperties = Record<string, string | number | boolean | null>;
 
 const clientEventNames = [
+  "landing_page_viewed",
   "signin_started",
   "support_cta_clicked",
+  "pwa_install_clicked",
+  "pwa_install_prompt_result",
+  "pwa_install_completed",
+  "pwa_install_dismissed",
+  "devotional_read_aloud_started",
+  "devotional_read_aloud_paused",
+  "devotional_read_aloud_resumed",
+  "devotional_read_aloud_stopped",
+  "bible_read_aloud_started",
+  "bible_read_aloud_paused",
+  "bible_read_aloud_resumed",
+  "bible_read_aloud_stopped",
+  "prayer_audio_recording_started",
+  "prayer_audio_recording_stopped",
+  "prayer_audio_playback_started",
   "gracie_button_clicked",
   "gracie_message_shown",
   "gracie_cta_clicked",
@@ -72,6 +107,10 @@ function safeBoolean(value: unknown) {
   return typeof value === "boolean" ? value : false;
 }
 
+function safeNumber(value: unknown, fallback = 0) {
+  return typeof value === "number" && Number.isFinite(value) ? Math.max(0, Math.round(value)) : fallback;
+}
+
 export function sanitizeClientAnalyticsEvent(input: unknown):
   | {
       eventName: AnalyticsEventName;
@@ -86,6 +125,16 @@ export function sanitizeClientAnalyticsEvent(input: unknown):
 
   const rawProperties = body.properties && typeof body.properties === "object" ? (body.properties as Record<string, unknown>) : {};
   const route = typeof body.route === "string" ? body.route.slice(0, 180) : undefined;
+
+  if (body.eventName === "landing_page_viewed") {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        source: safeString(rawProperties.source, "homepage")
+      }
+    };
+  }
 
   if (body.eventName === "signin_started") {
     return {
@@ -107,6 +156,50 @@ export function sanitizeClientAnalyticsEvent(input: unknown):
         supportType: safeString(rawProperties.supportType, "custom"),
         source: safeString(rawProperties.source, "support_link"),
         signedIn: safeBoolean(rawProperties.signedIn)
+      }
+    };
+  }
+
+  if (body.eventName.startsWith("pwa_install")) {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        source: safeString(rawProperties.source, "install_button"),
+        platform: safeString(rawProperties.platform, "unknown"),
+        outcome: safeString(rawProperties.outcome, "unknown"),
+        hasNativePrompt: safeBoolean(rawProperties.hasNativePrompt)
+      }
+    };
+  }
+
+  if (body.eventName.startsWith("devotional_read_aloud")) {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        textLength: safeNumber(rawProperties.textLength)
+      }
+    };
+  }
+
+  if (body.eventName.startsWith("bible_read_aloud")) {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        reference: safeString(rawProperties.reference, "unknown"),
+        verseCount: safeNumber(rawProperties.verseCount)
+      }
+    };
+  }
+
+  if (body.eventName.startsWith("prayer_audio")) {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
+        durationSeconds: safeNumber(rawProperties.durationSeconds)
       }
     };
   }

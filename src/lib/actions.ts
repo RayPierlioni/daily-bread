@@ -385,6 +385,17 @@ export async function toggleDevotionalComplete(devotionalId?: string) {
       total: current.total
     }
   });
+  if (current.sequence === 1) {
+    await recordAnalyticsEvent({
+      eventName: "day_one_devotional_completed",
+      userId: user.id,
+      route: "/devotional",
+      properties: {
+        devotionalId: devotional.id,
+        trackSlug: current.track?.slug ?? "daily"
+      }
+    });
+  }
 
   revalidatePath("/dashboard");
   revalidatePath("/devotional");

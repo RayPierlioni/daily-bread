@@ -12,28 +12,40 @@ type NotificationSettings = {
   reminderTime?: string;
 };
 
-const dismissalKey = "next-faithful-step-reminder-prompt-dismissed-at";
-const dismissalWindowMs = 7 * 24 * 60 * 60 * 1000;
+const reminderPromptShownKey = "reminderPromptShown";
+const legacyDismissalKey = "next-faithful-step-reminder-prompt-dismissed-at";
 
 function parseSettings(value: unknown): NotificationSettings {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   return value as NotificationSettings;
 }
 
-function wasDismissedRecently() {
+function wasAlreadyAnswered() {
   if (typeof window === "undefined") return true;
-  let dismissedAt = 0;
 
   try {
-    dismissedAt = Number(window.localStorage.getItem(dismissalKey) ?? "0");
+    return window.localStorage.getItem(reminderPromptShownKey) === "true" || Boolean(window.localStorage.getItem(legacyDismissalKey));
   } catch {
-    dismissedAt = 0;
+    return false;
   }
-
-  return Boolean(dismissedAt && Date.now() - dismissedAt < dismissalWindowMs);
 }
 
-export function NotificationOptInPrompt({ notificationSettings }: { notificationSettings?: unknown }) {
+function markPromptAnswered() {
+  try {
+    window.localStorage.setItem(reminderPromptShownKey, "true");
+    window.localStorage.removeItem(legacyDismissalKey);
+  } catch {
+    // If storage is blocked, still close the prompt for this page view.
+  }
+}
+
+export function NotificationOptInPrompt({
+  completedDevotionals = 0,
+  notificationSettings
+}: {
+  completedDevotionals?: number;
+  notificationSettings?: unknown;
+}) {
   const pathname = usePathname();
   const settings = useMemo(() => parseSettings(notificationSettings), [notificationSettings]);
   const [visible, setVisible] = useState(false);
@@ -43,29 +55,26 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       const shouldStayHidden =
-        pathname === "/settings" ||
+        pathname !== "/dashboard" ||
+        completedDevotionals < 1 ||
         !("Notification" in window) ||
         Notification.permission === "denied" ||
         (settings.browserReminders && Notification.permission === "granted") ||
-        wasDismissedRecently();
+        wasAlreadyAnswered();
 
       setVisible(!shouldStayHidden);
     }, 1500);
 
     return () => window.clearTimeout(timeoutId);
-  }, [pathname, settings.browserReminders]);
+  }, [completedDevotionals, pathname, settings.browserReminders]);
 
   const dismiss = () => {
     setVisible(false);
-
-    try {
-      window.localStorage.setItem(dismissalKey, String(Date.now()));
-    } catch {
-      // If storage is blocked, still close the prompt for this page view.
-    }
+    markPromptAnswered();
   };
 
   const enableReminders = async () => {
+    markPromptAnswered();
     setMessage("Turning on your 7:00 AM reminder...");
 
     if (!("Notification" in window)) {
@@ -89,12 +98,6 @@ export function NotificationOptInPrompt({ notificationSettings }: { notification
 
     try {
       await enableDailyBrowserReminder(reminderTime, timezone);
-
-      try {
-        window.localStorage.removeItem(dismissalKey);
-      } catch {
-        // Ignore blocked storage after the reminder is saved.
-      }
 
       setMessage("Daily reminder enabled for 7:00 AM. You can change the time in Settings.");
       globalThis.setTimeout(() => setVisible(false), 2000);

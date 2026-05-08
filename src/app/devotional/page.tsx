@@ -46,6 +46,17 @@ export default async function DevotionalPage() {
       total: current.total
     }
   });
+  if (current.sequence === 1) {
+    await recordAnalyticsEvent({
+      eventName: "day_one_devotional_viewed",
+      userId: user.id,
+      route: "/devotional",
+      properties: {
+        devotionalId: devotional.id,
+        trackSlug: current.track?.slug ?? "daily"
+      }
+    });
+  }
 
   return (
     <div className="space-y-6">

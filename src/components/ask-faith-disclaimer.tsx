@@ -34,7 +34,7 @@ export function AskFaithDisclaimer() {
   return (
     <div className="flex gap-3 rounded-xl border border-[#d7e0d3] bg-[#f5faf2] p-4 text-sm leading-6 text-[#52605d]">
       <p className="flex-1">
-        Ask in Faith offers thoughtful, pastoral responses to honest questions about Scripture, theology, history, and doubt. It is not a pastor, therapist, or substitute for professional spiritual care. Answers reflect general Christian perspectives and should be weighed prayerfully.
+        Ask in Faith can help you think through Scripture, theology, history, and doubt with care. It is not your pastor, therapist, or spiritual authority, and it should not replace wise people who know you. Bring honest questions here, then weigh the answer prayerfully with Scripture and trusted Christian counsel.
       </p>
       <button type="button" onClick={dismiss} aria-label="Dismiss Ask in Faith note" className="h-8 rounded-full p-1.5 text-[#52605d] transition hover:bg-white">
         <X className="h-4 w-4" aria-hidden="true" />

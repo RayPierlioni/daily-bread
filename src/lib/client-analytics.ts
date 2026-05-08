@@ -1,8 +1,9 @@
 "use client";
 
-type ClientAnalyticsProperties = Record<string, string | number | boolean | null>;
+export type ClientAnalyticsProperties = Record<string, string | number | boolean | null>;
 
-type ClientAnalyticsEvent =
+export type ClientAnalyticsEvent =
+  | "landing_page_viewed"
   | "signin_started"
   | "support_cta_clicked"
   | "gracie_button_clicked"

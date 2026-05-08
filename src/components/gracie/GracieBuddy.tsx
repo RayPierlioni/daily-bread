@@ -23,6 +23,7 @@ const eligibleRoutes = [
 ];
 
 const autoOpenRoutes = ["/dashboard", "/devotional"];
+const dashboardVisitCountKey = "dashboardVisitCount";
 
 function matchesRoute(pathname: string, route: string) {
   return pathname === route || pathname.startsWith(`${route}/`);
@@ -35,6 +36,13 @@ function canShowOnRoute(pathname: string) {
 
 function canAutoOpenOnRoute(pathname: string) {
   return autoOpenRoutes.some((route) => matchesRoute(pathname, route));
+}
+
+function isMobileFirstVisit() {
+  if (typeof window === "undefined") return false;
+  if (window.innerWidth >= 768) return false;
+  const dashboardVisitCount = Number(window.localStorage.getItem(dashboardVisitCountKey) ?? "0");
+  return dashboardVisitCount < 2;
 }
 
 export function GracieBuddy() {
@@ -65,8 +73,9 @@ export function GracieBuddy() {
   );
 
   useEffect(() => {
-    if (!allowed || open || !canAutoOpen() || !canAutoOpenOnRoute(pathname)) return;
+    if (!allowed || open || !canAutoOpen() || !canAutoOpenOnRoute(pathname) || isMobileFirstVisit()) return;
     const autoOpenTimer = window.setTimeout(() => {
+      if (isMobileFirstVisit()) return;
       markAutoOpenedToday();
       showMessage("auto");
     }, 650);

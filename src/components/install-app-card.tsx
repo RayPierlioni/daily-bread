@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Download, Smartphone, X } from "lucide-react";
-import { dismissInstallPrompt, INSTALL_DISMISSED_KEY, InstallAppButton } from "@/components/install-app-button";
+import { dismissInstallPrompt, INSTALL_CARD_DISMISSED_KEY, INSTALL_DISMISSED_KEY, InstallAppButton } from "@/components/install-app-button";
 import { trackClientEvent } from "@/lib/client-analytics";
+
+const dashboardVisitCountKey = "dashboardVisitCount";
 
 function isStandaloneMode() {
   if (typeof window === "undefined") return false;
@@ -11,19 +13,39 @@ function isStandaloneMode() {
   return window.matchMedia("(display-mode: standalone)").matches || Boolean(navigatorWithStandalone.standalone);
 }
 
+function isInstallCardDismissed() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(INSTALL_CARD_DISMISSED_KEY) === "true" || window.localStorage.getItem(INSTALL_DISMISSED_KEY) === "true";
+}
+
+function dismissInstallCard() {
+  window.localStorage.setItem(INSTALL_CARD_DISMISSED_KEY, "true");
+  dismissInstallPrompt();
+}
+
 export function InstallAppCard() {
   const [isInstalled] = useState(() => isStandaloneMode());
-  const [dismissed, setDismissed] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem(INSTALL_DISMISSED_KEY) === "true";
-  });
+  const [dismissed, setDismissed] = useState(() => isInstallCardDismissed());
+  const [showOnThisVisit, setShowOnThisVisit] = useState(false);
+  const countedVisit = useRef(false);
 
-  if (isInstalled || dismissed) return null;
+  useEffect(() => {
+    if (countedVisit.current) return;
+    countedVisit.current = true;
 
-  function handleDismiss() {
-    dismissInstallPrompt();
+    const currentCount = Number(window.localStorage.getItem(dashboardVisitCountKey) ?? "0");
+    const nextCount = currentCount + 1;
+    window.localStorage.setItem(dashboardVisitCountKey, String(nextCount));
+    setShowOnThisVisit(nextCount >= 2);
+    setDismissed(isInstallCardDismissed());
+  }, []);
+
+  if (isInstalled || dismissed || !showOnThisVisit) return null;
+
+  function handleDismiss(source: "card_dismiss" | "install_click" = "card_dismiss") {
+    dismissInstallCard();
     setDismissed(true);
-    trackClientEvent("pwa_install_dismissed", { source: "dashboard_card" });
+    trackClientEvent("pwa_install_dismissed", { source: source === "install_click" ? "dashboard_card_install_click" : "dashboard_card" });
   }
 
   return (
@@ -32,7 +54,7 @@ export function InstallAppCard() {
         type="button"
         className="absolute right-3 top-3 rounded-full p-1 text-[#68706e] transition hover:bg-[#f0eadf] hover:text-[#24302f]"
         aria-label="Dismiss install app reminder"
-        onClick={handleDismiss}
+        onClick={() => handleDismiss()}
       >
         <X className="h-4 w-4" aria-hidden="true" />
       </button>
@@ -48,13 +70,13 @@ export function InstallAppCard() {
             </p>
           </div>
         </div>
-        <InstallAppButton className="sm:shrink-0" />
+        <InstallAppButton className="sm:shrink-0" onInstallClick={() => handleDismiss("install_click")} />
       </div>
       <p className="mt-3 flex items-center gap-2 text-xs leading-5 text-[#68706e]">
         <Download className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         On iPhone, the button will show the Share then Add to Home Screen instructions.
       </p>
-      <button type="button" className="mt-2 text-xs font-medium text-[#345d6f] hover:text-[#24302f]" onClick={handleDismiss}>
+      <button type="button" className="mt-2 text-xs font-medium text-[#345d6f] hover:text-[#24302f]" onClick={() => handleDismiss()}>
         Not now. I can install it later from Settings.
       </button>
     </section>

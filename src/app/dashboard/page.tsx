@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { PrivacyBadge } from "@/components/privacy-badge";
 import { SupportNudgeBanner } from "@/components/support-nudge-banner";
 import { InstallAppCard } from "@/components/install-app-card";
+import { NotificationOptInPrompt } from "@/components/notification-opt-in-prompt";
 import { DevotionalIconSubmitButton, DevotionalSubmitButton } from "@/components/devotional-action-form";
 import { FirstStepGuide } from "@/components/first-step-guide";
 import { createQuickPrayer, toggleDevotionalComplete, toggleDevotionalSaved } from "@/lib/actions";
@@ -32,28 +33,52 @@ export default async function DashboardPage() {
   const current = await getCurrentDevotionalForUser(user);
   const devotional = current.devotional;
   const state = current.state;
-  const [prayers, posts, completedCount, faithQuestionsCount] = await Promise.all([
+  const [prayers, completedCount] = await Promise.all([
     prisma.prayer.findMany({
       where: { userId: user.id },
       orderBy: { createdAt: "desc" },
       take: 4
     }),
-    prisma.post.findMany({
-      where: { visibility: "PUBLIC" },
-      include: { user: { select: { name: true } } },
-      orderBy: { createdAt: "desc" },
-      take: 3
-    }),
-    prisma.userDevotional.count({ where: { userId: user.id, completed: true } }),
-    prisma.faithQuestion.count({ where: { userId: user.id } })
+    prisma.userDevotional.count({ where: { userId: user.id, completed: true } })
   ]);
+  const showCommunityPreview = completedCount >= 3;
+  const posts = showCommunityPreview
+    ? await prisma.post.findMany({
+        where: { visibility: "PUBLIC" },
+        include: { user: { select: { name: true } } },
+        orderBy: { createdAt: "desc" },
+        take: 3
+      })
+    : [];
 
   const trackPercent = current.total ? Math.round((Math.min(current.sequence, current.total) / current.total) * 100) : 0;
   const firstName = user.name?.split(" ")[0] ?? "friend";
-  const todaysDate = formatDate(new Date());
+  const now = new Date();
+  const todaysDate = formatDate(now);
   const devotionalImage = getDevotionalImage(devotional);
   const currentStep = Math.min(current.sequence, Math.max(current.total, 1));
   const devotionalTitle = devotional ? formatTrackStepTitle(devotional.title, currentStep) : "Today's devotional";
+
+  const lastActivity = await prisma.analyticsEvent.findFirst({
+    where: {
+      userId: user.id,
+      eventName: { not: "path_resumed_after_gap" }
+    },
+    orderBy: { createdAt: "desc" },
+    select: { createdAt: true }
+  });
+  const hoursSinceLastActivity = lastActivity ? Math.floor((now.getTime() - lastActivity.createdAt.getTime()) / 3_600_000) : 0;
+
+  if (lastActivity && hoursSinceLastActivity >= 24) {
+    await recordAnalyticsEvent({
+      eventName: "path_resumed_after_gap",
+      userId: user.id,
+      route: "/dashboard",
+      properties: {
+        hoursSinceLastActivity
+      }
+    });
+  }
 
   await recordAnalyticsEvent({
     eventName: "dashboard_viewed",
@@ -68,12 +93,10 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-7">
+      <NotificationOptInPrompt completedDevotionals={completedCount} notificationSettings={user.notificationSettings} />
       <SupportNudgeBanner completedCount={completedCount} />
-      <InstallAppCard />
       <FirstStepGuide
         completedDevotionals={completedCount}
-        prayersCreated={prayers.length}
-        faithQuestionsAsked={faithQuestionsCount}
         currentStep={currentStep}
         trackTitle={current.track?.title ?? "Faithful Foundations"}
       />
@@ -86,21 +109,27 @@ export default async function DashboardPage() {
                 {greeting()}, {firstName}. Your next step is ready.
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-8 text-[#53605b]">
-                You are not behind. Continue with {devotionalTitle}, write one honest prayer, or bring a question to Ask in Faith.
+                {completedCount === 0
+                  ? `You are not behind. Start with ${devotionalTitle}; everything else can wait until after this first step.`
+                  : `You are not behind. Continue with ${devotionalTitle}, write one honest prayer, or bring a question to Ask in Faith.`}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <LinkButton href="/devotional" variant="primary">
                   Begin today&apos;s step
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </LinkButton>
-                <LinkButton href="/prayers" variant="secondary">
-                  <PenLine className="h-4 w-4" aria-hidden="true" />
-                  Write a prayer
-                </LinkButton>
-                <LinkButton href="/ask" variant="ghost">
-                  <MessageCircleQuestion className="h-4 w-4" aria-hidden="true" />
-                  Ask in Faith
-                </LinkButton>
+                {completedCount > 0 ? (
+                  <>
+                    <LinkButton href="/prayers" variant="secondary">
+                      <PenLine className="h-4 w-4" aria-hidden="true" />
+                      Write a prayer
+                    </LinkButton>
+                    <LinkButton href="/ask" variant="ghost">
+                      <MessageCircleQuestion className="h-4 w-4" aria-hidden="true" />
+                      Ask in Faith
+                    </LinkButton>
+                  </>
+                ) : null}
               </div>
             </div>
 
@@ -162,6 +191,8 @@ export default async function DashboardPage() {
           </div>
         </div>
       </section>
+
+      <InstallAppCard />
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(19rem,0.52fr)]">
         <Card className="overflow-hidden rounded-2xl border-[#e4dccd] bg-white/86">
@@ -258,29 +289,31 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-[#345d6f]" aria-hidden="true" />
-              Community prayer preview
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {posts.map((post) => (
-              <div key={post.id} className="rounded-lg border border-[#eee5d8] bg-white/70 p-3">
-                <div className="flex items-center gap-2">
-                  <Badge>{humanizeEnum(post.type)}</Badge>
-                  <Sparkles className="h-3.5 w-3.5 text-[#b38b4d]" aria-hidden="true" />
+        {showCommunityPreview ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-[#345d6f]" aria-hidden="true" />
+                Community prayer preview
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {posts.map((post) => (
+                <div key={post.id} className="rounded-lg border border-[#eee5d8] bg-white/70 p-3">
+                  <div className="flex items-center gap-2">
+                    <Badge>{humanizeEnum(post.type)}</Badge>
+                    <Sparkles className="h-3.5 w-3.5 text-[#b38b4d]" aria-hidden="true" />
+                  </div>
+                  <p className="mt-2 text-sm font-medium text-[#24302f]">{post.title}</p>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#68706e]">{post.body}</p>
                 </div>
-                <p className="mt-2 text-sm font-medium text-[#24302f]">{post.title}</p>
-                <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#68706e]">{post.body}</p>
-              </div>
-            ))}
-            <LinkButton href="/community" variant="ghost" size="sm">
-              Visit community
-            </LinkButton>
-          </CardContent>
-        </Card>
+              ))}
+              <LinkButton href="/community" variant="ghost" size="sm">
+                Visit community
+              </LinkButton>
+            </CardContent>
+          </Card>
+        ) : null}
       </section>
     </div>
   );

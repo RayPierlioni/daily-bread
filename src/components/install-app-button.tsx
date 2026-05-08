@@ -7,6 +7,7 @@ import { trackClientEvent } from "@/lib/client-analytics";
 import { cn } from "@/lib/utils";
 
 export const INSTALL_DISMISSED_KEY = "next-faithful-step-install-dismissed";
+export const INSTALL_CARD_DISMISSED_KEY = "installCardDismissed";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -32,16 +33,19 @@ function isInstallDismissed() {
 export function dismissInstallPrompt() {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(INSTALL_DISMISSED_KEY, "true");
+  window.localStorage.setItem(INSTALL_CARD_DISMISSED_KEY, "true");
   window.dispatchEvent(new Event("next-faithful-step-install-dismissed"));
 }
 
 export function InstallAppButton({
   className,
   compact = false,
+  onInstallClick,
   respectDismissal = true
 }: {
   className?: string;
   compact?: boolean;
+  onInstallClick?: () => void;
   respectDismissal?: boolean;
 }) {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -87,6 +91,12 @@ export function InstallAppButton({
   }
 
   async function handleInstallClick() {
+    try {
+      window.localStorage.setItem(INSTALL_CARD_DISMISSED_KEY, "true");
+    } catch {
+      // Ignore blocked storage; the install action can still continue.
+    }
+    onInstallClick?.();
     trackClientEvent("pwa_install_clicked", {
       hasNativePrompt: Boolean(installPrompt),
       platform: isAppleMobile() ? "ios" : "web"

@@ -122,7 +122,7 @@ export function DevotionalCard({
           </LinkButton>
           <LinkButton href={bibleHref} variant="ghost">
             <BookOpen className="h-4 w-4" aria-hidden="true" />
-            Open chapter
+            Read this passage in Bible
           </LinkButton>
           <LinkButton href="/community?type=DEVOTIONAL_DISCUSSION" variant="ghost">
             <MessageSquare className="h-4 w-4" aria-hidden="true" />
