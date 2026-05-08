@@ -1,5 +1,4 @@
-// TODO: Update this after the Buy Me a Coffee profile is renamed for Next Faithful Step.
-export const supportUrl = "https://buymeacoffee.com/ourdailybreadhub";
+export const supportUrl = "https://buymeacoffee.com/nextfaithfulstep";
 export const donationUrl = supportUrl;
 
 export const monthlySupportGoal = "$1,500";
