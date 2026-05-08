@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Pause, Play, RotateCcw, Square, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackClientEvent } from "@/lib/client-analytics";
 
 type SpeechStatus = "idle" | "playing" | "paused" | "unsupported";
+
+function isSpeechSupported() {
+  return typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+}
 
 export function BibleChapterReadAloud({
   reference,
@@ -14,17 +18,19 @@ export function BibleChapterReadAloud({
   reference: string;
   verses: string[];
 }) {
-  const [status, setStatus] = useState<SpeechStatus>(() =>
-    typeof window !== "undefined" && !("speechSynthesis" in window) ? "unsupported" : "idle"
-  );
+  const [status, setStatus] = useState<SpeechStatus>(() => (typeof window !== "undefined" && !isSpeechSupported() ? "unsupported" : "idle"));
+  const [currentVerse, setCurrentVerse] = useState(0);
+  const stoppedRef = useRef(true);
 
-  const text = useMemo(
-    () => [reference, ...verses.map((verse, index) => `Verse ${index + 1}. ${verse}`)].join(" ").trim(),
+  const chunks = useMemo(
+    () => verses.map((verse, index) => `${index === 0 ? `${reference}. ` : ""}Verse ${index + 1}. ${verse}`.replace(/\s+/g, " ").trim()),
     [reference, verses]
   );
 
   useEffect(() => {
-    if (!("speechSynthesis" in window)) return;
+    if (!isSpeechSupported()) {
+      return;
+    }
 
     function handleVoicesChanged() {
       window.speechSynthesis.getVoices();
@@ -47,8 +53,36 @@ export function BibleChapterReadAloud({
     );
   }
 
+  function finish() {
+    stoppedRef.current = true;
+    setCurrentVerse(0);
+    setStatus("idle");
+  }
+
+  function speakChunk(index: number) {
+    if (stoppedRef.current || index >= chunks.length) {
+      finish();
+      return;
+    }
+
+    setCurrentVerse(index + 1);
+
+    const utterance = new SpeechSynthesisUtterance(chunks[index]);
+    utterance.voice = chooseVoice();
+    utterance.rate = 0.94;
+    utterance.pitch = 1;
+    utterance.onend = () => {
+      window.setTimeout(() => speakChunk(index + 1), 0);
+    };
+    utterance.onerror = () => {
+      window.setTimeout(() => speakChunk(index + 1), 0);
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
   function play() {
-    if (status === "unsupported") return;
+    if (status === "unsupported" || !chunks.length) return;
 
     if (window.speechSynthesis.paused) {
       window.speechSynthesis.resume();
@@ -58,26 +92,24 @@ export function BibleChapterReadAloud({
     }
 
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = chooseVoice();
-    utterance.rate = 0.94;
-    utterance.pitch = 1;
-    utterance.onend = () => setStatus("idle");
-    utterance.onerror = () => setStatus("idle");
-    window.speechSynthesis.speak(utterance);
+    stoppedRef.current = false;
     setStatus("playing");
+    speakChunk(0);
     trackClientEvent("bible_read_aloud_started", { reference, verseCount: verses.length });
   }
 
   function pause() {
+    if (status !== "playing") return;
+
     window.speechSynthesis.pause();
     setStatus("paused");
     trackClientEvent("bible_read_aloud_paused", { reference });
   }
 
   function stop() {
+    stoppedRef.current = true;
     window.speechSynthesis.cancel();
-    setStatus("idle");
+    finish();
     trackClientEvent("bible_read_aloud_stopped", { reference });
   }
 
@@ -94,7 +126,9 @@ export function BibleChapterReadAloud({
           </div>
           <div>
             <p className="font-semibold text-[#24302f]">Listen to {reference}</p>
-            <p className="text-sm text-[#68706e]">Use your browser&apos;s voice to hear this chapter while you move through your day.</p>
+            <p className="text-sm text-[#68706e]">
+              {currentVerse > 0 ? `Reading verse ${currentVerse} of ${verses.length}.` : "Use your browser's voice to hear this chapter while you move through your day."}
+            </p>
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -118,7 +152,8 @@ export function BibleChapterReadAloud({
         </div>
       </div>
       <p className="sr-only" aria-live="polite">
-        Bible read-aloud status: {status}.
+        Bible read-aloud status: {status}
+        {currentVerse > 0 ? `, verse ${currentVerse} of ${verses.length}` : ""}.
       </p>
     </div>
   );
