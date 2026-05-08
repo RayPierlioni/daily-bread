@@ -17,8 +17,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"]
 });
 
+const canonicalUrl = siteConfig.url;
+const openGraphImageUrl = `${canonicalUrl}/opengraph-image`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(canonicalUrl),
   applicationName: siteConfig.name,
   title: {
     default: "Next Faithful Step | A Free Devotional Path at Your Pace",
@@ -27,17 +30,17 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   alternates: {
-    canonical: "/"
+    canonical: canonicalUrl
   },
   openGraph: {
     type: "website",
-    url: "/",
+    url: canonicalUrl,
     siteName: siteConfig.name,
     title: "Next Faithful Step | Take the Next Faithful Step",
     description: siteConfig.description,
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImageUrl,
         width: 1200,
         height: 630,
         alt: "Next Faithful Step free devotional path"
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Next Faithful Step | Free Christian Devotional Path",
     description: siteConfig.description,
-    images: ["/opengraph-image"]
+    images: [openGraphImageUrl]
   },
   icons: {
     icon: [

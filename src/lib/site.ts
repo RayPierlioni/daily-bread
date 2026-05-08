@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Next Faithful Step",
-  url: process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "https://nextfaithfulstep.com",
+  url: "https://nextfaithfulstep.com",
   description:
     "A free, private Christian devotional path that starts where your faith actually is and continues at your pace without skipping ahead.",
   keywords: [
