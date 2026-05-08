@@ -6,6 +6,7 @@ import { recordAnalyticsEvent } from "@/lib/analytics";
 import { prisma } from "@/lib/prisma";
 
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+const demoAuthEnabled = process.env.ENABLE_DEMO_AUTH === "true" || process.env.NODE_ENV !== "production";
 const ninetyDaysInSeconds = 60 * 60 * 24 * 90;
 const oneDayInSeconds = 60 * 60 * 24;
 
@@ -32,38 +33,42 @@ export const authOptions: NextAuthOptions = {
           })
         ]
       : []),
-    CredentialsProvider({
-      id: "demo",
-      name: "Demo Sign In",
-      credentials: {
-        email: { label: "Email", type: "email" }
-      },
-      async authorize(credentials) {
-        const requestedEmail = credentials?.email?.trim().toLowerCase() || "demo@nextfaithfulstep.local";
-        const isAdmin = requestedEmail === "admin@nextfaithfulstep.local";
-        const isFirstTimeDemo =
-          requestedEmail === "new@nextfaithfulstep.local" || requestedEmail.endsWith("@firsttime.nextfaithfulstep.local");
-        const email = isAdmin ? requestedEmail : isFirstTimeDemo ? requestedEmail : "demo@nextfaithfulstep.local";
-        const user = await prisma.user.upsert({
-          where: { email },
-          update: {},
-          create: {
-            email,
-            name: isAdmin ? "Next Faithful Step Admin" : isFirstTimeDemo ? "First-Time Demo" : "Demo Believer",
-            role: isAdmin ? "ADMIN" : "USER",
-            onboardingCompleted: isAdmin || !isFirstTimeDemo,
-            spiritualFocusProfile: isAdmin || !isFirstTimeDemo ? "Growing in Scripture" : null
-          }
-        });
+    ...(demoAuthEnabled
+      ? [
+          CredentialsProvider({
+            id: "demo",
+            name: "Demo Sign In",
+            credentials: {
+              email: { label: "Email", type: "email" }
+            },
+            async authorize(credentials) {
+              const requestedEmail = credentials?.email?.trim().toLowerCase() || "demo@nextfaithfulstep.local";
+              const isAdmin = requestedEmail === "admin@nextfaithfulstep.local";
+              const isFirstTimeDemo =
+                requestedEmail === "new@nextfaithfulstep.local" || requestedEmail.endsWith("@firsttime.nextfaithfulstep.local");
+              const email = isAdmin ? requestedEmail : isFirstTimeDemo ? requestedEmail : "demo@nextfaithfulstep.local";
+              const user = await prisma.user.upsert({
+                where: { email },
+                update: {},
+                create: {
+                  email,
+                  name: isAdmin ? "Next Faithful Step Admin" : isFirstTimeDemo ? "First-Time Demo" : "Demo Believer",
+                  role: isAdmin ? "ADMIN" : "USER",
+                  onboardingCompleted: isAdmin || !isFirstTimeDemo,
+                  spiritualFocusProfile: isAdmin || !isFirstTimeDemo ? "Growing in Scripture" : null
+                }
+              });
 
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image: user.image
-        };
-      }
-    })
+              return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                image: user.image
+              };
+            }
+          })
+        ]
+      : [])
   ],
   callbacks: {
     async jwt({ token, user }) {
