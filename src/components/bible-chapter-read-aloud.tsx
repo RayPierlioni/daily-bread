@@ -3,12 +3,37 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Pause, Play, RotateCcw, Square, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/form-fields";
 import { trackClientEvent } from "@/lib/client-analytics";
 
 type SpeechStatus = "idle" | "playing" | "paused" | "unsupported";
+const VOICE_STORAGE_KEY = "next-faithful-step-bible-read-aloud-voice";
 
 function isSpeechSupported() {
   return typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+}
+
+function voiceScore(voice: SpeechSynthesisVoice) {
+  const name = voice.name.toLowerCase();
+  const lang = voice.lang.toLowerCase();
+  let score = lang.startsWith("en") ? 20 : 0;
+
+  if (/natural|neural|online|premium/i.test(name)) score += 40;
+  if (/google.*english|english.*google/i.test(name)) score += 30;
+  if (/jenny|aria|ava|emma|brian|guy|samantha|victoria/i.test(name)) score += 20;
+  if (/david|zira|desktop|compact/i.test(name)) score -= 8;
+  if (voice.localService) score += 2;
+  if (voice.default) score += 1;
+
+  return score;
+}
+
+function sortedReadableVoices() {
+  if (!isSpeechSupported()) return [];
+
+  const voices = window.speechSynthesis.getVoices();
+  const englishVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("en"));
+  return [...(englishVoices.length ? englishVoices : voices)].sort((a, b) => voiceScore(b) - voiceScore(a));
 }
 
 export function BibleChapterReadAloud({
@@ -20,37 +45,36 @@ export function BibleChapterReadAloud({
 }) {
   const [status, setStatus] = useState<SpeechStatus>(() => (typeof window !== "undefined" && !isSpeechSupported() ? "unsupported" : "idle"));
   const [currentVerse, setCurrentVerse] = useState(0);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState(() =>
+    typeof window !== "undefined" ? (window.localStorage.getItem(VOICE_STORAGE_KEY) ?? "") : ""
+  );
   const stoppedRef = useRef(true);
 
-  const chunks = useMemo(
-    () => verses.map((verse, index) => `${index === 0 ? `${reference}. ` : ""}Verse ${index + 1}. ${verse}`.replace(/\s+/g, " ").trim()),
-    [reference, verses]
-  );
+  const chunks = useMemo(() => verses.map((verse) => verse.replace(/\s+/g, " ").trim()), [verses]);
 
   useEffect(() => {
     if (!isSpeechSupported()) {
       return;
     }
 
-    function handleVoicesChanged() {
-      window.speechSynthesis.getVoices();
+    function updateVoices() {
+      setVoices(sortedReadableVoices());
     }
 
-    window.speechSynthesis.addEventListener("voiceschanged", handleVoicesChanged);
+    const updateTimer = window.setTimeout(updateVoices, 0);
+    window.speechSynthesis.addEventListener("voiceschanged", updateVoices);
 
     return () => {
+      window.clearTimeout(updateTimer);
       window.speechSynthesis.cancel();
-      window.speechSynthesis.removeEventListener("voiceschanged", handleVoicesChanged);
+      window.speechSynthesis.removeEventListener("voiceschanged", updateVoices);
     };
   }, []);
 
   function chooseVoice() {
-    const voices = window.speechSynthesis.getVoices();
-    return (
-      voices.find((voice) => voice.lang.toLowerCase().startsWith("en") && /female|samantha|victoria|zira|aria|jenny/i.test(voice.name)) ??
-      voices.find((voice) => voice.lang.toLowerCase().startsWith("en")) ??
-      null
-    );
+    const availableVoices = sortedReadableVoices();
+    return availableVoices.find((voice) => voice.voiceURI === selectedVoiceURI) ?? availableVoices[0] ?? null;
   }
 
   function finish() {
@@ -113,6 +137,22 @@ export function BibleChapterReadAloud({
     trackClientEvent("bible_read_aloud_stopped", { reference });
   }
 
+  function handleVoiceChange(voiceURI: string) {
+    setSelectedVoiceURI(voiceURI);
+
+    if (voiceURI) {
+      window.localStorage.setItem(VOICE_STORAGE_KEY, voiceURI);
+    } else {
+      window.localStorage.removeItem(VOICE_STORAGE_KEY);
+    }
+
+    if (status !== "idle") {
+      stoppedRef.current = true;
+      window.speechSynthesis.cancel();
+      finish();
+    }
+  }
+
   if (status === "unsupported") {
     return <p className="text-sm leading-6 text-[#68706e]">Bible read-aloud is not supported in this browser.</p>;
   }
@@ -151,6 +191,21 @@ export function BibleChapterReadAloud({
           ) : null}
         </div>
       </div>
+      {voices.length > 1 ? (
+        <div className="mt-4 grid gap-2 sm:max-w-sm">
+          <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[#68706e]" htmlFor="bible-read-aloud-voice">
+            Voice
+          </label>
+          <Select id="bible-read-aloud-voice" value={selectedVoiceURI} onChange={(event) => handleVoiceChange(event.target.value)} className="h-10">
+            <option value="">Best available voice</option>
+            {voices.map((voice) => (
+              <option key={voice.voiceURI} value={voice.voiceURI}>
+                {voice.name} ({voice.lang})
+              </option>
+            ))}
+          </Select>
+        </div>
+      ) : null}
       <p className="sr-only" aria-live="polite">
         Bible read-aloud status: {status}
         {currentVerse > 0 ? `, verse ${currentVerse} of ${verses.length}` : ""}.
