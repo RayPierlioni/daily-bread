@@ -2,99 +2,99 @@
 
 Use the name "Next Faithful Step" consistently in public copy so people recognize the app and do not confuse it with any other ministry.
 
-Live site: https://ourdailybreadhub.com/
+Live site: https://nextfaithfulstep.com/
 
 ## Simple App Description
 
-Next Faithful Step is a free Christian devotional, prayer journal, and faith Q&A app for people who want a quiet place to start the morning with Scripture, track prayers privately, ask honest questions, and grow at their own pace.
+Next Faithful Step is a free Christian devotional app that picks up where people left off, so missing days never means falling behind. It includes a private prayer journal, honest faith questions, and a gentle path back into Scripture.
 
 ## One-Sentence Description
 
-A free Scripture-centered devotional and prayer app with private journaling, honest faith questions, and gentle Christian community.
+A free Scripture-centered devotional path that keeps your place, even when you miss days.
 
 ## Short Invite Message
 
-Hey, I built a free Christian devotional app called Next Faithful Step. It gives you a daily Scripture-centered devotional, a private prayer journal, and a safe place to ask honest faith questions. There is no cost and no pressure. I would love for you to try it and tell me what feels helpful or confusing.
+Hey, I built a free Christian devotional app called Next Faithful Step. The main idea is simple: most devotional apps move on when you fall behind, but this one picks up where you left off. It also includes a private prayer journal and a gentle place to ask honest faith questions. No cost, no pressure. I would love for you to try Day 1 and tell me what feels helpful or confusing.
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Friend Text Message
 
-I wanted to share something meaningful I have been working on. It is called Next Faithful Step, and it is a free Christian devotional app with daily Scripture, private prayer journaling, and a place to ask faith questions without feeling judged.
+I wanted to share something meaningful I have been working on. It is called Next Faithful Step, and it is a free Christian devotional app for people who keep meaning to get back to Scripture but feel behind. If you miss days, it does not skip ahead. It simply picks up where you left off.
 
-Would you be willing to try it for a few minutes and tell me what you think?
+Would you be willing to try the sample devotional or Day 1 and tell me what you think?
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Church Or Small Group Message
 
-I recently built a free app called Next Faithful Step for Christians and spiritually curious people who want a private place to begin the day with Scripture, prayer, and honest questions.
+I recently built a free app called Next Faithful Step for Christians and spiritually curious people who want a private, gentle way to begin again with Scripture.
 
 It includes:
 
-- Daily devotionals
+- A devotional path that does not skip ahead when someone misses days
 - A private prayer journal
 - Answered prayer tracking
 - A safe faith Q&A section
-- Prayer groups and community posts
+- Optional prayer groups and community posts
 
-I am not charging for it. My hope is simply that it helps people build a steady rhythm with God. If anyone would like to try it and share feedback, the link is:
+I am not charging for it. My hope is simply that it helps people take one faithful step toward God without shame or pressure. It is a companion, not a replacement for church, pastors, counseling, or Christian community. If anyone would like to try it and share feedback, the link is:
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Pastor Or Ministry Leader Message
 
 Hi Pastor,
 
-I wanted to share a free tool I built called Next Faithful Step. It is a Christian devotional and prayer app designed to help people begin the morning with Scripture, track private prayers, ask honest faith questions, and connect around prayer in a calm and respectful way.
+I wanted to share a free tool I built called Next Faithful Step. It is a Christian devotional companion for people who struggle to stay consistent, feel spiritually behind, or are trying to return to a Scripture rhythm.
 
-I built it to be gentle, Scripture-centered, and non-judgmental, especially for people who are growing in faith or wrestling with questions.
+The main promise is that it does not skip ahead when someone misses days. It picks up where they left off. It also includes private prayer journaling and a careful Ask in Faith section for honest questions.
 
-There is no cost to use it. I would be grateful if you would take a look and let me know whether it could be useful for individuals, small groups, or prayer ministries.
+There is no cost to use it. It is not meant to replace church, pastors, counseling, or Christian community. I would be grateful if you would take a look and let me know whether it could be useful for individuals, small groups, or prayer ministries.
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Facebook Launch Post
 
 I am excited to share something I have been building: Next Faithful Step.
 
-It is a free Christian devotional and prayer app for people who want a quiet place to start the morning with Scripture, write prayers privately, track answered prayers, and ask honest questions about God, Jesus, the Bible, faith, doubt, history, and life.
+It is a free Christian devotional app for people who keep meaning to get back to Scripture but feel behind.
 
-The heart behind it is simple: no pressure, no judgment, no cost. Just a peaceful place to grow with God one day at a time.
+The heart behind it is simple: most devotional apps move on when you miss days. Next Faithful Step picks up where you left off. No pressure, no judgment, no cost. Just a peaceful place to take the next faithful step.
 
 If you would be willing to try it and share feedback, I would really appreciate it.
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Softer Facebook Post
 
-I built a free app called Next Faithful Step for anyone who wants a peaceful place to start the day with Scripture and prayer.
+I built a free app called Next Faithful Step for anyone who keeps meaning to get back to Scripture.
 
-It includes daily devotionals, private prayer journaling, answered prayer tracking, and a gentle space to ask faith questions.
+It gives you a gentle devotional path that keeps your place, even if you miss days. It also includes private prayer journaling, answered prayer tracking, and a gentle space to ask faith questions.
 
 I am still improving it, but it is live now. If it helps even one person build a deeper rhythm with God, it will be worth it.
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## QR Code Handout Copy
 
-### Start your morning with Scripture and prayer
+### Take the next faithful step
 
-Next Faithful Step is a free Christian devotional and prayer app.
+Next Faithful Step is a free Christian devotional app that picks up where you left off.
 
 Use it to:
 
-- Read daily Scripture-centered devotionals
+- Follow a Scripture-centered devotional path that does not skip ahead
 - Keep a private prayer journal
 - Track answered prayers
 - Ask honest faith questions
-- Join prayer-centered community
+- Use optional prayer-centered community
 
-No cost. No pressure. A quiet place to grow.
+No cost. No pressure. A quiet place to begin again.
 
 Scan to begin:
 
-https://ourdailybreadhub.com/
+https://nextfaithfulstep.com/
 
 ## Feedback Request
 
