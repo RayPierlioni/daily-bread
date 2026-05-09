@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 export const analyticsEventNames = [
   "landing_page_viewed",
+  "signin_embedded_browser_detected",
+  "signin_link_copied",
   "signin_started",
   "signin_completed",
   "path_resumed_after_gap",
@@ -62,6 +64,8 @@ export type AnalyticsProperties = Record<string, string | number | boolean | nul
 
 const clientEventNames = [
   "landing_page_viewed",
+  "signin_embedded_browser_detected",
+  "signin_link_copied",
   "signin_started",
   "support_cta_clicked",
   "pwa_install_clicked",
@@ -142,6 +146,16 @@ export function sanitizeClientAnalyticsEvent(input: unknown):
       route,
       properties: {
         provider: safeString(rawProperties.provider, "google"),
+        source: safeString(rawProperties.source, "signin_page")
+      }
+    };
+  }
+
+  if (body.eventName === "signin_embedded_browser_detected" || body.eventName === "signin_link_copied") {
+    return {
+      eventName: body.eventName,
+      route,
+      properties: {
         source: safeString(rawProperties.source, "signin_page")
       }
     };

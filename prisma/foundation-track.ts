@@ -574,16 +574,16 @@ type EditorialDevotional = {
 const editorialDevotionals: Record<number, EditorialDevotional> = {
   1: {
     body: [
-      "There is a particular kind of mercy that shows up before the house is awake. The room is still dim. The phone is close enough to reach, but for once it stays quiet. Yesterday may still be sitting on the edge of the bed: the unfinished conversation, the thing you regret saying, the worry you carried into sleep. Nothing has been fixed yet, but morning has arrived anyway.",
-      "Lamentations 3 was not written from a life that had gone smoothly. It rises out of grief, ruin, and honest sorrow. That matters. When Jeremiah says God's mercies are new every morning, he is not giving a pretty sentence for people whose lives are already easy. He is testifying that mercy can meet a person in the rubble and still be real.",
-      "This is where Faithful Foundations begins: not with your effort, your consistency, your Bible knowledge, or your ability to feel spiritual on command. It begins with mercy. You are not invited to prove you deserve another morning with God. You are invited to receive the morning as a gift from the God whose compassion has not run out.",
-      "Some days, faith starts small. It may look like sitting still for thirty seconds and saying, Lord, I am here. It may look like opening Scripture even though your attention feels scattered. It may look like admitting that you need mercy before you need a plan. That is not failure. That is a true beginning.",
-      "Let this first step be gentle and honest. You are not behind. You are not disqualified by the days you missed before this one. The path begins where mercy meets you today, and mercy is already here."
+      "A person can feel behind before the morning even has a chance to begin. The phone lights up. The calendar is already crowded. There are dishes, messages, children, work, appointments, aches in the body, unfinished conversations, and quiet regrets from yesterday. Before your feet touch the floor, it can feel as if life has already moved ahead without asking whether you were ready.",
+      "That is why Lamentations 3 matters so much. These words about new mercy were not written from a life that had gone smoothly. They rise out of grief, ruin, and honest sorrow. When Jeremiah says God's mercies are new every morning, he is not offering a pretty sentence for people whose lives are already easy. He is testifying that mercy can meet a person in the rubble and still be real.",
+      "This is where Faithful Foundations begins: not with your effort, your consistency, your Bible knowledge, or your ability to feel spiritual on command. It begins with mercy. God does not move on without you. His compassion has not expired because you missed days, lost focus, got tired, or did not know where to begin.",
+      "Your devotional path is meant to echo that truth. You do not have to catch up to a spiritual calendar before you are allowed to come near. You do not have to pretend you are stronger, calmer, or more consistent than you are. Today can be small and still be real. It may look like one verse read slowly, one honest sentence of prayer, one quiet breath before the noise begins.",
+      "Let this first step be gentle and honest. You are not behind here. You are not disqualified by the days that came before this one. When you return, grace is still there. The path begins where mercy meets you today, and mercy is already here."
     ].join("\n\n"),
-    reflectionQuestion: "Where do you most need to receive God's mercy before trying to improve, explain, or fix yourself?",
+    reflectionQuestion: "Where have you been carrying the feeling that God has moved on without you, and what would it mean to receive His mercy there today?",
     prayerPrompt:
-      "Father, thank You that Your mercies are new this morning. Meet me honestly where I am, not where I pretend to be. Teach me to begin with grace before effort, and let one small faithful step be enough for today.",
-    actionStep: "Before checking messages or moving to tasks, pause for ten seconds and say aloud: God's mercy is new for me today."
+      "Father, I am here. Thank You that Your mercies are new this morning and that You have not moved on without me. Meet me honestly where I am, not where I pretend to be. Teach me to begin with grace before effort, and let one small faithful step be enough for today.",
+    actionStep: "Before checking messages or moving to tasks, pause for ten seconds and pray: God, I am here, and Your mercy is here too."
   },
   2: {
     body: [

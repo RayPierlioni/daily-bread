@@ -1,10 +1,15 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { BrandMark } from "@/components/brand-mark";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { isGoogleAuthConfigured } from "@/lib/auth";
+import { isEmbeddedBrowserUserAgent } from "@/lib/embedded-browser";
 import { SignInButtons } from "./signin-buttons";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const requestHeaders = await headers();
+  const embeddedBrowser = isEmbeddedBrowserUserAgent(requestHeaders.get("user-agent") ?? "");
+
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
       <Card className="w-full max-w-md">
@@ -26,7 +31,7 @@ export default function SignInPage() {
               Google sign-in is used only so your private path, prayers, questions, and notes stay saved to your account.
             </p>
           </div>
-          <SignInButtons googleConfigured={isGoogleAuthConfigured} />
+          <SignInButtons googleConfigured={isGoogleAuthConfigured} embeddedBrowser={embeddedBrowser} />
           {!isGoogleAuthConfigured ? (
             <p className="mt-4 rounded-lg bg-[#fbf7ef] p-3 text-xs leading-5 text-[#68706e]">
               Google OAuth is ready in the codebase. Add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` to enable it locally.

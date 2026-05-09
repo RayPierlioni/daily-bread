@@ -4,6 +4,8 @@ export type ClientAnalyticsProperties = Record<string, string | number | boolean
 
 export type ClientAnalyticsEvent =
   | "landing_page_viewed"
+  | "signin_embedded_browser_detected"
+  | "signin_link_copied"
   | "signin_started"
   | "support_cta_clicked"
   | "gracie_button_clicked"
