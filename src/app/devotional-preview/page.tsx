@@ -13,7 +13,7 @@ import { buildFoundationDevotionals } from "../../../prisma/foundation-track";
 
 export const metadata: Metadata = {
   title: "Preview the First Faithful Step",
-  description: "Read a sample first devotional from Next Faithful Step before signing in.",
+  description: "Read a sample first devotional from the path that keeps your place when life gets busy.",
   alternates: {
     canonical: "/devotional-preview"
   }
@@ -73,10 +73,10 @@ export default async function DevotionalPreviewPage() {
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">Sample first step</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight text-[#24302f] sm:text-5xl">
-            Feel the path before you sign in.
+            See how a path can wait with grace.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-[#52605d]">
-            This is a public preview of the first Foundations devotional. When you begin your own path, your progress is saved privately and missing days never skips you ahead.
+            This is a public preview of the first Foundations devotional. Next Faithful Step is built to echo a simple truth: God does not move on without you. When you begin your own path, your progress is saved privately and missed days never skip ahead without you.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <LinkButton href="/signin" size="lg">
@@ -147,7 +147,7 @@ export default async function DevotionalPreviewPage() {
             </Card>
             <Card className="bg-[#fff7e8] p-5">
               <p className="text-sm leading-7 text-[#5a3e18]">
-                No ads. No paywalls. No pressure. The path waits for your next faithful step.
+                No ads. No paywalls. No pressure. When you return, grace is still there, so your devotional path waits too.
               </p>
             </Card>
           </div>

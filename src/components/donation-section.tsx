@@ -22,7 +22,7 @@ export function DonationSection({ className, compact = false, impactStats }: { c
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">Support</p>
         <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">Help keep this path open for people who feel spiritually behind.</h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#52605d]">
-          Next Faithful Step is free because spiritual encouragement should not depend on someone&apos;s bank account. Some people can give. Some cannot. Supporters help keep Scripture, prayer, honest questions, and a gentle place to begin again available to anyone who needs it.
+          Next Faithful Step is free because spiritual encouragement should not depend on someone&apos;s bank account. It is built to echo a simple truth: God does not move on without you. Some people can give. Some cannot. Supporters help keep Scripture, prayer, honest questions, and a gentle place to begin again available to anyone who needs it.
         </p>
 
         <Card className="mx-auto mt-8 max-w-2xl bg-[#fffdf8] p-5 text-left">
@@ -33,10 +33,10 @@ export function DonationSection({ className, compact = false, impactStats }: { c
             <div>
               <p className="text-sm font-semibold text-[#24302f]">A note from the founder</p>
               <p className="mt-2 text-sm leading-6 text-[#68706e]">
-                I built Next Faithful Step because I know how easy it is to feel behind spiritually. Most devotional tools move on without you. This one waits, so anyone can return with grace instead of guilt.
+                I built Next Faithful Step because I know how easy it is to feel behind spiritually. Most devotional tools move on when work piles up, kids need you, or life gets heavy. This one waits, so anyone can return with grace instead of guilt.
               </p>
               <p className="mt-2 text-sm leading-6 text-[#68706e]">
-                If this app helped you return to God after a long time away, that is exactly what it was built for. You do not owe anything. But if you want to help someone else find their way back, a small gift goes a long way.
+                If this app helped you return to God after a long time away, that is exactly what it was built for. When you return, grace is still there, so your devotional path waits too. You do not owe anything. But if you want to help someone else find their way back, a small gift goes a long way.
               </p>
             </div>
           </div>

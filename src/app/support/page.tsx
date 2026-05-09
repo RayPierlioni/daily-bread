@@ -9,7 +9,7 @@ import { getSupportImpactStats } from "@/lib/support-impact";
 
 export const metadata: Metadata = {
   title: "Support Next Faithful Step",
-  description: "Help keep Next Faithful Step free for people who need Scripture, prayer, honest faith questions, and a private devotional path.",
+  description: "Help keep Next Faithful Step free for people who need a private devotional path that keeps their place and does not move on without them.",
   alternates: {
     canonical: "/support"
   }

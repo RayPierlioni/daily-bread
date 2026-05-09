@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "For Churches and Small Groups",
   description:
-    "A free devotional companion churches can recommend to people who struggle to stay consistent with Scripture, prayer, and private reflection.",
+    "A free devotional companion churches can recommend to people who struggle to stay consistent and need a gentle way back to Scripture.",
   alternates: {
     canonical: "/churches"
   }
@@ -29,7 +29,7 @@ const benefits = [
   },
   {
     title: "A path that does not skip ahead",
-    body: "If someone misses days, they return to the next reading in their path. The app reinforces grace, not guilt.",
+    body: "If someone misses days because work, children, weariness, or life got heavy, they return to the next reading in their path. The app reinforces grace, not guilt.",
     icon: HeartHandshake
   },
   {
@@ -95,7 +95,7 @@ export default async function ChurchesPage() {
               A free devotional companion for people who struggle to stay consistent.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-[#52605d]">
-              Next Faithful Step helps people begin with Scripture, prayer, honest questions, and private reflection. When they miss days, their path waits instead of moving on without them.
+              Next Faithful Step helps people begin with Scripture, prayer, honest questions, and private reflection. It is built to echo a simple truth: God does not move on without you. When someone misses days, their path waits instead of moving on without them.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/signin" size="lg">
@@ -115,7 +115,7 @@ export default async function ChurchesPage() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-[#24302f]">Pastoral posture</p>
-                <p className="text-sm text-[#68706e]">Helpful companion, never a replacement.</p>
+                <p className="text-sm text-[#68706e]">A gentle companion, never a replacement.</p>
               </div>
             </div>
             <p className="mt-5 text-sm leading-7 text-[#52605d]">
@@ -206,9 +206,9 @@ export default async function ChurchesPage() {
           <Card className="mx-auto grid max-w-4xl gap-8 bg-white p-6 print:shadow-none sm:p-8 md:grid-cols-[minmax(0,1fr)_220px] md:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">Free devotional companion</p>
-              <h3 className="mt-3 text-3xl font-semibold leading-tight text-[#24302f]">Take the next faithful step, right where you are.</h3>
+              <h3 className="mt-3 text-3xl font-semibold leading-tight text-[#24302f]">God does not move on without you.</h3>
               <p className="mt-4 text-base leading-7 text-[#52605d]">
-                A free Christian devotional path with Scripture, prayer, private journaling, and honest faith questions. Miss days without losing your place.
+                A free Christian devotional path with Scripture, prayer, private journaling, and honest faith questions. Miss days without losing your place. When you return, grace is still there, so your path waits too.
               </p>
               <p className="mt-5 text-lg font-semibold text-[#345d6f]">nextfaithfulstep.com</p>
               <p className="mt-3 text-xs leading-5 text-[#68706e]">

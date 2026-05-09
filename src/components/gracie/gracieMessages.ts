@@ -40,7 +40,7 @@ export const gracieMessages: GracieMessage[] = [
     id: "general-not-behind",
     category: "general",
     pose: "default",
-    text: "You are not behind here. Your path waits for you."
+    text: "You are not behind here. God does not move on without you, and your path waits too."
   },
   {
     id: "general-thankful",

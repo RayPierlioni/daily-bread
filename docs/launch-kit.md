@@ -6,21 +6,21 @@ Live site: https://nextfaithfulstep.com/
 
 ## Simple App Description
 
-Next Faithful Step is a free Christian devotional app that picks up where people left off, so missing days never means falling behind. It includes a private prayer journal, honest faith questions, and a gentle path back into Scripture.
+Next Faithful Step is a free Christian devotional app built to echo a simple truth: God does not move on without you. Other devotional apps keep moving when life gets busy, but this one keeps your place so missing days never means falling behind.
 
 ## One-Sentence Description
 
-A free Scripture-centered devotional path that keeps your place, even when you miss days.
+God does not move on without you. Your devotional path should not either.
 
 ## Short Invite Message
 
-Hey, I built a free Christian devotional app called Next Faithful Step. The main idea is simple: most devotional apps move on when you fall behind, but this one picks up where you left off. It also includes a private prayer journal and a gentle place to ask honest faith questions. No cost, no pressure. I would love for you to try Day 1 and tell me what feels helpful or confusing.
+Hey, I built a free Christian devotional app called Next Faithful Step. The main idea is simple: God does not move on without you, and your devotional path should not either. Most devotional apps move on when work, kids, or life make you miss days. This one keeps your place and lets you pick up where you left off. No cost, no pressure. I would love for you to try Day 1 and tell me what feels helpful or confusing.
 
 https://nextfaithfulstep.com/
 
 ## Friend Text Message
 
-I wanted to share something meaningful I have been working on. It is called Next Faithful Step, and it is a free Christian devotional app for people who keep meaning to get back to Scripture but feel behind. If you miss days, it does not skip ahead. It simply picks up where you left off.
+I wanted to share something meaningful I have been working on. It is called Next Faithful Step, and it is a free Christian devotional app for people who keep meaning to get back to Scripture but feel behind. The heart is: God does not move on without you. If you miss days, the app does not skip ahead. It simply picks up where you left off.
 
 Would you be willing to try the sample devotional or Day 1 and tell me what you think?
 
@@ -32,13 +32,13 @@ I recently built a free app called Next Faithful Step for Christians and spiritu
 
 It includes:
 
-- A devotional path that does not skip ahead when someone misses days
+- A devotional path that does not move on without someone
 - A private prayer journal
 - Answered prayer tracking
 - A safe faith Q&A section
 - Optional prayer groups and community posts
 
-I am not charging for it. My hope is simply that it helps people take one faithful step toward God without shame or pressure. It is a companion, not a replacement for church, pastors, counseling, or Christian community. If anyone would like to try it and share feedback, the link is:
+I am not charging for it. My hope is simply that it echoes a simple truth: God does not move on without you. When someone returns, grace is still there, so the devotional path waits too. It is a companion, not a replacement for church, pastors, counseling, or Christian community. If anyone would like to try it and share feedback, the link is:
 
 https://nextfaithfulstep.com/
 
@@ -48,7 +48,7 @@ Hi Pastor,
 
 I wanted to share a free tool I built called Next Faithful Step. It is a Christian devotional companion for people who struggle to stay consistent, feel spiritually behind, or are trying to return to a Scripture rhythm.
 
-The main promise is that it does not skip ahead when someone misses days. It picks up where they left off. It also includes private prayer journaling and a careful Ask in Faith section for honest questions.
+The main promise is this: God does not move on without you, and your devotional path should not either. If someone misses days because work, children, weariness, or life got heavy, the app keeps their place and lets them continue where they left off. It also includes private prayer journaling and a careful Ask in Faith section for honest questions.
 
 There is no cost to use it. It is not meant to replace church, pastors, counseling, or Christian community. I would be grateful if you would take a look and let me know whether it could be useful for individuals, small groups, or prayer ministries.
 
@@ -60,7 +60,7 @@ I am excited to share something I have been building: Next Faithful Step.
 
 It is a free Christian devotional app for people who keep meaning to get back to Scripture but feel behind.
 
-The heart behind it is simple: most devotional apps move on when you miss days. Next Faithful Step picks up where you left off. No pressure, no judgment, no cost. Just a peaceful place to take the next faithful step.
+The heart behind it is simple: God does not move on without you. Most devotional apps keep moving when you miss days. Next Faithful Step keeps your place. No pressure, no judgment, no cost. Just a peaceful place to take the next faithful step.
 
 If you would be willing to try it and share feedback, I would really appreciate it.
 
@@ -70,7 +70,7 @@ https://nextfaithfulstep.com/
 
 I built a free app called Next Faithful Step for anyone who keeps meaning to get back to Scripture.
 
-It gives you a gentle devotional path that keeps your place, even if you miss days. It also includes private prayer journaling, answered prayer tracking, and a gentle space to ask faith questions.
+It is built around one gentle truth: God does not move on without you. If you miss days, the devotional path keeps your place. It also includes private prayer journaling, answered prayer tracking, and a gentle space to ask faith questions.
 
 I am still improving it, but it is live now. If it helps even one person build a deeper rhythm with God, it will be worth it.
 
@@ -80,17 +80,17 @@ https://nextfaithfulstep.com/
 
 ### Take the next faithful step
 
-Next Faithful Step is a free Christian devotional app that picks up where you left off.
+Next Faithful Step is a free Christian devotional app built around this promise: God does not move on without you.
 
 Use it to:
 
-- Follow a Scripture-centered devotional path that does not skip ahead
+- Follow a Scripture-centered devotional path that does not move on without you
 - Keep a private prayer journal
 - Track answered prayers
 - Ask honest faith questions
 - Use optional prayer-centered community
 
-No cost. No pressure. A quiet place to begin again.
+No cost. No pressure. When you return, grace is still there.
 
 Scan to begin:
 
@@ -168,4 +168,4 @@ Next Faithful Step should be introduced as a free spiritual rhythm tool, not as 
 
 The safest message is:
 
-Next Faithful Step helps people start the day with Scripture, prayer, honest questions, and private reflection.
+God does not move on without you. Next Faithful Step keeps your devotional place, so you can return without shame and continue where you left off.

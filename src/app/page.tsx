@@ -11,8 +11,8 @@ import { publicResourcePages, siteConfig } from "@/lib/site";
 
 const features = [
   {
-    title: "Daily devotionals personalized to your spiritual season.",
-    body: "Begin with Scripture, reflection, prayer, and a gentle next step shaped by where you are right now.",
+    title: "A devotional path that waits.",
+    body: "When work, kids, grief, or ordinary life interrupt your rhythm, you return to the next step instead of a skipped calendar date.",
     href: "/daily-devotional",
     icon: BookOpen
   },
@@ -49,7 +49,7 @@ const howItWorks = [
   },
   {
     title: "Continue at your pace",
-    body: "Each morning brings your next faithful step. Miss a week? You return to where you left off, not a random calendar date.",
+    body: "Other devotional apps keep moving when life gets busy. This one keeps your place and lets you continue where you left off.",
     icon: BookmarkCheck
   },
   {
@@ -108,9 +108,12 @@ export default function LandingPage() {
               <HeartHandshake className="h-4 w-4" aria-hidden="true" />
               For anyone who keeps meaning to get back to it
             </div>
-            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Take the next faithful step, right where you are.</h1>
+            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">God does not move on without you.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/86">
-              Most devotional apps move on when you fall behind. Next Faithful Step gives you a free, private devotional path that starts where your faith actually is {"\u2014"} and picks up exactly where you left off, no matter how long you&apos;ve been away.
+              Work piles up. Kids need you. Days get missed. Most devotional apps keep moving, and suddenly you feel behind. Next Faithful Step keeps your place, so you can return without shame and continue where you left off.
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/78">
+              This app is built to echo a simple truth: when you return, grace is still there. So your devotional path waits too.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/signin" size="lg" className="bg-white text-[#24302f] hover:bg-[#f7f2e8]">
@@ -134,7 +137,7 @@ export default function LandingPage() {
       <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b38b4d]">How it works</p>
-          <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">Your path. Your pace. Your private space.</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-[#24302f] sm:text-4xl">The path waits, because grace does.</h2>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {howItWorks.map((step, index) => {
@@ -156,7 +159,9 @@ export default function LandingPage() {
       </section>
 
       <section className="border-y border-[#e4dccd] bg-[#f0eadf]/70 px-4 py-8 text-center sm:px-6 lg:px-8">
-        <p className="mx-auto max-w-4xl text-xl font-semibold leading-8 text-[#24302f]">Your prayers are private. Your questions are safe. Your journey is yours.</p>
+        <p className="mx-auto max-w-4xl text-xl font-semibold leading-8 text-[#24302f]">
+          Your prayers are private. Your questions are safe. Your place is kept.
+        </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">

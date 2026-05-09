@@ -4,7 +4,7 @@ import { MarketingFeaturePage } from "@/components/marketing-feature-page";
 export const metadata: Metadata = {
   title: "Personalized Daily Devotional App",
   description:
-    "Next Faithful Step is a free Christian devotional app with Scripture-centered readings personalized to your spiritual season and paced by your reading journey.",
+    "Next Faithful Step is a free Christian devotional app built around a simple promise: God does not move on without you, and your devotional path should not either.",
   alternates: {
     canonical: "/daily-devotional"
   }
@@ -14,11 +14,11 @@ export default function DailyDevotionalMarketingPage() {
   return (
     <MarketingFeaturePage
       eyebrow="Daily Devotional"
-      title="A daily devotional that meets you where you are."
-      description="Next Faithful Step begins with a gentle spiritual assessment, then guides you through Scripture-centered devotionals at a pace that follows your real life. If you miss a week, your next devotional waits for you."
+      title="A daily devotional that does not move on without you."
+      description="Next Faithful Step guides you through Scripture-centered devotionals at a pace that follows your real life. Work gets busy. Kids need you. Some weeks get heavy. When you return, grace is still there, so your next devotional waits for you."
       primaryAction="Begin today's devotional"
       highlights={[
-        "Personalized by spiritual season instead of a one-size-fits-all reading.",
+        "A Scripture-centered path that keeps your place when life interrupts your rhythm.",
         "Designed to bridge gaps in biblical knowledge without shame or pressure.",
         "Includes Scripture, reflection, prayer, an action step, and saved notes."
       ]}
@@ -29,7 +29,7 @@ export default function DailyDevotionalMarketingPage() {
         },
         {
           title: "Paced with grace",
-          body: "Your devotional path does not punish you for missing days. The next reading remains ready when you return."
+          body: "Your devotional path does not punish you for missing days. It echoes a simple truth: God does not move on without you."
         },
         {
           title: "Built for growth",

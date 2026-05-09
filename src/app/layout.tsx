@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(canonicalUrl),
   applicationName: siteConfig.name,
   title: {
-    default: "Next Faithful Step | A Free Devotional Path at Your Pace",
+    default: "Next Faithful Step | God Does Not Move On Without You",
     template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     url: canonicalUrl,
     siteName: siteConfig.name,
-    title: "Next Faithful Step | Take the Next Faithful Step",
+    title: "Next Faithful Step | God Does Not Move On Without You",
     description: siteConfig.description,
     images: [
       {

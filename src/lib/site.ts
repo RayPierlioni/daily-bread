@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Next Faithful Step",
   url: "https://nextfaithfulstep.com",
   description:
-    "A free, private Christian devotional path that starts where your faith actually is and continues at your pace without skipping ahead.",
+    "A free, private Christian devotional path built to echo a simple truth: God does not move on without you. When you return, your path waits too.",
   keywords: [
     "Christian devotional app",
     "personalized devotional path",
@@ -20,12 +20,12 @@ export const publicMarketingPages = [
   {
     path: "/daily-devotional",
     title: "Personalized Daily Devotionals",
-    description: "Daily Scripture-centered devotionals shaped by your spiritual season and paced by your actual reading journey."
+    description: "Daily Scripture-centered devotionals that keep your place, so missing days never means your path moves on without you."
   },
   {
     path: "/devotional-preview",
     title: "Preview the First Faithful Step",
-    description: "Read a sample first devotional step before signing in, so you can feel the tone of the path before creating an account."
+    description: "Read a sample first devotional step before signing in, and see how the path waits when life gets busy."
   },
   {
     path: "/prayer-journal",
@@ -45,7 +45,7 @@ export const publicMarketingPages = [
   {
     path: "/churches",
     title: "For Churches and Small Groups",
-    description: "A free devotional companion churches can recommend to people who struggle to stay consistent with Scripture and prayer."
+    description: "A free devotional companion churches can recommend to people who struggle to stay consistent and need a gentle way back."
   },
   {
     path: "/support",
