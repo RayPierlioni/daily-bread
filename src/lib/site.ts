@@ -19,8 +19,8 @@ export const siteConfig = {
 export const publicMarketingPages = [
   {
     path: "/daily-devotional",
-    title: "Personalized Daily Devotionals",
-    description: "Daily Scripture-centered devotionals that keep your place, so missing days never means your path moves on without you."
+    title: "Devotional App That Picks Up Where You Left Off",
+    description: "A free Christian devotional app that keeps your place, so missed days never skip you ahead or make you feel behind."
   },
   {
     path: "/devotional-preview",

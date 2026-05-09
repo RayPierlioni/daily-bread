@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MarketingFeaturePage } from "@/components/marketing-feature-page";
 
 export const metadata: Metadata = {
-  title: "Personalized Daily Devotional App",
+  title: "Devotional App That Picks Up Where You Left Off",
   description:
-    "Next Faithful Step is a free Christian devotional app built around a simple promise: God does not move on without you, and your devotional path should not either.",
+    "A free Christian devotional app that picks up where you left off, so missed days do not skip you ahead or make you feel behind.",
   alternates: {
     canonical: "/daily-devotional"
   }
@@ -14,8 +14,8 @@ export default function DailyDevotionalMarketingPage() {
   return (
     <MarketingFeaturePage
       eyebrow="Daily Devotional"
-      title="A daily devotional that does not move on without you."
-      description="Next Faithful Step guides you through Scripture-centered devotionals at a pace that follows your real life. Work gets busy. Kids need you. Some weeks get heavy. When you return, grace is still there, so your next devotional waits for you."
+      title="A devotional app that picks up where you left off."
+      description="Next Faithful Step guides you through Scripture-centered devotionals at a pace that follows your real life. Work gets busy. Kids need you. Some weeks get heavy. God does not move on without you, and your devotional path should not either."
       primaryAction="Begin today's devotional"
       highlights={[
         "A Scripture-centered path that keeps your place when life interrupts your rhythm.",
@@ -29,11 +29,11 @@ export default function DailyDevotionalMarketingPage() {
         },
         {
           title: "Paced with grace",
-          body: "Your devotional path does not punish you for missing days. It echoes a simple truth: God does not move on without you."
+          body: "This is a devotional app that picks up where you left off. Missed days do not erase your place, skip you ahead, or turn a spiritual rhythm into a guilt list."
         },
         {
-          title: "Built for growth",
-          body: "The app can recommend readings around faith, comfort, anxiety, prayer, Scripture, discipline, doubt, restoration, and belonging."
+          title: "A gentle way back",
+          body: "When you return, grace is still there. The next reading remains ready so you can continue with Scripture, prayer, and one faithful step."
         }
       ]}
     />

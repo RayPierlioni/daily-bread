@@ -11,7 +11,7 @@ import { publicResourcePages, siteConfig } from "@/lib/site";
 
 const features = [
   {
-    title: "A devotional path that waits.",
+    title: "A devotional app that picks up where you left off.",
     body: "When work, kids, grief, or ordinary life interrupt your rhythm, you return to the next step instead of a skipped calendar date.",
     href: "/daily-devotional",
     icon: BookOpen
