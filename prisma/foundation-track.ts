@@ -555,13 +555,13 @@ const rhythmFormationNotes: Record<string, string> = {
 };
 
 const weeklyProgressionNotes = [
-  "Today introduces the week's theme. Do not rush to mastery. Ask God for a teachable beginning.",
+  "Today introduces this step's theme. Do not rush to mastery. Ask God for a teachable beginning.",
   "Today invites deeper attention. Return to the passage as if there is still more mercy and wisdom to receive.",
-  "Today brings the theme closer to ordinary pressure. Notice where this truth meets a real fear, habit, or desire.",
+  "Today brings this Scripture closer to ordinary pressure. Notice where this truth meets a real fear, habit, or desire.",
   "Today asks for embodied faith. Let the reading become one specific response before the day ends.",
   "Today gives room for honest questions. Let curiosity, resistance, or confusion become prayer instead of avoidance.",
   "Today carries the truth into relationships and choices. Watch how this Scripture wants to shape your presence with others.",
-  "Today gathers the week in remembrance. Name what God showed you, and carry one phrase forward."
+  "Today gathers what you have noticed in remembrance. Name what God showed you, and carry one phrase forward."
 ];
 
 type EditorialDevotional = {
@@ -1121,7 +1121,7 @@ const editorialDevotionals: Record<number, EditorialDevotional> = {
 };
 
 function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
-  const editorial = editorialDevotionals[day];
+  const editorial = getEditorialDevotional(day);
   if (editorial) return editorial.body;
 
   const dayInWeek = ((day - 1) % 7) + 1;
@@ -1142,6 +1142,17 @@ function buildBody(day: number, week: FoundationWeek, rhythm: (typeof dayRhythms
   ].join("\n\n");
 }
 
+function getEditorialDevotional(day: number) {
+  // Day 1 has been hand-shaped as the public preview and first retention moment.
+  // The rest of the path is generated from a daily Scripture rotation so users do
+  // not hear the same book repeated for a full week.
+  return day === 1 ? editorialDevotionals[day] : undefined;
+}
+
+function getThemeForDay(day: number) {
+  return weeklyThemes[(day - 1) % weeklyThemes.length];
+}
+
 function buildReflectionQuestion(week: FoundationWeek, rhythm: (typeof dayRhythms)[number]) {
   return `${rhythm.question} As you answer, where does ${week.theme.toLowerCase()} feel most connected to your real life right now?`;
 }
@@ -1159,10 +1170,11 @@ export function buildFoundationDevotionals() {
   const startDate = new Date("2031-01-01T00:00:00");
 
   for (let day = 1; day <= 365; day += 1) {
-    const week = weeklyThemes[Math.min(Math.floor((day - 1) / 7), weeklyThemes.length - 1)];
+    const week = getThemeForDay(day);
     const rhythm = day === 365 ? dayRhythms[6] : dayRhythms[(day - 1) % 7];
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + day - 1);
+    const editorial = getEditorialDevotional(day);
 
     generated.push({
       date,
@@ -1170,9 +1182,9 @@ export function buildFoundationDevotionals() {
       scriptureReference: week.scriptureReference,
       scriptureText: week.scriptureText,
       body: buildBody(day, week, rhythm),
-      reflectionQuestion: editorialDevotionals[day]?.reflectionQuestion ?? buildReflectionQuestion(week, rhythm),
-      prayerPrompt: editorialDevotionals[day]?.prayerPrompt ?? buildPrayerPrompt(week, rhythm),
-      actionStep: editorialDevotionals[day]?.actionStep ?? buildActionStep(rhythm),
+      reflectionQuestion: editorial?.reflectionQuestion ?? buildReflectionQuestion(week, rhythm),
+      prayerPrompt: editorial?.prayerPrompt ?? buildPrayerPrompt(week, rhythm),
+      actionStep: editorial?.actionStep ?? buildActionStep(rhythm),
       tags: ["daily-bread-foundations", `day-${String(day).padStart(3, "0")}`, ...week.tags],
       categories: [week.focus, "Growing in Scripture", "Building Discipline"]
     });
